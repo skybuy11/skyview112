@@ -140,10 +140,22 @@ export default function Header({ currentTab, setCurrentTab, isDarkMode, toggleTh
         }
 
         .logo-img {
-          height: 32px; /* Smaller, sleeker logo */
+          height: 35px; /* Sleek, readable logo */
           width: auto;
           object-fit: contain;
           transition: transform 0.3s ease;
+        }
+
+        @media (max-width: 767px) {
+          .logo-img {
+            height: 42px; /* Make it more visible on mobile */
+          }
+          .header {
+            padding: 0.85rem 0;
+          }
+          .header.scrolled {
+            padding: 0.55rem 0;
+          }
         }
 
         [data-theme="dark"] .logo-img {
