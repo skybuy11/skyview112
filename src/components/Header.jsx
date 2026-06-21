@@ -44,7 +44,7 @@ export default function Header({ currentTab, setCurrentTab, isDarkMode, toggleTh
   };
 
   return (
-    <header className={`header ${scrolled ? 'scrolled' : ''}`}>
+    <header className={`header ${scrolled ? 'scrolled' : ''} ${isOpen ? 'menu-open' : ''}`}>
       <div className="container header-container">
         {/* Logo */}
         <div className="logo-container" onClick={() => handleNavClick('home')}>
@@ -112,7 +112,7 @@ export default function Header({ currentTab, setCurrentTab, isDarkMode, toggleTh
           left: 0;
           right: 0;
           z-index: 50;
-          background: rgba(var(--bg-secondary), 0.7);
+          background: transparent;
           backdrop-filter: blur(20px);
           -webkit-backdrop-filter: blur(20px);
           border-bottom: 1px solid transparent;
@@ -120,11 +120,20 @@ export default function Header({ currentTab, setCurrentTab, isDarkMode, toggleTh
           padding: 1.25rem 0;
         }
 
-        .header.scrolled {
+        .header.scrolled,
+        .header.menu-open {
           background: var(--glass-bg);
           border-bottom: 1px solid var(--border-color);
           box-shadow: var(--glass-shadow);
           padding: 0.75rem 0;
+        }
+
+        @media (max-width: 767px) {
+          .header.menu-open {
+            background: var(--bg-secondary) !important;
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
+          }
         }
 
         .header-container {
@@ -257,39 +266,51 @@ export default function Header({ currentTab, setCurrentTab, isDarkMode, toggleTh
           left: 0;
           right: 0;
           border-bottom: 1px solid var(--border-color);
-          padding: 1.5rem 0;
-          background: var(--glass-bg);
-          backdrop-filter: blur(20px);
-          -webkit-backdrop-filter: blur(20px);
+          padding: 1.25rem 0;
+          background: var(--bg-secondary); /* Solid background on mobile to prevent text overlap */
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+          z-index: 100;
+        }
+
+        [data-theme="dark"] .mobile-nav-drawer {
+          background: var(--bg-secondary);
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
 
         .mobile-nav-container {
           display: flex;
           flex-direction: column;
-          gap: 1rem;
+          gap: 0;
         }
 
         .mobile-nav-link {
           background: none;
           border: none;
           text-align: left;
-          font-size: 1rem;
-          font-weight: 400;
+          font-size: 1.05rem;
+          font-weight: 500;
           color: var(--text-primary);
-          opacity: 0.7;
-          padding: 0.5rem 0;
+          opacity: 0.85;
+          padding: 0.85rem 0;
+          border-bottom: 1px solid var(--border-color);
           cursor: pointer;
           transition: all 0.25s ease;
         }
 
+        .mobile-nav-link:last-child {
+          border-bottom: none;
+        }
+
         .mobile-nav-link:hover {
           opacity: 1;
+          color: var(--accent);
           padding-left: 0.25rem;
         }
 
         .mobile-nav-link.active {
           opacity: 1;
-          font-weight: 550;
+          color: var(--accent);
+          font-weight: 600;
         }
       `}</style>
     </header>
