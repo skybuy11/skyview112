@@ -274,6 +274,13 @@ export default function About() {
           background: var(--bg-primary);
         }
 
+        @media (max-width: 767px) {
+          .about-team {
+            padding: 1.5rem;
+            margin-top: 3rem;
+          }
+        }
+
         .team-grid {
           display: grid;
           grid-template-columns: 1fr;

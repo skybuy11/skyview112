@@ -231,12 +231,18 @@ export default function Hero({ setCurrentTab }) {
         }
 
         .hero-title {
-          font-size: 2.75rem;
+          font-size: 2.15rem; /* Highly readable on small mobile screens */
           font-weight: 700;
-          line-height: 1.1;
-          letter-spacing: -0.035em;
+          line-height: 1.15;
+          letter-spacing: -0.03em;
           margin-bottom: 1.5rem;
           color: var(--text-primary);
+        }
+
+        @media (min-width: 480px) {
+          .hero-title {
+            font-size: 2.75rem;
+          }
         }
 
         @media (min-width: 768px) {
@@ -271,6 +277,16 @@ export default function Hero({ setCurrentTab }) {
           gap: 1rem;
         }
 
+        @media (max-width: 480px) {
+          .hero-actions {
+            flex-direction: column;
+            width: 100%;
+          }
+          .hero-actions .btn {
+            width: 100%;
+          }
+        }
+
         .hero-graphics {
           position: relative;
           height: 380px;
@@ -284,6 +300,13 @@ export default function Hero({ setCurrentTab }) {
           .hero-graphics {
             margin-top: 3rem;
             height: 300px;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .hero-graphics {
+            height: auto !important;
+            margin-top: 1.5rem;
           }
         }
 
@@ -387,6 +410,30 @@ export default function Hero({ setCurrentTab }) {
           bottom: 5%;
           left: 0px;
           transform: rotate(-1deg);
+        }
+
+        @media (max-width: 480px) {
+          .card-3d-wrapper {
+            flex-direction: column;
+            height: auto;
+            gap: 0.75rem;
+            padding: 1rem 0;
+            max-width: 100%;
+          }
+          .svg-education-illustration {
+            display: none !important;
+          }
+          .student-badge {
+            position: relative !important;
+            transform: none !important;
+            left: auto !important;
+            right: auto !important;
+            top: auto !important;
+            bottom: auto !important;
+            margin: 0 auto;
+            width: 100% !important;
+            max-width: 100% !important;
+          }
         }
 
         .hero-metrics {

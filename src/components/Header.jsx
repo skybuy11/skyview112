@@ -117,7 +117,7 @@ export default function Header({ currentTab, setCurrentTab, isDarkMode, toggleTh
           -webkit-backdrop-filter: blur(20px);
           border-bottom: 1px solid transparent;
           transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-          padding: 1.25rem 0;
+          padding: 1rem 0; /* Slightly reduced padding to match larger logo */
         }
 
         .header.scrolled,
@@ -125,7 +125,7 @@ export default function Header({ currentTab, setCurrentTab, isDarkMode, toggleTh
           background: var(--glass-bg);
           border-bottom: 1px solid var(--border-color);
           box-shadow: var(--glass-shadow);
-          padding: 0.75rem 0;
+          padding: 0.5rem 0; /* Slightly reduced padding to match larger logo */
         }
 
         @media (max-width: 767px) {
@@ -149,7 +149,7 @@ export default function Header({ currentTab, setCurrentTab, isDarkMode, toggleTh
         }
 
         .logo-img {
-          height: 42px; /* Sleek, highly readable logo */
+          height: 52px; /* Sleek, highly visible logo */
           width: auto;
           object-fit: contain;
           transition: transform 0.3s ease;
@@ -157,13 +157,13 @@ export default function Header({ currentTab, setCurrentTab, isDarkMode, toggleTh
 
         @media (max-width: 767px) {
           .logo-img {
-            height: 48px; /* Make it prominently visible on mobile */
+            height: 60px; /* Substantially larger on mobile for maximum legibility */
           }
           .header {
-            padding: 0.75rem 0;
+            padding: 0.5rem 0;
           }
           .header.scrolled {
-            padding: 0.5rem 0;
+            padding: 0.35rem 0;
           }
         }
 

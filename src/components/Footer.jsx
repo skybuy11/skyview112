@@ -142,7 +142,7 @@ export default function Footer({ setCurrentTab }) {
         }
 
         .footer-logo-img {
-          height: 45px; /* Proportional, visible footer logo */
+          height: 55px; /* Proportional, visible footer logo */
           width: auto;
           object-fit: contain;
           transition: transform 0.3s ease;
@@ -150,7 +150,7 @@ export default function Footer({ setCurrentTab }) {
 
         @media (max-width: 767px) {
           .footer-logo-img {
-            height: 40px;
+            height: 46px;
           }
         }
 
