@@ -142,10 +142,16 @@ export default function Footer({ setCurrentTab }) {
         }
 
         .footer-logo-img {
-          height: 36px;
+          height: 45px; /* Proportional, visible footer logo */
           width: auto;
           object-fit: contain;
           transition: transform 0.3s ease;
+        }
+
+        @media (max-width: 767px) {
+          .footer-logo-img {
+            height: 40px;
+          }
         }
 
         [data-theme="dark"] .footer-logo-img {
