@@ -75,7 +75,7 @@ export default function Contact() {
           Have questions about studying in the UK? Fill out the form below, and one of our certified advisors will contact you.
         </p>
 
-        <div className="grid-2 contact-grid">
+        <div className="grid grid-cols-1 md:grid-cols-2 contact-grid">
           {/* Left: Contact Info & Map */}
           <div className="contact-info-panel animate-fade-in animate-delay-1">
             <div className="contact-details-box">

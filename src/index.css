@@ -382,3 +382,68 @@ button, input, textarea, select {
 }
 
 /* Mobile responsiveness verified - v1.0.1 */
+
+/* Tailwind-equivalent Utility Classes */
+.grid {
+  display: grid;
+}
+.flex {
+  display: flex;
+}
+.flex-col {
+  flex-direction: column;
+}
+.grid-cols-1 {
+  grid-template-columns: 1fr;
+}
+.w-full {
+  width: 100% !important;
+}
+
+@media (min-width: 640px) {
+  .sm\:grid-cols-2 {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .md\:grid-cols-2 {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  .md\:grid-cols-4 {
+    grid-template-columns: repeat(4, 1fr) !important;
+  }
+  .md\:flex-row {
+    flex-direction: row !important;
+  }
+  .md\:flex {
+    display: flex !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .lg\:grid-cols-3 {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+
+/* Padding utilities */
+.py-6 {
+  padding-top: 1.5rem !important;
+  padding-bottom: 1.5rem !important;
+}
+.px-4 {
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+}
+
+/* Border utilities */
+.border-b {
+  border-bottom: 1px solid !important;
+}
+.border-gray-100 {
+  border-color: rgba(0, 0, 0, 0.05) !important;
+}
+[data-theme="dark"] .border-gray-100 {
+  border-color: rgba(255, 255, 255, 0.05) !important;
+}

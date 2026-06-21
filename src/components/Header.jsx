@@ -90,13 +90,13 @@ export default function Header({ currentTab, setCurrentTab, isDarkMode, toggleTh
 
       {/* Mobile Drawer */}
       {isOpen && (
-        <div className="mobile-nav-drawer glass animate-fade-in">
+        <div className="mobile-nav-drawer animate-fade-in">
           <div className="container mobile-nav-container">
             {navItems.map((item) => (
               <button
                 key={item.id}
                 onClick={() => handleNavClick(item.id)}
-                className={`mobile-nav-link ${currentTab === item.id ? 'active' : ''}`}
+                className={`mobile-nav-link py-6 px-4 border-b border-gray-100 w-full ${currentTab === item.id ? 'active' : ''}`}
               >
                 {item.label}
               </button>
@@ -291,14 +291,13 @@ export default function Header({ currentTab, setCurrentTab, isDarkMode, toggleTh
           font-weight: 500;
           color: var(--text-primary);
           opacity: 0.85;
-          padding: 0.85rem 0;
-          border-bottom: 1px solid var(--border-color);
           cursor: pointer;
           transition: all 0.25s ease;
+          display: block;
         }
 
         .mobile-nav-link:last-child {
-          border-bottom: none;
+          border-bottom: none !important;
         }
 
         .mobile-nav-link:hover {

@@ -18,7 +18,7 @@ export default function Footer({ setCurrentTab }) {
   return (
     <footer className="footer">
       <div className="container">
-        <div className="footer-grid">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 footer-grid">
           {/* Brand Info */}
           <div className="footer-brand">
             <div className="brand-header" onClick={() => handleNavClick('home')}>
@@ -111,22 +111,8 @@ export default function Footer({ setCurrentTab }) {
         }
 
         .footer-grid {
-          display: grid;
-          grid-template-columns: 1fr;
           gap: 2.5rem;
           margin-bottom: 3rem;
-        }
-
-        @media (min-width: 768px) {
-          .footer-grid {
-            grid-template-columns: repeat(2, 1fr);
-          }
-        }
-
-        @media (min-width: 1024px) {
-          .footer-grid {
-            grid-template-columns: 2fr 1.25fr 1.25fr 2fr;
-          }
         }
 
         .footer-brand {

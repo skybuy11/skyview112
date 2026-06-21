@@ -334,11 +334,11 @@ export default function Universities() {
         {/* Grid Display */}
         {paginatedUnis.length > 0 ? (
           <>
-            <div className="grid-3 unis-grid">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 unis-grid">
               {paginatedUnis.map((uni) => (
                 <div 
                   key={uni.id} 
-                  className="glass-card uni-card"
+                  className="glass-card uni-card w-full"
                   onClick={() => setSelectedUni(uni)}
                 >
                   <div className="uni-card-header">
