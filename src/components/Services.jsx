@@ -266,6 +266,15 @@ export default function Services() {
         .expand-text {
           font-family: var(--font-body);
         }
+
+        @media (max-width: 640px) {
+          .service-card {
+            padding: 1.75rem 1.25rem;
+          }
+          .service-card-header {
+            gap: 1rem;
+          }
+        }
       `}</style>
     </section>
   );

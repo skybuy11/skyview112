@@ -327,6 +327,16 @@ export default function News() {
           border-bottom-color: var(--accent);
           outline: none;
         }
+
+        @media (max-width: 640px) {
+          .news-card {
+            padding: 1.75rem 1.25rem;
+          }
+          .newsletter-box {
+            padding: 1.75rem 1.25rem;
+            margin-top: 3rem;
+          }
+        }
       `}</style>
     </section>
   );

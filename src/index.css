@@ -134,8 +134,14 @@ button, input, textarea, select {
 }
 
 .section {
-  padding: 100px 0;
+  padding: 60px 0; /* Reduced vertical spacing on mobile */
   position: relative;
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding: 100px 0;
+  }
 }
 
 .grid-2 {
@@ -359,11 +365,17 @@ button, input, textarea, select {
 /* Section Headings */
 .section-title {
   text-align: center;
-  font-size: 2.5rem;
+  font-size: 2rem; /* Optimized for mobile screens */
   font-weight: 700;
   letter-spacing: -0.025em;
   margin-bottom: 0.75rem;
   color: var(--text-primary);
+}
+
+@media (min-width: 480px) {
+  .section-title {
+    font-size: 2.5rem;
+  }
 }
 
 @media (min-width: 768px) {
@@ -375,10 +387,17 @@ button, input, textarea, select {
 .section-subtitle {
   text-align: center;
   max-width: 600px;
-  margin: 0 auto 4rem auto;
+  margin: 0 auto 2.5rem auto; /* Tighter layout on mobile */
   color: var(--text-secondary);
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   line-height: 1.6;
+}
+
+@media (min-width: 768px) {
+  .section-subtitle {
+    margin: 0 auto 4rem auto;
+    font-size: 1.1rem;
+  }
 }
 
 /* Mobile responsiveness verified - v1.0.1 */

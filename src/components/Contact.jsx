@@ -446,11 +446,21 @@ export default function Contact() {
         }
 
         .success-message-text {
+          font-family: var(--font-body);
           font-size: 0.95rem;
           line-height: 1.6;
           color: var(--text-secondary);
           max-width: 480px;
           margin-bottom: 1rem;
+        }
+
+        @media (max-width: 640px) {
+          .contact-form-panel {
+            padding: 1.75rem 1.25rem;
+          }
+          .contact-image-container {
+            height: 200px;
+          }
         }
       `}</style>
     </section>

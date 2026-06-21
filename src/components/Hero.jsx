@@ -495,6 +495,14 @@ export default function Hero({ setCurrentTab }) {
           color: var(--text-muted);
           font-weight: 400;
         }
+
+        @media (max-width: 480px) {
+          .metrics-grid {
+            grid-template-columns: 1fr;
+            gap: 1.25rem;
+            padding: 1.5rem;
+          }
+        }
       `}</style>
     </section>
   );

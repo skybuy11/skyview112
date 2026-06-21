@@ -431,6 +431,18 @@ export default function About() {
           line-height: 1.5;
           color: var(--text-secondary);
         }
+
+        @media (max-width: 640px) {
+          .value-card {
+            padding: 1.75rem 1.25rem;
+          }
+          .about-image-wrapper {
+            height: 260px;
+          }
+          .about-intro {
+            gap: 1.5rem;
+          }
+        }
       `}</style>
     </section>
   );

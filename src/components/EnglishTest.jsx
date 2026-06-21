@@ -680,6 +680,20 @@ export default function EnglishTest({ setCurrentTab }) {
           border-top: 1px solid var(--border-color);
           padding-top: 1.5rem;
         }
+
+        @media (max-width: 640px) {
+          .test-intro, .quiz-card, .result-card {
+            padding: 1.75rem 1.25rem;
+          }
+          .quiz-navigation {
+            gap: 1rem;
+          }
+          .quiz-navigation .btn {
+            flex: 1;
+            padding: 0.65rem 0.5rem;
+            font-size: 0.85rem;
+          }
+        }
       `}</style>
     </section>
   );

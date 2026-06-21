@@ -128,7 +128,7 @@ export default function Footer({ setCurrentTab }) {
         }
 
         .footer-logo-img {
-          height: 55px; /* Proportional, visible footer logo */
+          height: 68px; /* Proportional, visible footer logo */
           width: auto;
           object-fit: contain;
           transition: transform 0.3s ease;
@@ -136,12 +136,12 @@ export default function Footer({ setCurrentTab }) {
 
         @media (max-width: 767px) {
           .footer-logo-img {
-            height: 46px;
+            height: 60px;
           }
         }
 
         [data-theme="dark"] .footer-logo-img {
-          filter: brightness(1.25); /* Subtle brightness boost for dark backgrounds */
+          filter: brightness(1.35) contrast(1.1); /* Crisper visibility on dark backgrounds */
         }
 
         .brand-desc {

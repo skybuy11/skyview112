@@ -13,6 +13,24 @@ export default function Header({ currentTab, setCurrentTab, isDarkMode, toggleTh
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleOutsideClick = (event) => {
+      const headerElement = document.querySelector('.header');
+      if (headerElement && !headerElement.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleOutsideClick);
+    document.addEventListener('touchstart', handleOutsideClick);
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick);
+      document.removeEventListener('touchstart', handleOutsideClick);
+    };
+  }, [isOpen]);
+
   const navItems = [
     { id: 'home', label: 'Home' },
     { id: 'services', label: 'Services' },
@@ -149,7 +167,7 @@ export default function Header({ currentTab, setCurrentTab, isDarkMode, toggleTh
         }
 
         .logo-img {
-          height: 52px; /* Sleek, highly visible logo */
+          height: 64px; /* Larger, highly visible logo on desktop */
           width: auto;
           object-fit: contain;
           transition: transform 0.3s ease;
@@ -157,18 +175,18 @@ export default function Header({ currentTab, setCurrentTab, isDarkMode, toggleTh
 
         @media (max-width: 767px) {
           .logo-img {
-            height: 60px; /* Substantially larger on mobile for maximum legibility */
+            height: 76px; /* Substantially larger on mobile for maximum legibility */
           }
           .header {
-            padding: 0.5rem 0;
+            padding: 0.75rem 0;
           }
           .header.scrolled {
-            padding: 0.35rem 0;
+            padding: 0.45rem 0;
           }
         }
 
         [data-theme="dark"] .logo-img {
-          filter: brightness(1.25); /* Subtle brightness boost for dark backgrounds */
+          filter: brightness(1.35) contrast(1.1); /* Crisper visibility on dark backgrounds */
         }
 
         .logo-container:hover .logo-img {
