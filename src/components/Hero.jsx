@@ -188,43 +188,23 @@ export default function Hero({ setCurrentTab }) {
             url('/uk-university-bg.png');
         }
 
-        /* Mobile: strong opaque overlay so text is always readable over the background image */
-        .hero-mobile-overlay {
-          display: none;
-          position: absolute;
-          inset: 0;
-          background: rgba(0, 0, 0, 0);
-          z-index: 1;
-          pointer-events: none;
-        }
-
+        /* On mobile, replace the side gradient with a full-coverage dark overlay
+           so the background image never bleeds through the text area */
         @media (max-width: 767px) {
-          .hero-mobile-overlay {
-            display: block;
-            background: rgba(0, 0, 0, 0.55);
+          .hero-section {
+            background-image:
+              linear-gradient(rgba(0, 0, 0, 0.62), rgba(0, 0, 0, 0.62)),
+              url('/uk-university-bg.png');
+            background-position: center center;
           }
-          [data-theme="dark"] .hero-mobile-overlay {
-            background: rgba(0, 0, 0, 0.70);
-          }
-          /* Force hero text colors to high-contrast white on mobile to read over dark overlay */
-          .hero-text .hero-title {
-            color: #ffffff !important;
-          }
-          .hero-text .gradient-text {
-            background: linear-gradient(135deg, #ffffff 20%, var(--accent) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-          }
-          .hero-text .hero-description {
-            color: rgba(255, 255, 255, 0.88) !important;
-          }
-          .hero-text .trust-badge {
-            background: rgba(255,255,255,0.15);
-            border-color: rgba(255,255,255,0.3);
-            color: #ffffff;
+          [data-theme="dark"] .hero-section {
+            background-image:
+              linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)),
+              url('/uk-university-bg.png');
           }
         }
 
+        /* Keep the radial accent glow on desktop only */
         .hero-overlay-tint {
           position: absolute;
           inset: 0;
@@ -233,14 +213,50 @@ export default function Hero({ setCurrentTab }) {
           pointer-events: none;
         }
 
-        .glow-bubble {
-          display: none; /* Removed heavy colorful glows */
+        @media (max-width: 767px) {
+          .hero-overlay-tint {
+            display: none; /* hide accent glow on mobile — not needed with solid dark bg */
+          }
         }
 
+        /* The mobile overlay div is now a safety net for any theming edge cases */
+        .hero-mobile-overlay {
+          display: none;
+          position: absolute;
+          inset: 0;
+          pointer-events: none;
+        }
+
+        .glow-bubble {
+          display: none;
+        }
+
+        /* Hero text container must sit above everything */
         .hero-container {
           position: relative;
-          z-index: 2;
+          z-index: 3;
           align-items: center;
+        }
+
+        /* On mobile, all hero text is forced white so it reads over the dark background */
+        @media (max-width: 767px) {
+          .hero-text .hero-title {
+            color: #ffffff !important;
+          }
+          .hero-text .gradient-text {
+            background: linear-gradient(135deg, #ffffff 10%, #d4a84b 100%) !important;
+            -webkit-background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+            background-clip: text !important;
+          }
+          .hero-text .hero-description {
+            color: rgba(255, 255, 255, 0.90) !important;
+          }
+          .hero-text .trust-badge {
+            background: rgba(255, 255, 255, 0.15) !important;
+            border-color: rgba(255, 255, 255, 0.35) !important;
+            color: #ffffff !important;
+          }
         }
 
         .trust-badge {
