@@ -143,12 +143,21 @@ export default function Header({ currentTab, setCurrentTab, isDarkMode, toggleTh
           background: var(--glass-bg);
           border-bottom: 1px solid var(--border-color);
           box-shadow: var(--glass-shadow);
-          padding: 0.5rem 0; /* Slightly reduced padding to match larger logo */
+          padding: 0.5rem 0;
         }
 
         @media (max-width: 767px) {
+          /* When menu is open on mobile, header bar must be fully solid — no transparency */
           .header.menu-open {
             background: var(--bg-secondary) !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+            border-bottom: 1px solid var(--border-color) !important;
+            box-shadow: none !important;
+          }
+          /* When NOT scrolled and NOT open, keep header transparent on mobile */
+          .header:not(.scrolled):not(.menu-open) {
+            background: transparent;
             backdrop-filter: none;
             -webkit-backdrop-filter: none;
           }
@@ -283,16 +292,20 @@ export default function Header({ currentTab, setCurrentTab, isDarkMode, toggleTh
           top: 100%;
           left: 0;
           right: 0;
+          border-top: 2px solid var(--accent);
           border-bottom: 1px solid var(--border-color);
-          padding: 1.25rem 0;
-          background: var(--bg-secondary); /* Solid background on mobile to prevent text overlap */
-          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-          z-index: 100;
+          padding: 0.5rem 0 1rem 0;
+          /* Fully opaque — never transparent so it never bleeds into hero */
+          background: var(--bg-secondary);
+          backdrop-filter: none;
+          -webkit-backdrop-filter: none;
+          box-shadow: 0 12px 36px rgba(0, 0, 0, 0.18);
+          z-index: 200;
         }
 
         [data-theme="dark"] .mobile-nav-drawer {
           background: var(--bg-secondary);
-          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+          box-shadow: 0 12px 36px rgba(0, 0, 0, 0.55);
         }
 
         .mobile-nav-container {

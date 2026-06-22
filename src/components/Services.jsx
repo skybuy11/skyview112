@@ -131,6 +131,18 @@ export default function Services() {
           box-shadow: none;
         }
 
+        @media (max-width: 480px) {
+          /* Force single-column stacking for service cards on small phones */
+          .services-grid {
+            grid-template-columns: 1fr !important;
+            gap: 12px !important;
+          }
+          .service-card {
+            padding: 1rem !important;
+            min-height: unset;
+          }
+        }
+
         .service-card:hover {
           transform: translateY(-2px);
           border-color: var(--accent);

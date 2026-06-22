@@ -25,6 +25,8 @@ export default function Hero({ setCurrentTab }) {
   return (
     <section id="home" className="hero-section">
       <div className="hero-overlay-tint"></div>
+      {/* Mobile-only opaque overlay for text legibility over background image */}
+      <div className="hero-mobile-overlay"></div>
       
       {/* Decorative Glow Elements */}
       <div className="glow-bubble bubble-1"></div>
@@ -182,8 +184,45 @@ export default function Hero({ setCurrentTab }) {
 
         [data-theme="dark"] .hero-section {
           background-image: 
-            linear-gradient(to right, var(--bg-primary) 35%, rgba(0, 0, 0, 0.9) 70%, rgba(0, 0, 0, 0.4) 100%),
+            linear-gradient(to right, var(--bg-primary) 40%, rgba(0, 0, 0, 0.95) 75%, rgba(0, 0, 0, 0.6) 100%),
             url('/uk-university-bg.png');
+        }
+
+        /* Mobile: strong opaque overlay so text is always readable over the background image */
+        .hero-mobile-overlay {
+          display: none;
+          position: absolute;
+          inset: 0;
+          background: rgba(0, 0, 0, 0);
+          z-index: 1;
+          pointer-events: none;
+        }
+
+        @media (max-width: 767px) {
+          .hero-mobile-overlay {
+            display: block;
+            background: rgba(0, 0, 0, 0.55);
+          }
+          [data-theme="dark"] .hero-mobile-overlay {
+            background: rgba(0, 0, 0, 0.70);
+          }
+          /* Force hero text colors to high-contrast white on mobile to read over dark overlay */
+          .hero-text .hero-title {
+            color: #ffffff !important;
+          }
+          .hero-text .gradient-text {
+            background: linear-gradient(135deg, #ffffff 20%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+          }
+          .hero-text .hero-description {
+            color: rgba(255, 255, 255, 0.88) !important;
+          }
+          .hero-text .trust-badge {
+            background: rgba(255,255,255,0.15);
+            border-color: rgba(255,255,255,0.3);
+            color: #ffffff;
+          }
         }
 
         .hero-overlay-tint {
@@ -463,18 +502,25 @@ export default function Hero({ setCurrentTab }) {
           display: flex;
           align-items: center;
           gap: 1rem;
+          padding: 0.5rem 0;
         }
 
         .metric-icon {
-          width: 42px;
-          height: 42px;
+          width: 48px;
+          height: 48px;
           border-radius: 50%;
           background: var(--accent-light);
+          border: 1px solid rgba(181, 138, 63, 0.2);
           display: flex;
           align-items: center;
           justify-content: center;
           color: var(--accent);
           flex-shrink: 0;
+        }
+
+        .metric-icon svg {
+          width: 24px;
+          height: 24px;
         }
 
         .metric-text-box {
@@ -491,15 +537,33 @@ export default function Hero({ setCurrentTab }) {
         }
 
         .metric-label {
-          font-size: 0.8rem;
-          color: var(--text-muted);
-          font-weight: 400;
+          font-size: 0.82rem;
+          color: var(--text-secondary);
+          font-weight: 500;
+        }
+
+        @media (max-width: 767px) {
+          .metrics-grid {
+            padding: 1.75rem;
+            gap: 1.25rem;
+          }
+          .metric-card {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-color);
+          }
+          .metric-card:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+          }
+          .metric-card:first-child {
+            padding-top: 0;
+          }
         }
 
         @media (max-width: 480px) {
           .metrics-grid {
             grid-template-columns: 1fr;
-            gap: 1.25rem;
+            gap: 0;
             padding: 1.5rem;
           }
         }
