@@ -97,7 +97,7 @@ export default function Contact() {
                   <Mail className="info-icon text-accent" size={24} />
                   <div>
                     <h4>Email Address</h4>
-                    <p><a href="mailto:info@skyviewconsultants.co.uk">info@skyviewconsultants.co.uk</a></p>
+                    <p><a href="mailto:sharan@skyview.org.uk">sharan@skyview.org.uk</a></p>
                   </div>
                 </li>
 
@@ -105,7 +105,7 @@ export default function Contact() {
                   <Phone className="info-icon text-accent" size={24} />
                   <div>
                     <h4>Phone Number</h4>
-                    <p><a href="tel:+442071234567">+44 (0) 20 7123 4567</a></p>
+                    <p><a href="tel:+447725355355">+44 7725 355355</a></p>
                   </div>
                 </li>
               </ul>

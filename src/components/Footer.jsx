@@ -73,11 +73,11 @@ export default function Footer({ setCurrentTab }) {
               </li>
               <li>
                 <Mail className="contact-icon text-accent" size={18} />
-                <a href="mailto:info@skyviewconsultants.co.uk">info@skyviewconsultants.co.uk</a>
+                <a href="mailto:sharan@skyview.org.uk">sharan@skyview.org.uk</a>
               </li>
               <li>
                 <Phone className="contact-icon text-accent" size={18} />
-                <a href="tel:+442071234567">+44 (0) 20 7123 4567</a>
+                <a href="tel:+447725355355">+44 7725 355355</a>
               </li>
               <li>
                 <div className="status-indicator">
