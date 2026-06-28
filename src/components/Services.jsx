@@ -124,43 +124,39 @@ export default function Services() {
           display: flex;
           flex-direction: column;
           justify-content: space-between;
-          padding: 2.5rem;
-          min-height: 240px;
+          padding: 1.25rem;
+          min-height: unset;
           background: var(--bg-primary);
           border: 1px solid var(--border-color);
           box-shadow: none;
+        }
+
+        @media (min-width: 480px) {
+          .service-card {
+            padding: 1.75rem;
+            min-height: 200px;
+          }
+        }
+
+        @media (min-width: 768px) {
+          .service-card {
+            padding: 2.5rem;
+            min-height: 240px;
+          }
         }
 
         @media (max-width: 480px) {
           /* Force single-column stacking for service cards on small phones */
           .services-grid {
             grid-template-columns: 1fr !important;
-            gap: 12px !important;
+            gap: 10px !important;
           }
-          .service-card {
-            padding: 1rem !important;
-            min-height: unset;
-          }
-        }
-
-        .service-card:hover {
-          transform: translateY(-2px);
-          border-color: var(--accent);
-          background: var(--bg-secondary);
-          box-shadow: var(--card-shadow-hover);
         }
 
         .service-card-header {
           display: flex;
-          gap: 1.5rem;
+          gap: 1rem;
           align-items: flex-start;
-        }
-
-        @media (max-width: 640px) {
-          .service-card-header {
-            flex-direction: column;
-            gap: 1rem;
-          }
         }
 
         .service-icon-box {

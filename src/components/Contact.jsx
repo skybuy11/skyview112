@@ -75,7 +75,7 @@ export default function Contact() {
           Have questions about studying in the UK? Fill out the form below, and one of our certified advisors will contact you.
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 contact-grid">
+        <div className="contact-grid">
           {/* Left: Contact Info & Map */}
           <div className="contact-info-panel animate-fade-in animate-delay-1">
             <div className="contact-details-box">
@@ -257,8 +257,18 @@ export default function Contact() {
         }
 
         .contact-grid {
+          display: grid;
+          grid-template-columns: 1fr;
           align-items: stretch;
           margin-top: 1.5rem;
+          gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+          .contact-grid {
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+          }
         }
 
         .contact-info-panel {
@@ -380,18 +390,24 @@ export default function Contact() {
           opacity: 0.9;
         }
 
-        /* Form panel styles */
         .contact-form-panel {
-          padding: 3rem;
-          border-radius: 18px;
+          padding: 1.5rem 1.25rem;
+          border-radius: 16px;
           background: var(--bg-secondary);
           border: 1px solid var(--border-color);
           box-shadow: none;
         }
 
-        @media (max-width: 640px) {
+        @media (min-width: 480px) {
           .contact-form-panel {
-            padding: 2.25rem 1.5rem;
+            padding: 2rem 1.75rem;
+            border-radius: 18px;
+          }
+        }
+
+        @media (min-width: 768px) {
+          .contact-form-panel {
+            padding: 3rem;
           }
         }
 
@@ -455,11 +471,14 @@ export default function Contact() {
         }
 
         @media (max-width: 640px) {
-          .contact-form-panel {
-            padding: 1.75rem 1.25rem;
-          }
           .contact-image-container {
-            height: 200px;
+            height: 180px;
+          }
+          .panel-title, .form-panel-title {
+            font-size: 1.25rem;
+          }
+          .contact-info-panel {
+            gap: 1.25rem;
           }
         }
       `}</style>

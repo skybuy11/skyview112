@@ -128,9 +128,21 @@ button, input, textarea, select {
 /* Utility Layout Classes */
 .container {
   width: 100%;
-  max-width: 1120px; /* Apple's content width standard */
+  max-width: 1120px;
   margin: 0 auto;
-  padding: 0 1.5rem;
+  padding: 0 1rem;
+}
+
+@media (min-width: 480px) {
+  .container {
+    padding: 0 1.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding: 0 2rem;
+  }
 }
 
 .section {
@@ -147,7 +159,13 @@ button, input, textarea, select {
 .grid-2 {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 2.5rem;
+  gap: 2rem;
+}
+
+@media (min-width: 480px) {
+  .grid-2 {
+    gap: 2.5rem;
+  }
 }
 
 @media (min-width: 992px) {
@@ -184,12 +202,25 @@ button, input, textarea, select {
 .glass-card {
   background: var(--bg-secondary);
   border: 1px solid var(--border-color);
-  border-radius: 18px; /* Smooth card curvature */
-  padding: 2.25rem;
+  border-radius: 16px;
+  padding: 1.25rem;
   box-shadow: var(--card-shadow);
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
               box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
               border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (min-width: 480px) {
+  .glass-card {
+    padding: 1.75rem;
+    border-radius: 18px;
+  }
+}
+
+@media (min-width: 768px) {
+  .glass-card {
+    padding: 2.25rem;
+  }
 }
 
 .glass-card:hover {
@@ -204,13 +235,22 @@ button, input, textarea, select {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 0.75rem 1.75rem;
-  border-radius: 99px; /* Pill shape */
+  padding: 0.75rem 1.5rem;
+  border-radius: 99px;
   font-weight: 550;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   cursor: pointer;
   border: 1px solid transparent;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  min-height: 44px; /* WCAG touch target */
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (min-width: 480px) {
+  .btn {
+    font-size: 0.95rem;
+    padding: 0.75rem 1.75rem;
+  }
 }
 
 .btn-primary {
@@ -321,7 +361,7 @@ button, input, textarea, select {
   background: transparent;
   padding: 0.65rem 0;
   color: var(--text-primary);
-  font-size: 1rem;
+  font-size: 16px; /* Prevents iOS zoom on focus */
   border-radius: 0;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }

@@ -171,8 +171,8 @@ export default function Hero({ setCurrentTab }) {
 
       <style>{`
         .hero-section {
-          padding-top: 140px;
-          padding-bottom: 80px;
+          padding-top: 100px;
+          padding-bottom: 50px;
           position: relative;
           background-image: 
             linear-gradient(to right, var(--bg-primary) 35%, rgba(245, 247, 250, 0.9) 70%, rgba(245, 247, 250, 0.4) 100%),
@@ -180,6 +180,13 @@ export default function Hero({ setCurrentTab }) {
           background-size: cover;
           background-position: center right;
           overflow: hidden;
+        }
+
+        @media (min-width: 768px) {
+          .hero-section {
+            padding-top: 140px;
+            padding-bottom: 80px;
+          }
         }
 
         [data-theme="dark"] .hero-section {

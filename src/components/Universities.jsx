@@ -525,6 +525,20 @@ export default function Universities() {
           display: flex;
           flex-wrap: wrap;
           gap: 0.5rem;
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
+          scrollbar-width: none;
+          padding-bottom: 2px; /* stop clipping on iOS */
+        }
+
+        .filter-tags::-webkit-scrollbar {
+          display: none;
+        }
+
+        @media (max-width: 480px) {
+          .filter-tags {
+            flex-wrap: nowrap;
+          }
         }
 
         .filter-btn {
@@ -558,10 +572,22 @@ export default function Universities() {
           cursor: pointer;
           display: flex;
           flex-direction: column;
-          padding: 2.25rem;
+          padding: 1.25rem;
           background: var(--bg-secondary);
           border: 1px solid var(--border-color);
           box-shadow: none;
+        }
+
+        @media (min-width: 480px) {
+          .uni-card {
+            padding: 1.75rem;
+          }
+        }
+
+        @media (min-width: 768px) {
+          .uni-card {
+            padding: 2.25rem;
+          }
         }
 
         .uni-card:hover {
@@ -698,14 +724,28 @@ export default function Universities() {
         .modal-content {
           width: 100%;
           max-width: 600px;
-          max-height: 85vh;
+          max-height: 90vh;
           overflow-y: auto;
+          -webkit-overflow-scrolling: touch;
           position: relative;
-          padding: 2.5rem;
-          border-radius: 18px;
+          padding: 1.25rem;
+          border-radius: 16px;
           background: var(--bg-secondary);
           border: 1px solid var(--border-color);
           box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        @media (min-width: 480px) {
+          .modal-content {
+            padding: 2rem;
+            border-radius: 18px;
+          }
+        }
+
+        @media (min-width: 640px) {
+          .modal-content {
+            padding: 2.5rem;
+          }
         }
 
         .modal-close {
@@ -847,9 +887,23 @@ export default function Universities() {
           display: flex;
           justify-content: flex-end;
           gap: 0.75rem;
-          margin-top: 2rem;
+          margin-top: 1.5rem;
           border-top: 1px solid var(--border-color);
-          padding-top: 1.5rem;
+          padding-top: 1.25rem;
+          flex-wrap: wrap;
+        }
+
+        @media (max-width: 480px) {
+          .modal-footer {
+            flex-direction: column;
+          }
+          .modal-footer .btn {
+            width: 100%;
+            justify-content: center;
+          }
+          .modal-title {
+            font-size: 1.25rem;
+          }
         }
       `}</style>
     </section>

@@ -327,11 +327,24 @@ export default function EnglishTest({ setCurrentTab }) {
         }
 
         .test-intro, .quiz-card, .result-card {
-          padding: 3rem;
-          border-radius: 18px;
+          padding: 1.25rem 1rem;
+          border-radius: 16px;
           border: 1px solid var(--border-color);
           background: var(--bg-primary);
           box-shadow: none;
+        }
+
+        @media (min-width: 480px) {
+          .test-intro, .quiz-card, .result-card {
+            padding: 2rem 1.5rem;
+            border-radius: 18px;
+          }
+        }
+
+        @media (min-width: 640px) {
+          .test-intro, .quiz-card, .result-card {
+            padding: 3rem;
+          }
         }
 
         .test-intro {
@@ -453,11 +466,24 @@ export default function EnglishTest({ setCurrentTab }) {
         }
 
         .quiz-question {
-          font-size: 1.25rem;
+          font-size: 1rem;
           font-weight: 600;
           color: var(--text-primary);
-          line-height: 1.4;
+          line-height: 1.45;
           letter-spacing: -0.01em;
+        }
+
+        @media (min-width: 480px) {
+          .quiz-question {
+            font-size: 1.15rem;
+          }
+        }
+
+        @media (min-width: 640px) {
+          .quiz-question {
+            font-size: 1.25rem;
+            line-height: 1.4;
+          }
         }
 
         .quiz-options {
@@ -682,16 +708,26 @@ export default function EnglishTest({ setCurrentTab }) {
         }
 
         @media (max-width: 640px) {
-          .test-intro, .quiz-card, .result-card {
-            padding: 1.75rem 1.25rem;
-          }
           .quiz-navigation {
-            gap: 1rem;
+            gap: 0.75rem;
           }
           .quiz-navigation .btn {
             flex: 1;
             padding: 0.65rem 0.5rem;
             font-size: 0.85rem;
+          }
+          .result-actions {
+            flex-direction: column;
+          }
+          .result-actions .btn {
+            width: 100%;
+            justify-content: center;
+          }
+          .result-header {
+            gap: 1rem;
+          }
+          .result-recommendations {
+            padding: 1.25rem;
           }
         }
       `}</style>

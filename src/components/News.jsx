@@ -150,12 +150,25 @@ export default function News() {
           cursor: pointer;
           display: flex;
           flex-direction: column;
-          padding: 2.25rem;
+          padding: 1.25rem 1rem;
           background: var(--bg-secondary);
           border: 1px solid var(--border-color);
           box-shadow: none;
-          border-radius: 18px;
+          border-radius: 16px;
           transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @media (min-width: 480px) {
+          .news-card {
+            padding: 1.75rem 1.25rem;
+            border-radius: 18px;
+          }
+        }
+
+        @media (min-width: 768px) {
+          .news-card {
+            padding: 2.25rem;
+          }
         }
 
         .news-card:hover {
@@ -285,10 +298,16 @@ export default function News() {
         }
 
         .newsletter-text h3 {
-          font-size: 1.25rem;
+          font-size: 1.05rem;
           color: var(--text-primary);
           margin-bottom: 0.25rem;
           font-weight: 600;
+        }
+
+        @media (min-width: 640px) {
+          .newsletter-text h3 {
+            font-size: 1.25rem;
+          }
         }
 
         .newsletter-text p {
@@ -329,12 +348,15 @@ export default function News() {
         }
 
         @media (max-width: 640px) {
-          .news-card {
-            padding: 1.75rem 1.25rem;
-          }
           .newsletter-box {
-            padding: 1.75rem 1.25rem;
-            margin-top: 3rem;
+            padding: 1.5rem 1rem;
+            margin-top: 2.5rem;
+          }
+          .newsletter-text {
+            gap: 0.75rem;
+          }
+          .news-grid {
+            gap: 1rem;
           }
         }
       `}</style>
