@@ -1,0 +1,185 @@
+/* Responsive layout mobile-first adjustments to fix layout breaking */
+
+@media (max-width: 767px) {
+  /* Fix container boundaries and remove side paddings on body */
+  body {
+    overflow-x: hidden;
+    width: 100%;
+  }
+
+  /* Reset grid layouts that were broken due to fixed desktop widths */
+  .grid-2, .grid-3, .grid-4, .contact-grid, .footer-grid, .unis-grid, .services-grid, .values-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.25rem !important;
+  }
+
+  /* Section Title and subtitle optimization */
+  .section-title {
+    font-size: 1.65rem !important;
+    padding: 0 0.5rem;
+    line-height: 1.25;
+  }
+  .section-subtitle {
+    font-size: 0.95rem !important;
+    padding: 0 1rem;
+    margin-bottom: 2rem !important;
+  }
+
+  /* Hero section adjustments */
+  .hero-section {
+    padding-top: 110px !important;
+    padding-bottom: 40px !important;
+    background-position: center center !important;
+    text-align: center;
+  }
+  .hero-container {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1.5rem !important;
+  }
+  .hero-title {
+    font-size: 2.1rem !important;
+    line-height: 1.2 !important;
+  }
+  .hero-description {
+    font-size: 0.95rem !important;
+    margin-bottom: 1.75rem !important;
+    padding: 0 0.5rem;
+    max-width: 100% !important;
+  }
+  .hero-actions {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100%;
+    gap: 0.75rem !important;
+  }
+  .hero-actions .btn {
+    width: 100% !important;
+    justify-content: center;
+  }
+
+  /* Metrics Grid */
+  .metrics-grid {
+    grid-template-columns: 1fr !important;
+    padding: 1.25rem !important;
+    gap: 0.75rem !important;
+  }
+  .metric-card {
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.75rem;
+    width: 100%;
+    justify-content: flex-start;
+  }
+  .metric-card:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  /* Header Logo sizing and toggle adjustment */
+  .logo-img {
+    height: 48px !important; /* Proper scaling so it fits perfectly with hamburger */
+  }
+  .header {
+    padding: 0.6rem 0 !important;
+  }
+  .header-container {
+    padding: 0 1rem !important;
+  }
+
+  /* Service card stacking and spacing */
+  .services-section {
+    padding: 3.5rem 0 !important;
+  }
+  .service-card {
+    padding: 1.25rem !important;
+  }
+
+  /* Partner Universities list scaling */
+  .search-filter-box {
+    padding: 1rem !important;
+    border-radius: 14px !important;
+    gap: 1rem !important;
+  }
+  .search-bar {
+    font-size: 16px !important; /* No iOS zoom */
+  }
+  .filter-tags {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    gap: 0.4rem !important;
+    padding-bottom: 0.5rem !important;
+  }
+  .filter-btn {
+    flex-shrink: 0;
+    padding: 0.4rem 0.9rem !important;
+  }
+
+  /* About section values and timeline */
+  .about-img {
+    height: auto !important;
+  }
+  .about-image-wrapper {
+    height: 200px !important;
+  }
+  .team-grid {
+    grid-template-columns: 1fr !important;
+    text-align: center;
+    gap: 1.5rem !important;
+  }
+  .team-credentials {
+    justify-content: center !important;
+  }
+
+  /* Contact page layouts */
+  .contact-info-panel {
+    gap: 1.5rem !important;
+  }
+  .contact-image-container {
+    display: none !important; /* Hide secondary decorative elements to keep layout light */
+  }
+  .form-row {
+    flex-direction: column !important;
+    gap: 0 !important;
+  }
+
+  /* Newsletter adjustments */
+  .newsletter-box {
+    padding: 1.25rem !important;
+    border-radius: 14px !important;
+    text-align: center;
+    gap: 1.25rem !important;
+  }
+  .newsletter-form {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    width: 100% !important;
+  }
+  .newsletter-input {
+    font-size: 16px !important;
+  }
+
+  /* English Test section */
+  .test-meta-info {
+    flex-direction: column !important;
+    gap: 0.75rem !important;
+    align-items: flex-start !important;
+  }
+  .meta-divider {
+    display: none !important;
+  }
+  .option-btn {
+    padding: 0.75rem 1rem !important;
+    font-size: 0.9rem !important;
+  }
+
+  /* Modal responsive adjustment */
+  .modal-overlay {
+    padding: 0.5rem !important;
+  }
+  .modal-content {
+    padding: 1.25rem !important;
+    max-height: 95vh !important;
+  }
+}

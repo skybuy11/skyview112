@@ -36,6 +36,7 @@ export default function Header({ currentTab, setCurrentTab, isDarkMode, toggleTh
     { id: 'services', label: 'Services' },
     { id: 'universities', label: 'Universities' },
     { id: 'english-test', label: 'English Test' },
+    { id: 'contract', label: 'Contract' },
     { id: 'news', label: 'News' },
     { id: 'about', label: 'About Us' },
     { id: 'contact', label: 'Contact' },

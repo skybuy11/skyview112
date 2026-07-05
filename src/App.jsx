@@ -4,6 +4,7 @@ import Hero from './components/Hero';
 import Services from './components/Services';
 import Universities from './components/Universities';
 import EnglishTest from './components/EnglishTest';
+import StudentContract from './components/StudentContract';
 import News from './components/News';
 import About from './components/About';
 import Contact from './components/Contact';
@@ -31,7 +32,7 @@ export default function App() {
 
   // Handle active navigation tab highlighting on scroll
   useEffect(() => {
-    const sections = ['home', 'services', 'universities', 'english-test', 'news', 'about', 'contact'];
+    const sections = ['home', 'services', 'universities', 'english-test', 'contract', 'news', 'about', 'contact'];
     
     const handleScroll = () => {
       const scrollPosition = window.scrollY + 120; // offset for nav header
@@ -78,6 +79,9 @@ export default function App() {
 
       {/* Interactive English Competence Test */}
       <EnglishTest setCurrentTab={setCurrentTab} />
+
+      {/* Student-Agent Representation Agreement */}
+      <StudentContract />
 
       {/* UK Higher Education News */}
       <News />

@@ -54,6 +54,10 @@ export default function Hero({ setCurrentTab }) {
               Start Your Journey
               <ArrowRight size={18} />
             </button>
+            <button className="btn btn-secondary btn-lg" onClick={() => handleActionClick('contract')}>
+              Student Agreement
+              <ArrowRight size={18} />
+            </button>
             <button className="btn btn-secondary btn-lg" onClick={() => handleActionClick('english-test')}>
               Test Your English
               <ClipboardCheck size={18} />

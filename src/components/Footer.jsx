@@ -45,6 +45,7 @@ export default function Footer({ setCurrentTab }) {
               <li><button onClick={() => handleNavClick('services')}>Our Services</button></li>
               <li><button onClick={() => handleNavClick('universities')}>Partner Universities</button></li>
               <li><button onClick={() => handleNavClick('english-test')}>English Assessment</button></li>
+              <li><button onClick={() => handleNavClick('contract')}>Student Contract</button></li>
               <li><button onClick={() => handleNavClick('news')}>UK Education News</button></li>
               <li><button onClick={() => handleNavClick('about')}>About Us</button></li>
             </ul>
