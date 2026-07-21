@@ -121,15 +121,15 @@ export default function Hero({ setCurrentTab }) {
           display: inline-flex;
           align-items: center;
           gap: 0.4rem;
-          padding: 0.35rem 0.85rem;
+          padding: 0.4rem 0.95rem;
           border-radius: 99px;
           background: var(--primary-light);
-          border: 1px solid rgba(0, 48, 120, 0.12);
+          border: 1px solid rgba(0, 48, 120, 0.14);
           color: var(--primary);
           font-weight: 600;
-          font-size: 0.75rem;
+          font-size: 0.8rem;
           letter-spacing: 0.02em;
-          margin-bottom: 1.25rem;
+          margin-bottom: 1.5rem;
         }
 
         .badge-spark {
@@ -137,11 +137,11 @@ export default function Hero({ setCurrentTab }) {
         }
 
         .hero-title {
-          font-size: 2.15rem;
+          font-size: 2.25rem; /* 36px on mobile for maximum readability */
           font-weight: 800;
-          line-height: 1.15;
+          line-height: 1.25;
           letter-spacing: -0.03em;
-          margin-bottom: 1.25rem;
+          margin-bottom: 1.5rem;
           color: var(--text-primary);
         }
 
@@ -162,23 +162,23 @@ export default function Hero({ setCurrentTab }) {
         }
 
         .hero-description {
-          font-size: 0.975rem;
+          font-size: 1.05rem; /* 17px on mobile minimum */
           line-height: 1.65;
           color: var(--text-secondary);
-          margin-bottom: 2rem;
+          margin-bottom: 2.25rem;
           max-width: 560px;
         }
 
         @media (min-width: 640px) {
           .hero-description {
-            font-size: 1.05rem;
+            font-size: 1.1rem;
           }
         }
 
         .hero-actions {
           display: flex;
           flex-direction: column;
-          gap: 0.75rem;
+          gap: 0.85rem;
           width: 100%;
         }
 
@@ -191,6 +191,9 @@ export default function Hero({ setCurrentTab }) {
 
         .hero-actions .btn {
           width: 100%;
+          min-height: 52px;
+          font-size: 1.05rem;
+          padding: 0.9rem 1.5rem;
         }
 
         @media (min-width: 640px) {

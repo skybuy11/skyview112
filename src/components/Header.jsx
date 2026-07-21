@@ -171,7 +171,10 @@ export default function Header({ currentTab, setCurrentTab }) {
 
         @media (max-width: 767px) {
           .logo-img {
-            height: 44px;
+            height: 58px;
+          }
+          .header {
+            padding: 0.65rem 0;
           }
         }
 
