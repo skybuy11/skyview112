@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ArrowRight } from 'lucide-react';
 
 export default function Header({ currentTab, setCurrentTab }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -7,13 +7,12 @@ export default function Header({ currentTab, setCurrentTab }) {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      setScrolled(window.scrollY > 25);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Dismiss mobile drawer when tapping outside
   useEffect(() => {
     if (!isOpen) return;
 
@@ -49,7 +48,7 @@ export default function Header({ currentTab, setCurrentTab }) {
     
     const element = document.getElementById(id);
     if (element) {
-      const offset = 80;
+      const offset = 85;
       const bodyRect = document.body.getBoundingClientRect().top;
       const elementRect = element.getBoundingClientRect().top;
       const elementPosition = elementRect - bodyRect;
@@ -65,44 +64,43 @@ export default function Header({ currentTab, setCurrentTab }) {
   return (
     <header className={`header ${scrolled ? 'scrolled' : ''} ${isOpen ? 'menu-open' : ''}`}>
       <div className="container header-container">
-        {/* Skyview Brand Logo */}
-        <div className="logo-container" onClick={() => handleNavClick('home')}>
-          <img src="/logo.png" alt="Skyview Consultants Logo" className="logo-img" />
-        </div>
+        <div className="floating-navbar-shell glass-card">
+          <div className="logo-container" onClick={() => handleNavClick('home')}>
+            <img src="/logo.png" alt="Skyview Consultants Logo" className="logo-img" />
+          </div>
 
-        {/* Desktop Navigation */}
-        <nav className="desktop-nav">
-          {navItems.map((item) => (
-            <button
-              key={item.id}
-              onClick={() => handleNavClick(item.id)}
-              className={`nav-link ${currentTab === item.id ? 'active' : ''}`}
+          <nav className="desktop-nav">
+            {navItems.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => handleNavClick(item.id)}
+                className={`nav-link ${currentTab === item.id ? 'active' : ''}`}
+              >
+                {item.label}
+              </button>
+            ))}
+          </nav>
+
+          <div className="controls-container">
+            <button 
+              className="btn btn-accent header-cta-btn"
+              onClick={() => handleNavClick('contact')}
             >
-              {item.label}
+              Apply Now
+              <ArrowRight size={16} />
             </button>
-          ))}
-        </nav>
 
-        {/* Action Button & Mobile Drawer Trigger */}
-        <div className="controls-container">
-          <button 
-            className="btn btn-accent header-cta-btn"
-            onClick={() => handleNavClick('contact')}
-          >
-            Apply Now
-          </button>
-
-          <button
-            className="mobile-menu-toggle"
-            onClick={() => setIsOpen(!isOpen)}
-            aria-label="Toggle navigation menu"
-          >
-            {isOpen ? <X size={26} /> : <Menu size={26} />}
-          </button>
+            <button
+              className="mobile-menu-toggle"
+              onClick={() => setIsOpen(!isOpen)}
+              aria-label="Toggle navigation menu"
+            >
+              {isOpen ? <X size={26} /> : <Menu size={26} />}
+            </button>
+          </div>
         </div>
       </div>
 
-      {/* Mobile Drawer */}
       {isOpen && (
         <div className="mobile-nav-drawer animate-fade-in">
           <div className="container mobile-nav-container">
@@ -128,32 +126,28 @@ export default function Header({ currentTab, setCurrentTab }) {
       <style>{`
         .header {
           position: fixed;
-          top: 0;
+          top: 1rem;
           left: 0;
           right: 0;
           z-index: 1000;
-          background: rgba(255, 255, 255, 0.94);
-          backdrop-filter: blur(16px);
-          -webkit-backdrop-filter: blur(16px);
-          border-bottom: 1px solid var(--border-color);
-          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-          padding: 0.85rem 0;
+          transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .header.scrolled {
-          padding: 0.6rem 0;
-          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+          top: 0.5rem;
         }
 
-        .header.menu-open {
-          background: #FFFFFF !important;
-          backdrop-filter: none;
-        }
-
-        .header-container {
+        .floating-navbar-shell {
           display: flex;
-          justify-content: space-between;
           align-items: center;
+          justify-content: space-between;
+          padding: 0.6rem 1.25rem !important;
+          border-radius: 99px !important;
+          background: rgba(255, 255, 255, 0.95) !important;
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          border: 1.5px solid rgba(0, 92, 59, 0.12) !important;
+          box-shadow: 0 10px 30px rgba(15, 41, 30, 0.08) !important;
         }
 
         .logo-container {
@@ -207,7 +201,7 @@ export default function Header({ currentTab, setCurrentTab }) {
           left: 0;
           right: 0;
           height: 3px;
-          background: var(--accent);
+          background: var(--accent-gold);
           border-radius: 99px;
         }
 
@@ -251,19 +245,21 @@ export default function Header({ currentTab, setCurrentTab }) {
 
         .mobile-nav-drawer {
           position: absolute;
-          top: 100%;
-          left: 0;
-          right: 0;
+          top: calc(100% + 0.5rem);
+          left: 1.25rem;
+          right: 1.25rem;
           background: #FFFFFF;
-          border-bottom: 1px solid var(--border-color);
-          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-          padding: 1.25rem 0 1.75rem 0;
+          border: 1.5px solid var(--border-color);
+          border-radius: 24px;
+          box-shadow: 0 24px 48px rgba(0, 0, 0, 0.12);
+          padding: 1.25rem;
         }
 
         .mobile-nav-container {
           display: flex;
           flex-direction: column;
           gap: 0.35rem;
+          padding: 0;
         }
 
         .mobile-nav-link {
@@ -274,7 +270,7 @@ export default function Header({ currentTab, setCurrentTab }) {
           font-size: 1.1rem;
           font-weight: 700;
           color: var(--text-primary);
-          border-radius: 12px;
+          border-radius: 14px;
           transition: all 0.2s;
         }
 

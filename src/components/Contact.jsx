@@ -1,233 +1,163 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Send, CheckCircle, AlertCircle } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, CheckCircle, Clock, Globe } from 'lucide-react';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
-    inquiryType: 'admissions',
+    studyLevel: 'Postgraduate',
     message: ''
   });
-
-  const [errors, setErrors] = useState({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
-
-  const validate = () => {
-    const newErrors = {};
-    if (!formData.name.trim()) newErrors.name = 'Full name is required';
-    
-    if (!formData.email.trim()) {
-      newErrors.email = 'Email address is required';
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Invalid email address';
-    }
-    
-    if (!formData.phone.trim()) {
-      newErrors.phone = 'Phone number is required';
-    }
-
-    if (!formData.message.trim()) {
-      newErrors.message = 'Please enter your message details';
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-    if (errors[name]) {
-      setErrors({ ...errors, [name]: '' });
-    }
-  };
+  const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!validate()) return;
+    if (formData.name && formData.email) {
+      setSubmitted(true);
+    }
+  };
 
-    setIsSubmitting(true);
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsSubmitted(true);
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        inquiryType: 'admissions',
-        message: ''
-      });
-    }, 1200);
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   return (
-    <section id="contact" className="contact-section section">
+    <section id="contact" className="section contact-section">
       <div className="container">
-        <h2 className="section-title">Get in Touch</h2>
+        <h2 className="section-title">Get in Touch with Our Advisors</h2>
         <p className="section-subtitle">
-          Have questions about studying in the UK? Send us a message and a certified advisor will get in touch with you.
+          Start your UK admissions journey today. Schedule a free consultation with a British Council certified education counselor.
         </p>
 
         <div className="contact-grid">
-          {/* Left Panel: Contact Info */}
-          <div className="contact-info-panel">
-            <div className="contact-details-box">
-              <h3 className="panel-title">Contact Information</h3>
-              <p className="panel-desc">
-                Feel free to visit our central London office or contact us directly via email or phone.
-              </p>
+          {/* Left Column: Direct Contact Details */}
+          <div className="info-panel glass-card">
+            <h3 className="panel-title">London Headquarters</h3>
+            <p className="panel-desc">
+              Visit our Covent Garden London office or contact our international student desk directly.
+            </p>
 
-              <ul className="info-list">
-                <li className="info-item">
-                  <div className="info-icon"><MapPin size={22} /></div>
-                  <div>
-                    <h4>Registered Office</h4>
-                    <p>71-75 Shelton Street, Covent Garden, London, WC2H 9JQ, United Kingdom</p>
-                  </div>
-                </li>
+            <div className="contact-info-list">
+              <div className="info-item">
+                <div className="info-icon">
+                  <MapPin size={22} />
+                </div>
+                <div>
+                  <span className="info-label">Office Address</span>
+                  <p>71-75 Shelton Street, Covent Garden<br />London, WC2H 9JQ, United Kingdom</p>
+                </div>
+              </div>
 
-                <li className="info-item">
-                  <div className="info-icon"><Mail size={22} /></div>
-                  <div>
-                    <h4>Email Address</h4>
-                    <p><a href="mailto:sharan@skyview.org.uk">sharan@skyview.org.uk</a></p>
-                  </div>
-                </li>
+              <div className="info-item">
+                <div className="info-icon">
+                  <Mail size={22} />
+                </div>
+                <div>
+                  <span className="info-label">Email Support</span>
+                  <p><a href="mailto:sharan@skyview.org.uk">sharan@skyview.org.uk</a></p>
+                </div>
+              </div>
 
-                <li className="info-item">
-                  <div className="info-icon"><Phone size={22} /></div>
-                  <div>
-                    <h4>Phone Number</h4>
-                    <p><a href="tel:+447725355355">+44 7725 355355</a></p>
-                  </div>
-                </li>
-              </ul>
-            </div>
+              <div className="info-item">
+                <div className="info-icon">
+                  <Phone size={22} />
+                </div>
+                <div>
+                  <span className="info-label">Phone & WhatsApp</span>
+                  <p><a href="tel:+447725355355">+44 7725 355355</a></p>
+                </div>
+              </div>
 
-            <div className="contact-img-box glass-card">
-              <img src="/library-students.png" alt="Students studying in the UK" className="contact-img" />
+              <div className="info-item">
+                <div className="info-icon">
+                  <Clock size={22} />
+                </div>
+                <div>
+                  <span className="info-label">Working Hours</span>
+                  <p>Monday – Friday: 9:00 AM – 6:00 PM (GMT)</p>
+                </div>
+              </div>
             </div>
           </div>
 
-          {/* Right Panel: Form */}
-          <div className="contact-form-panel glass-card">
-            {!isSubmitted ? (
-              <form onSubmit={handleSubmit} noValidate className="contact-form">
-                <h3 className="form-panel-title">Send Us a Message</h3>
+          {/* Right Column: Interactive Consultation Form */}
+          <div className="form-panel glass-card">
+            {!submitted ? (
+              <form onSubmit={handleSubmit}>
+                <h3 className="form-panel-title">Start Free Application Guidance</h3>
 
-                <div className={`form-group-underline ${errors.name ? 'has-error' : ''}`}>
-                  <label htmlFor="name">Full Name</label>
+                <div className="form-group-underline">
+                  <label>Your Full Name *</label>
                   <input
                     type="text"
-                    id="name"
                     name="name"
+                    required
+                    placeholder="e.g. Sharan Ahamed"
                     value={formData.name}
                     onChange={handleChange}
-                    placeholder="Enter your name"
                   />
-                  {errors.name && (
-                    <div className="error-message">
-                      <AlertCircle size={14} />
-                      <span>{errors.name}</span>
-                    </div>
-                  )}
-                </div>
-
-                <div className="form-row">
-                  <div className={`form-group-underline flex-1 ${errors.email ? 'has-error' : ''}`}>
-                    <label htmlFor="email">Email Address</label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      placeholder="name@example.com"
-                    />
-                    {errors.email && (
-                      <div className="error-message">
-                        <AlertCircle size={14} />
-                        <span>{errors.email}</span>
-                      </div>
-                    )}
-                  </div>
-
-                  <div className={`form-group-underline flex-1 ${errors.phone ? 'has-error' : ''}`}>
-                    <label htmlFor="phone">Phone Number</label>
-                    <input
-                      type="tel"
-                      id="phone"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleChange}
-                      placeholder="+44 7..."
-                    />
-                    {errors.phone && (
-                      <div className="error-message">
-                        <AlertCircle size={14} />
-                        <span>{errors.phone}</span>
-                      </div>
-                    )}
-                  </div>
                 </div>
 
                 <div className="form-group-underline">
-                  <label htmlFor="inquiryType">Subject / Inquiry Type</label>
-                  <select
-                    id="inquiryType"
-                    name="inquiryType"
-                    value={formData.inquiryType}
+                  <label>Email Address *</label>
+                  <input
+                    type="email"
+                    name="email"
+                    required
+                    placeholder="name@example.com"
+                    value={formData.email}
                     onChange={handleChange}
-                  >
-                    <option value="admissions">University & Course Admissions</option>
-                    <option value="visas">Student Visa (CAS) Guidance</option>
-                    <option value="contract">Representation Agreement Inquiry</option>
-                    <option value="englishTest">English Diagnostic Test Query</option>
-                    <option value="general">General Inquiry</option>
+                  />
+                </div>
+
+                <div className="form-group-underline">
+                  <label>Phone / WhatsApp Number</label>
+                  <input
+                    type="tel"
+                    name="phone"
+                    placeholder="+44 7000 000000"
+                    value={formData.phone}
+                    onChange={handleChange}
+                  />
+                </div>
+
+                <div className="form-group-underline">
+                  <label>Intended Study Level</label>
+                  <select name="studyLevel" value={formData.studyLevel} onChange={handleChange}>
+                    <option value="Undergraduate">Undergraduate (BSc / BA)</option>
+                    <option value="Postgraduate">Postgraduate (MSc / MA / MBA)</option>
+                    <option value="Doctorate">Doctorate (PhD)</option>
+                    <option value="Foundation">Foundation / Pathway</option>
                   </select>
                 </div>
 
-                <div className={`form-group-underline ${errors.message ? 'has-error' : ''}`}>
-                  <label htmlFor="message">Message Details</label>
+                <div className="form-group-underline">
+                  <label>Your Inquiry / Desired Course</label>
                   <textarea
-                    id="message"
                     name="message"
-                    rows="4"
+                    rows="3"
+                    placeholder="Tell us your target subject or university..."
                     value={formData.message}
                     onChange={handleChange}
-                    placeholder="Describe your qualifications, intended course, and questions..."
                   ></textarea>
-                  {errors.message && (
-                    <div className="error-message">
-                      <AlertCircle size={14} />
-                      <span>{errors.message}</span>
-                    </div>
-                  )}
                 </div>
 
-                <button 
-                  type="submit" 
-                  className="btn btn-accent form-submit-btn"
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? 'Sending Request...' : 'Send Inquiry'}
-                  <Send size={16} />
+                <button type="submit" className="btn btn-primary btn-lg submit-btn">
+                  Submit Consultation Request
+                  <Send size={18} />
                 </button>
               </form>
             ) : (
-              <div className="success-panel animate-fade-in">
-                <CheckCircle className="success-icon" size={54} />
-                <h3>Message Sent Successfully</h3>
-                <p className="success-message-text">
-                  Thank you for contacting Skyview Consultants. A specialist advisor will review your message and reply to your email shortly.
-                </p>
-                <button 
-                  className="btn btn-secondary" 
-                  onClick={() => setIsSubmitted(false)}
+              <div className="submitted-box animate-fade-in">
+                <CheckCircle size={56} className="text-success" />
+                <h3>Application Request Received!</h3>
+                <p>Thank you, <strong>{formData.name}</strong>. A British Council certified Skyview advisor will contact you within 24 business hours at <strong>{formData.email}</strong>.</p>
+                <button
+                  className="btn btn-secondary"
+                  onClick={() => setSubmitted(false)}
                 >
-                  Send Another Message
+                  Send Another Inquiry
                 </button>
               </div>
             )}
@@ -237,57 +167,50 @@ export default function Contact() {
 
       <style>{`
         .contact-section {
-          background-color: var(--bg-primary);
+          background: var(--bg-primary);
         }
 
         .contact-grid {
           display: grid;
           grid-template-columns: 1fr;
-          gap: 2rem;
+          gap: 2.25rem;
         }
 
         @media (min-width: 992px) {
           .contact-grid {
-            grid-template-columns: 1fr 1.1fr;
-            gap: 3rem;
+            grid-template-columns: 0.9fr 1.1fr;
+            gap: 2.5rem;
           }
         }
 
-        .contact-info-panel {
+        .panel-title {
+          font-size: 1.6rem;
+          font-weight: 900;
+          margin-bottom: 0.5rem;
+        }
+
+        .panel-desc {
+          font-size: 1.05rem;
+          color: var(--text-secondary);
+          margin-bottom: 2rem;
+        }
+
+        .contact-info-list {
           display: flex;
           flex-direction: column;
           gap: 1.5rem;
         }
 
-        .panel-title {
-          font-size: 1.35rem;
-          font-weight: 700;
-          margin-bottom: 0.5rem;
-        }
-
-        .panel-desc {
-          font-size: 0.9rem;
-          color: var(--text-secondary);
-          margin-bottom: 1.25rem;
-        }
-
-        .info-list {
-          list-style: none;
-          display: flex;
-          flex-direction: column;
-          gap: 1.25rem;
-        }
-
         .info-item {
           display: flex;
-          gap: 1rem;
           align-items: flex-start;
+          gap: 1rem;
         }
 
         .info-icon {
-          width: 44px;
-          height: 44px;
-          border-radius: 50%;
+          width: 48px;
+          height: 48px;
+          border-radius: 14px;
           background: var(--primary-light);
           color: var(--primary);
           display: flex;
@@ -296,75 +219,57 @@ export default function Contact() {
           flex-shrink: 0;
         }
 
-        .info-item h4 {
-          font-size: 0.95rem;
-          font-weight: 700;
+        .info-label {
+          font-size: 0.75rem;
+          font-weight: 800;
+          color: var(--text-muted);
+          text-transform: uppercase;
         }
 
         .info-item p {
-          font-size: 0.875rem;
-          color: var(--text-secondary);
+          font-size: 1.05rem;
+          font-weight: 700;
+          color: var(--text-primary);
+          line-height: 1.5;
         }
 
-        .contact-img-box {
-          padding: 0.5rem;
+        .info-item a {
+          color: var(--primary);
         }
 
-        .contact-img {
-          width: 100%;
-          height: 180px;
-          object-fit: cover;
-          border-radius: 12px;
+        .form-panel {
+          background: #FFFFFF !important;
         }
 
         .form-panel-title {
-          font-size: 1.35rem;
-          font-weight: 700;
-          margin-bottom: 1.5rem;
+          font-size: 1.5rem;
+          font-weight: 900;
+          margin-bottom: 2rem;
         }
 
-        .form-row {
-          display: flex;
-          flex-direction: column;
-          gap: 0;
-        }
-
-        @media (min-width: 640px) {
-          .form-row {
-            flex-direction: row;
-            gap: 1.25rem;
-          }
-        }
-
-        .flex-1 {
-          flex: 1;
-        }
-
-        .error-message {
-          font-size: 0.75rem;
-          color: #EF4444;
-          display: flex;
-          align-items: center;
-          gap: 0.25rem;
-          margin-top: 0.25rem;
-        }
-
-        .form-submit-btn {
+        .submit-btn {
           width: 100%;
-          margin-top: 1rem;
         }
 
-        .success-panel {
+        .submitted-box {
+          text-align: center;
+          padding: 3rem 1rem;
           display: flex;
           flex-direction: column;
           align-items: center;
-          text-align: center;
-          padding: 2rem 0;
           gap: 1rem;
         }
 
-        .success-icon {
-          color: var(--success);
+        .submitted-box h3 {
+          font-size: 1.6rem;
+          font-weight: 900;
+        }
+
+        .submitted-box p {
+          font-size: 1.1rem;
+          line-height: 1.6;
+          color: var(--text-secondary);
+          max-width: 440px;
         }
       `}</style>
     </section>

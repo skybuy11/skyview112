@@ -1,322 +1,289 @@
 import React, { useState } from 'react';
-import { Search, MapPin, Bookmark, GraduationCap, X, ChevronDown, ExternalLink } from 'lucide-react';
+import { Search, MapPin, Award, CheckCircle, ExternalLink, X, Building2, GraduationCap } from 'lucide-react';
 
-export default function Universities() {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [activeFilter, setActiveFilter] = useState('All');
+export default function Universities({ setCurrentTab }) {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [activeCategory, setActiveCategory] = useState('All');
   const [selectedUni, setSelectedUni] = useState(null);
-  const [visibleCount, setVisibleCount] = useState(6);
 
-  const filterOptions = [
-    'All',
-    'Russell Group',
-    'London',
-    'Scotland & Wales',
-    'Modern & Career'
-  ];
-
-  const universitiesData = [
+  const universities = [
     {
-      id: 'lse',
-      name: 'London School of Economics (LSE)',
-      location: 'London, England',
-      description: 'Specializing in social sciences, LSE is renowned globally for its leadership in economics, politics, sociology, law, and anthropology.',
-      tags: ['Russell Group', 'London'],
-      popularCourses: ['Economics', 'Finance', 'International Relations', 'Sociology'],
-      established: '1895',
-      studentCount: '11,000+',
-      satisfaction: '91%',
-      badge: 'Top for Social Sciences'
-    },
-    {
-      id: 'ucl',
-      name: 'University College London (UCL)',
-      location: 'London, England',
-      description: 'The first university in England to admit students of any religion and women on equal terms. A multidisciplinary research powerhouse.',
-      tags: ['Russell Group', 'London'],
-      popularCourses: ['Architecture', 'Law', 'Medicine', 'Psychology'],
-      established: '1826',
-      studentCount: '43,000+',
-      satisfaction: '89%',
-      badge: "London's Global Uni"
-    },
-    {
-      id: 'durham',
-      name: 'Durham University',
-      location: 'Durham, England',
-      description: "England's third oldest university, known for its collegiate system where students live and study in historic colleges.",
-      tags: ['Russell Group', 'Collegiate'],
-      popularCourses: ['Geography', 'History', 'Law', 'English Literature'],
-      established: '1832',
-      studentCount: '20,000+',
-      satisfaction: '93%',
-      badge: 'UNESCO Heritage Site'
-    },
-    {
-      id: 'edinburgh',
-      name: 'University of Edinburgh',
-      location: 'Edinburgh, Scotland',
-      description: "One of Scotland's ancient universities, famous for its role in the Scottish Enlightenment and world-leading research.",
-      tags: ['Russell Group', 'Scotland & Wales'],
-      popularCourses: ['Informatics (CS)', 'Biological Sciences', 'Philosophy', 'English Literature'],
-      established: '1582',
-      studentCount: '45,000+',
-      satisfaction: '88%',
-      badge: 'Ancient Scottish Uni'
-    },
-    {
-      id: 'glasgow',
-      name: 'University of Glasgow',
-      location: 'Glasgow, Scotland',
-      description: 'Founded in 1451, Glasgow is the fourth-oldest university in the English-speaking world. A member of the prestigious Russell Group.',
-      tags: ['Russell Group', 'Scotland & Wales'],
-      popularCourses: ['Veterinary Medicine', 'Aerospace Engineering', 'Medicine'],
-      established: '1451',
-      studentCount: '35,000+',
-      satisfaction: '92%',
-      badge: 'Russell Group Scotland'
-    },
-    {
-      id: 'manchester',
-      name: 'University of Manchester',
-      location: 'Manchester, England',
-      description: 'A red-brick research university known for high employability rates and groundbreaking scientific discoveries including graphene.',
-      tags: ['Russell Group'],
-      popularCourses: ['Chemical Engineering', 'Business Administration', 'Computer Science'],
-      established: '1824',
-      studentCount: '40,000+',
-      satisfaction: '88%',
-      badge: 'Research Powerhouse'
-    },
-    {
-      id: 'greenwich',
+      id: 1,
       name: 'University of Greenwich',
-      location: 'London, England',
-      description: 'Located on a UNESCO World Heritage site in London, offering career-aligned programs in business, computing, and engineering.',
-      tags: ['London', 'Modern & Career'],
-      popularCourses: ['MBA International', 'Computer Science', 'Cybersecurity'],
-      established: '1890',
-      studentCount: '21,000+',
-      satisfaction: '87%',
-      badge: 'UNESCO Maritime Campus'
+      location: 'London & Medway, England',
+      ranking: 'Top London Campus',
+      category: 'London',
+      acceptanceRate: '68%',
+      popularCourses: ['Cyber Security', 'International Business', 'Logistics & Supply Chain', 'Nursing'],
+      description: 'Iconic UNESCO World Heritage campus location offering flexible entry requirements, placement years, and career-aligned degree programs.'
     },
     {
-      id: 'middlesex',
-      name: 'Middlesex University',
-      location: 'London, England',
-      description: 'Forward-looking London university known for industry placements, practical degree structures, and global career pathways.',
-      tags: ['London', 'Modern & Career'],
-      popularCourses: ['MSc Cybersecurity', 'Business Analytics', 'Nursing'],
-      established: '1973',
-      studentCount: '19,000+',
-      satisfaction: '86%',
-      badge: 'Global Career Focus'
+      id: 2,
+      name: 'Middlesex University London',
+      location: 'Hendon, North London, England',
+      ranking: 'Top Modern London Uni',
+      category: 'London',
+      acceptanceRate: '72%',
+      popularCourses: ['Information Technology', 'Graphic Design', 'Accounting & Finance', 'Public Health'],
+      description: 'Industry-integrated modern university in North London with high international student satisfaction and direct internship options.'
     },
     {
-      id: 'bpp',
+      id: 3,
       name: 'BPP University',
-      location: 'London & UK Wide',
-      description: 'UK specialist university dedicated exclusively to professional education in Law, Business, Finance, and Healthcare degrees.',
-      tags: ['London', 'Modern & Career'],
-      popularCourses: ['LLM Legal Practice', 'MSc Healthcare Management', 'ACCA Finance'],
-      established: '1992',
-      studentCount: '16,000+',
-      satisfaction: '90%',
-      badge: 'Professional Law & Business'
+      location: 'London, Birmingham, Manchester & Bristol',
+      ranking: 'Leading Professional Provider',
+      category: 'London',
+      acceptanceRate: '78%',
+      popularCourses: ['ACCA Accounting', 'SQE Law Practice', 'Data Analytics', 'Healthcare Management'],
+      description: 'Dedicated professional degree provider focusing strictly on employer-sponsored professional qualifications, business, and law tracks.'
+    },
+    {
+      id: 4,
+      name: 'Coventry University',
+      location: 'Coventry & London, England',
+      ranking: '#1 Modern University UK',
+      category: 'Career Focused',
+      acceptanceRate: '65%',
+      popularCourses: ['Automotive Engineering', 'Global Business', 'Computer Science', 'Project Management'],
+      description: 'Award-winning UK university renowned for employment outcomes, state-of-the-art simulation labs, and flexible intake options.'
+    },
+    {
+      id: 5,
+      name: 'University of Sunderland',
+      location: 'Sunderland & London, England',
+      ranking: 'High International Support',
+      category: 'Career Focused',
+      acceptanceRate: '74%',
+      popularCourses: ['MBA (Work Placement)', 'Pharmacy', 'Digital Marketing', 'Tourism & Hospitality'],
+      description: 'Career-focused UK university offering affordable tuition, generous international scholarships, and London/Sunderland campus choices.'
+    },
+    {
+      id: 6,
+      name: 'De Montfort University (DMU)',
+      location: 'Leicester, England',
+      ranking: 'Top 10 Employability UK',
+      category: 'Career Focused',
+      acceptanceRate: '69%',
+      popularCourses: ['Fashion & Textiles', 'Artificial Intelligence', 'Architecture', 'Business Management'],
+      description: 'Dynamic campus in Leicester recognized for world-leading design, technology research, and international graduate career support.'
+    },
+    {
+      id: 7,
+      name: 'University of Chester',
+      location: 'Chester, North West England',
+      ranking: 'Top Student Satisfaction',
+      category: 'Regional Excellence',
+      acceptanceRate: '73%',
+      popularCourses: ['Biomedical Science', 'International Finance', 'Software Engineering', 'Psychology'],
+      description: 'Historic and safe historic city campus setting delivering high student satisfaction, affordable living costs, and supportive faculties.'
+    },
+    {
+      id: 8,
+      name: 'University of Hertfordshire',
+      location: 'Hatfield (25 mins from London)',
+      ranking: 'Top Post-Polytechnic UK',
+      category: 'Career Focused',
+      acceptanceRate: '70%',
+      popularCourses: ['Aerospace Engineering', 'Robotics', 'Data Science', 'Business Analytics'],
+      description: 'Innovative university located just 25 minutes from central London, featuring direct industry ties with UK aerospace and tech hubs.'
+    },
+    {
+      id: 9,
+      name: 'University of East London (UEL)',
+      location: 'Docklands & Stratford, London',
+      ranking: 'Top London Career Impact',
+      category: 'London',
+      acceptanceRate: '71%',
+      popularCourses: ['Construction Management', 'Civil Engineering', 'FinTech', 'Clinical Psychology'],
+      description: 'Vibrant London Docklands campus providing career-focused degree programs with active industry employer partnerships.'
+    },
+    {
+      id: 10,
+      name: 'University of Portsmouth',
+      location: 'Portsmouth, South Coast England',
+      ranking: 'TEF Gold Rating UK',
+      category: 'Regional Excellence',
+      acceptanceRate: '67%',
+      popularCourses: ['Logistics & Supply Chain', 'Cyber Security', 'Mechanical Engineering', 'International Relations'],
+      description: 'Gold-rated coastal UK university offering high-quality teaching, industry work placements, and strong international student care.'
     }
   ];
 
-  const filteredUnis = universitiesData.filter((uni) => {
-    const matchesQuery = 
-      uni.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      uni.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      uni.popularCourses.some(c => c.toLowerCase().includes(searchQuery.toLowerCase()));
+  const categories = ['All', 'London', 'Career Focused', 'Regional Excellence'];
 
-    if (activeFilter === 'All') return matchesQuery;
-    return matchesQuery && uni.tags.includes(activeFilter);
+  const filteredUnis = universities.filter(uni => {
+    const matchesCategory = activeCategory === 'All' || uni.category === activeCategory;
+    const matchesSearch = uni.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                          uni.location.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                          uni.popularCourses.some(c => c.toLowerCase().includes(searchTerm.toLowerCase()));
+    return matchesCategory && matchesSearch;
   });
 
-  const paginatedUnis = filteredUnis.slice(0, visibleCount);
+  const handleApplyNow = (uniName) => {
+    setSelectedUni(null);
+    setCurrentTab('contact');
+    const element = document.getElementById('contact');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
-    <section id="universities" className="unis-section section">
+    <section id="universities" className="section unis-section">
       <div className="container">
-        <h2 className="section-title">Partner Universities</h2>
+        <h2 className="section-title">UK Partner Universities</h2>
         <p className="section-subtitle">
-          Explore elite Russell Group institutions and leading career-focused UK universities officially represented by Skyview Consultants.
+          Explore career-focused British institutions offering high international acceptance rates, generous scholarships, and placement year options across London and the UK.
         </p>
 
-        {/* Search & Filter Bar */}
+        {/* Search & Filter Box */}
         <div className="search-filter-box glass-card">
-          <div className="search-input-wrapper">
-            <Search className="search-icon" size={20} />
+          <div className="search-bar-wrapper">
+            <Search size={22} className="search-bar-icon" />
             <input
               type="text"
-              placeholder="Search by university name, location, or course..."
-              value={searchQuery}
-              onChange={(e) => { setSearchQuery(e.target.value); setVisibleCount(6); }}
+              placeholder="Search university name, city or degree subject..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
               className="search-bar"
             />
           </div>
 
           <div className="filter-tags">
-            {filterOptions.map((filter) => (
+            {categories.map((cat) => (
               <button
-                key={filter}
-                onClick={() => { setActiveFilter(filter); setVisibleCount(6); }}
-                className={`filter-btn ${activeFilter === filter ? 'active' : ''}`}
+                key={cat}
+                className={`filter-btn ${activeCategory === cat ? 'active' : ''}`}
+                onClick={() => setActiveCategory(cat)}
               >
-                {filter}
+                {cat}
               </button>
             ))}
           </div>
         </div>
 
-        {/* Grid */}
-        {paginatedUnis.length > 0 ? (
-          <>
-            <div className="unis-grid">
-              {paginatedUnis.map((uni) => (
-                <div 
-                  key={uni.id} 
-                  className="glass-card uni-card"
-                  onClick={() => setSelectedUni(uni)}
-                >
-                  <div className="uni-card-header">
-                    <span className="uni-badge">{uni.badge}</span>
-                    <Bookmark className="bookmark-icon" size={18} />
-                  </div>
+        {/* Cards Grid Without Images */}
+        <div className="unis-grid">
+          {filteredUnis.map((uni) => (
+            <div key={uni.id} className="uni-card glass-card">
+              <div className="uni-card-header-bar">
+                <div className="uni-icon-box">
+                  <GraduationCap size={26} />
+                </div>
+                <span className="uni-ranking-badge">{uni.ranking}</span>
+              </div>
 
-                  <h3 className="uni-card-title">{uni.name}</h3>
+              <div className="uni-card-body">
+                <span className="uni-location-tag">
+                  <MapPin size={14} />
+                  {uni.location}
+                </span>
 
-                  <div className="uni-card-location">
-                    <MapPin size={15} className="text-accent" />
-                    <span>{uni.location}</span>
-                  </div>
+                <h3 className="uni-card-title">{uni.name}</h3>
+                <p className="uni-card-desc">{uni.description}</p>
 
-                  <p className="uni-card-desc">{uni.description}</p>
-
-                  <div className="uni-card-tags">
-                    {uni.tags.map((tag) => (
-                      <span key={tag} className="tag-pill">{tag}</span>
+                <div className="uni-courses-box">
+                  <span className="courses-label">Popular Programs:</span>
+                  <div className="course-pills">
+                    {uni.popularCourses.slice(0, 3).map((course, idx) => (
+                      <span key={idx} className="course-pill">{course}</span>
                     ))}
                   </div>
+                </div>
 
-                  <button className="btn btn-secondary uni-card-btn">
-                    View University Details
+                <div className="uni-card-actions">
+                  <button 
+                    className="btn btn-secondary uni-card-btn"
+                    onClick={() => setSelectedUni(uni)}
+                  >
+                    View Details
+                  </button>
+                  <button 
+                    className="btn btn-primary uni-card-btn"
+                    onClick={() => handleApplyNow(uni.name)}
+                  >
+                    Apply Direct
                   </button>
                 </div>
-              ))}
+              </div>
             </div>
+          ))}
+        </div>
 
-            {/* Load More */}
-            {visibleCount < filteredUnis.length && (
-              <div className="load-more-container">
-                <button className="btn btn-primary btn-load-more" onClick={() => setVisibleCount(prev => prev + 3)}>
-                  Load More Universities
-                  <ChevronDown size={18} />
+        {/* Modal Popup */}
+        {selectedUni && (
+          <div className="modal-backdrop" onClick={() => setSelectedUni(null)}>
+            <div className="modal-content glass-card animate-fade-in" onClick={(e) => e.stopPropagation()}>
+              <button className="modal-close" onClick={() => setSelectedUni(null)}>
+                <X size={24} />
+              </button>
+
+              <div className="modal-header">
+                <Building2 size={32} className="modal-icon text-primary" />
+                <div>
+                  <span className="uni-ranking-badge">{selectedUni.ranking}</span>
+                  <h3 className="modal-title">{selectedUni.name}</h3>
+                  <span className="uni-location-tag"><MapPin size={14} />{selectedUni.location}</span>
+                </div>
+              </div>
+
+              <div className="modal-body">
+                <p className="modal-desc">{selectedUni.description}</p>
+
+                <div className="modal-meta-grid">
+                  <div className="meta-box">
+                    <span className="meta-lbl">Category</span>
+                    <span className="meta-val">{selectedUni.category}</span>
+                  </div>
+                  <div className="meta-box">
+                    <span className="meta-lbl">Est. Acceptance Rate</span>
+                    <span className="meta-val">{selectedUni.acceptanceRate}</span>
+                  </div>
+                </div>
+
+                <h4 className="modal-subheading">Featured Degrees Offered:</h4>
+                <div className="course-pills">
+                  {selectedUni.popularCourses.map((c, idx) => (
+                    <span key={idx} className="course-pill">{c}</span>
+                  ))}
+                </div>
+              </div>
+
+              <div className="modal-footer">
+                <button 
+                  className="btn btn-accent btn-lg"
+                  onClick={() => handleApplyNow(selectedUni.name)}
+                >
+                  Start Application to {selectedUni.name}
+                  <ExternalLink size={18} />
                 </button>
               </div>
-            )}
-          </>
-        ) : (
-          <div className="no-results glass-card">
-            <GraduationCap size={44} className="no-results-icon" />
-            <h3>No Universities Found</h3>
-            <p>No partner institutions match your query. Try resetting your search filters.</p>
-            <button className="btn btn-primary" onClick={() => { setSearchQuery(''); setActiveFilter('All'); setVisibleCount(6); }}>
-              Reset Filters
-            </button>
+            </div>
           </div>
         )}
       </div>
 
-      {/* Detail Modal */}
-      {selectedUni && (
-        <div className="modal-overlay" onClick={() => setSelectedUni(null)}>
-          <div className="modal-content glass-card animate-fade-in" onClick={(e) => e.stopPropagation()}>
-            <button className="modal-close" onClick={() => setSelectedUni(null)}>
-              <X size={20} />
-            </button>
-
-            <div className="modal-header">
-              <span className="uni-badge">{selectedUni.badge}</span>
-              <h3 className="modal-title">{selectedUni.name}</h3>
-              <div className="modal-location">
-                <MapPin size={16} />
-                <span>{selectedUni.location}</span>
-              </div>
-            </div>
-
-            <div className="modal-body">
-              <p className="modal-desc">{selectedUni.description}</p>
-              
-              <div className="modal-stats-grid">
-                <div className="modal-stat">
-                  <span className="stat-val">{selectedUni.established}</span>
-                  <span className="stat-lbl">Established</span>
-                </div>
-                <div className="modal-stat">
-                  <span className="stat-val">{selectedUni.studentCount}</span>
-                  <span className="stat-lbl">Students</span>
-                </div>
-                <div className="modal-stat">
-                  <span className="stat-val">{selectedUni.satisfaction}</span>
-                  <span className="stat-lbl">Satisfaction</span>
-                </div>
-              </div>
-
-              <div className="modal-courses">
-                <h4>Popular Programs:</h4>
-                <div className="course-tags">
-                  {selectedUni.popularCourses.map((c, i) => (
-                    <span key={i} className="course-pill">{c}</span>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            <div className="modal-footer">
-              <button className="btn btn-secondary" onClick={() => setSelectedUni(null)}>
-                Close
-              </button>
-              <a 
-                href="#contact" 
-                className="btn btn-accent"
-                onClick={() => {
-                  setSelectedUni(null);
-                  const el = document.getElementById('contact');
-                  if (el) el.scrollIntoView({ behavior: 'smooth' });
-                }}
-              >
-                Inquire Admissions
-                <ExternalLink size={16} />
-              </a>
-            </div>
-          </div>
-        </div>
-      )}
-
       <style>{`
         .unis-section {
-          background-color: var(--bg-primary);
+          background: #FFFFFF;
         }
 
         .search-filter-box {
+          margin-bottom: 3rem;
           display: flex;
           flex-direction: column;
-          gap: 1rem;
-          margin-bottom: 2.25rem;
+          gap: 1.25rem;
+          padding: 1.5rem !important;
         }
 
-        .search-input-wrapper {
+        .search-bar-wrapper {
           position: relative;
           width: 100%;
         }
 
-        .search-icon {
+        .search-bar-icon {
           position: absolute;
-          left: 1.25rem;
+          left: 1.15rem;
           top: 50%;
           transform: translateY(-50%);
           color: var(--text-muted);
@@ -324,285 +291,251 @@ export default function Universities() {
 
         .search-bar {
           width: 100%;
-          padding: 0.8rem 1rem 0.8rem 3rem;
+          padding: 0.95rem 1rem 0.95rem 3.25rem;
+          background: var(--bg-primary);
+          border: 1.5px solid var(--border-color);
           border-radius: 99px;
-          border: 1px solid var(--border-color);
-          background-color: var(--bg-primary);
           color: var(--text-primary);
           font-size: 16px;
         }
 
         .search-bar:focus {
-          border-color: var(--accent);
-          background: #FFFFFF;
+          border-color: var(--primary);
         }
 
         .filter-tags {
           display: flex;
-          gap: 0.5rem;
-          overflow-x: auto;
-          -webkit-overflow-scrolling: touch;
-          padding-bottom: 4px;
-        }
-
-        .filter-tags::-webkit-scrollbar {
-          display: none;
+          gap: 0.65rem;
+          flex-wrap: wrap;
         }
 
         .filter-btn {
-          background: transparent;
-          border: 1px solid var(--border-color);
-          padding: 0.45rem 1.1rem;
+          padding: 0.55rem 1.25rem;
           border-radius: 99px;
+          background: var(--bg-subtle);
           color: var(--text-secondary);
-          font-weight: 500;
-          font-size: 0.825rem;
+          font-size: 0.9rem;
+          font-weight: 700;
           cursor: pointer;
-          flex-shrink: 0;
+          border: 1px solid transparent;
+          transition: all 0.2s ease;
         }
 
-        .filter-btn.active {
+        .filter-btn:hover, .filter-btn.active {
           background: var(--primary);
-          border-color: var(--primary);
           color: #FFFFFF;
         }
 
         .unis-grid {
           display: grid;
           grid-template-columns: 1fr;
-          gap: 1.25rem;
+          gap: 1.75rem;
         }
 
         @media (min-width: 992px) {
           .unis-grid {
             grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
+            gap: 2rem;
           }
         }
 
         .uni-card {
-          cursor: pointer;
           display: flex;
           flex-direction: column;
+          padding: 1.75rem !important;
         }
 
-        .uni-card-header {
+        .uni-card-header-bar {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          margin-bottom: 1rem;
-        }
-
-        .uni-badge {
-          background: var(--accent-light);
-          color: var(--accent);
-          font-size: 0.7rem;
-          font-weight: 700;
-          padding: 0.25rem 0.75rem;
-          border-radius: 99px;
-          border: 1px solid rgba(181, 138, 63, 0.2);
-        }
-
-        .bookmark-icon {
-          color: var(--text-muted);
-        }
-
-        .uni-card-title {
-          font-size: 1.2rem;
-          font-weight: 700;
-          color: var(--text-primary);
-          margin-bottom: 0.4rem;
-        }
-
-        .uni-card-location {
-          display: flex;
-          align-items: center;
-          gap: 0.35rem;
-          font-size: 0.8rem;
-          color: var(--text-muted);
-          margin-bottom: 0.85rem;
-        }
-
-        .uni-card-desc {
-          font-size: 0.875rem;
-          color: var(--text-secondary);
-          line-height: 1.55;
-          margin-bottom: 1.25rem;
-          flex-grow: 1;
-        }
-
-        .uni-card-tags {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 0.4rem;
           margin-bottom: 1.25rem;
         }
 
-        .tag-pill {
-          background: var(--bg-primary);
-          color: var(--text-secondary);
-          font-size: 0.7rem;
-          padding: 0.2rem 0.55rem;
-          border-radius: 4px;
-          font-weight: 500;
-          border: 1px solid var(--border-color);
-        }
-
-        .uni-card-btn {
-          width: 100%;
-        }
-
-        .load-more-container {
-          display: flex;
-          justify-content: center;
-          margin-top: 2.5rem;
-        }
-
-        .no-results {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          text-align: center;
-          padding: 3rem 1.5rem;
-          gap: 1rem;
-        }
-
-        /* Modal Overlay */
-        .modal-overlay {
-          position: fixed;
-          inset: 0;
-          background: rgba(0, 0, 0, 0.4);
-          backdrop-filter: blur(8px);
-          z-index: 2000;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          padding: 1rem;
-        }
-
-        .modal-content {
-          width: 100%;
-          max-width: 580px;
-          max-height: 90vh;
-          overflow-y: auto;
-          position: relative;
-        }
-
-        .modal-close {
-          position: absolute;
-          right: 1.25rem;
-          top: 1.25rem;
-          background: var(--bg-primary);
-          width: 32px;
-          height: 32px;
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          cursor: pointer;
-          color: var(--text-primary);
-        }
-
-        .modal-header {
-          display: flex;
-          flex-direction: column;
-          gap: 0.5rem;
-          margin-bottom: 1.25rem;
-        }
-
-        .modal-title {
-          font-size: 1.4rem;
-          font-weight: 700;
-        }
-
-        .modal-location {
-          display: flex;
-          align-items: center;
-          gap: 0.35rem;
-          color: var(--text-muted);
-          font-size: 0.85rem;
-        }
-
-        .modal-body {
-          display: flex;
-          flex-direction: column;
-          gap: 1.25rem;
-        }
-
-        .modal-desc {
-          font-size: 0.925rem;
-          line-height: 1.6;
-          color: var(--text-secondary);
-        }
-
-        .modal-stats-grid {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 0.75rem;
-          background: var(--bg-primary);
-          padding: 1rem;
-          border-radius: 12px;
-          border: 1px solid var(--border-color);
-        }
-
-        .modal-stat {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          text-align: center;
-        }
-
-        .stat-val {
-          font-family: var(--font-heading);
-          font-weight: 800;
-          font-size: 1.1rem;
+        .uni-icon-box {
+          width: 48px;
+          height: 48px;
+          border-radius: 14px;
+          background: var(--primary-light);
           color: var(--primary);
+          display: flex;
+          align-items: center;
+          justify-content: center;
         }
 
-        .stat-lbl {
-          font-size: 0.7rem;
+        .uni-ranking-badge {
+          background: var(--primary-light);
+          color: var(--primary);
+          font-size: 0.75rem;
+          font-weight: 800;
+          padding: 0.35rem 0.85rem;
+          border-radius: 99px;
+          border: 1px solid rgba(0, 92, 59, 0.15);
+        }
+
+        .uni-card-body {
+          display: flex;
+          flex-direction: column;
+          flex: 1;
+        }
+
+        .uni-location-tag {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.35rem;
+          font-size: 0.825rem;
           color: var(--text-muted);
-          text-transform: uppercase;
-        }
-
-        .modal-courses h4 {
-          font-size: 0.85rem;
-          font-weight: 700;
+          font-weight: 600;
           margin-bottom: 0.5rem;
         }
 
-        .course-tags {
+        .uni-card-title {
+          font-size: 1.35rem;
+          font-weight: 800;
+          color: var(--text-primary);
+          margin-bottom: 0.65rem;
+          line-height: 1.25;
+        }
+
+        .uni-card-desc {
+          font-size: 1.05rem;
+          line-height: 1.6;
+          color: var(--text-secondary);
+          margin-bottom: 1.25rem;
+        }
+
+        .uni-courses-box {
+          margin-top: auto;
+          margin-bottom: 1.5rem;
+        }
+
+        .courses-label {
+          font-size: 0.75rem;
+          font-weight: 800;
+          color: var(--text-muted);
+          text-transform: uppercase;
+          margin-bottom: 0.45rem;
+          display: block;
+        }
+
+        .course-pills {
           display: flex;
           flex-wrap: wrap;
           gap: 0.4rem;
         }
 
         .course-pill {
+          background: var(--primary-light);
+          color: var(--primary);
+          font-size: 0.78rem;
+          font-weight: 700;
+          padding: 0.25rem 0.65rem;
+          border-radius: 99px;
+        }
+
+        .uni-card-actions {
+          display: flex;
+          gap: 0.75rem;
+        }
+
+        .uni-card-btn {
+          flex: 1;
+          min-height: 48px;
+          font-size: 0.95rem;
+          padding: 0.65rem 1rem;
+        }
+
+        /* Modal */
+        .modal-backdrop {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: rgba(15, 41, 30, 0.65);
+          backdrop-filter: blur(10px);
+          z-index: 2000;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 1.25rem;
+        }
+
+        .modal-content {
+          width: 100%;
+          max-width: 600px;
+          position: relative;
+          padding: 2rem !important;
+          background: #FFFFFF !important;
+        }
+
+        .modal-close {
+          position: absolute;
+          top: 1.25rem;
+          right: 1.25rem;
+          color: var(--text-muted);
+          cursor: pointer;
+        }
+
+        .modal-header {
+          display: flex;
+          gap: 1rem;
+          align-items: flex-start;
+          margin-bottom: 1.5rem;
+        }
+
+        .modal-title {
+          font-size: 1.5rem;
+          font-weight: 800;
+        }
+
+        .modal-desc {
+          font-size: 1.1rem;
+          line-height: 1.7;
+          margin-bottom: 1.5rem;
+        }
+
+        .modal-meta-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 1rem;
           background: var(--bg-primary);
+          padding: 1rem;
+          border-radius: 14px;
+          margin-bottom: 1.5rem;
+        }
+
+        .meta-box {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .meta-lbl {
+          font-size: 0.75rem;
+          color: var(--text-muted);
+          font-weight: 700;
+          text-transform: uppercase;
+        }
+
+        .meta-val {
+          font-size: 1.1rem;
+          font-weight: 800;
           color: var(--text-primary);
-          font-size: 0.8rem;
-          padding: 0.35rem 0.75rem;
-          border-radius: 6px;
-          border: 1px solid var(--border-color);
+        }
+
+        .modal-subheading {
+          font-size: 0.9rem;
+          font-weight: 800;
+          margin-bottom: 0.65rem;
+          text-transform: uppercase;
         }
 
         .modal-footer {
-          display: flex;
-          justify-content: flex-end;
-          gap: 0.75rem;
-          margin-top: 1.5rem;
-          border-top: 1px solid var(--border-color);
-          padding-top: 1.25rem;
-          flex-wrap: wrap;
+          margin-top: 2rem;
         }
 
-        @media (max-width: 480px) {
-          .modal-footer {
-            flex-direction: column;
-          }
-          .modal-footer .btn {
-            width: 100%;
-          }
+        .modal-footer .btn {
+          width: 100%;
         }
       `}</style>
     </section>

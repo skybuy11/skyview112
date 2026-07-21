@@ -1,300 +1,183 @@
 import React, { useState } from 'react';
-import { ClipboardCheck, ArrowRight, RotateCcw, CheckCircle2 } from 'lucide-react';
+import { Award, CheckCircle2, RefreshCw, ArrowRight, HelpCircle } from 'lucide-react';
 
 export default function EnglishTest({ setCurrentTab }) {
-  const [started, setStarted] = useState(false);
-  const [currentIdx, setCurrentIdx] = useState(0);
+  const [currentStep, setCurrentStep] = useState(0);
   const [answers, setAnswers] = useState({});
-  const [submitted, setSubmitted] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const questions = [
     {
       id: 1,
-      question: "Choose the correct form of the comparative adjective: 'This book is _____ than the one I read last week.'",
-      options: ["more interesting", "most interesting", "much interesting"],
+      question: "Which option correctly completes the sentence? 'By the time the university term begins, I ______ my Tier 4 visa.'",
+      options: [
+        "will have received",
+        "would receive",
+        "have received",
+        "am receiving"
+      ],
       correct: 0
     },
     {
       id: 2,
-      question: "Choose the correct option to complete the sentence: 'If I _____ known about the meeting, I would have attended it.'",
-      options: ["have", "had", "would have"],
+      question: "Choose the sentence with the most appropriate formal academic tone for a Statement of Purpose:",
+      options: [
+        "I really want to get into this course because it's super cool.",
+        "My primary motivation for pursuing this MSc stems from its rigorous curriculum.",
+        "I figure this degree will help me land a high-paying job real quick.",
+        "Your university looks pretty decent and I want to study there."
+      ],
       correct: 1
     },
     {
       id: 3,
-      question: "Choose the correct preposition: 'She is interested _____ pursuing a degree in engineering.'",
-      options: ["in", "at", "for", "on"],
+      question: "Select the correct prepositions: 'The student was eligible ______ a scholarship and applied ______ the academic board.'",
+      options: [
+        "for / to",
+        "with / for",
+        "to / at",
+        "of / by"
+      ],
       correct: 0
     },
     {
       id: 4,
-      question: "Select the correct meaning of the idiom 'to beat around the bush':",
-      options: ["to fight for something", "to avoid the main topic", "to speak in secret", "to plant flowers"],
-      correct: 1
-    },
-    {
-      id: 5,
-      question: "Select the sentence with correct punctuation:",
+      question: "Identify the synonym for 'compulsory' in a university course module context:",
       options: [
-        "However, I think the solution is simple.",
-        "However I think, the solution is simple.",
-        "However I think the solution, is simple.",
-        "However I think the solution is, simple."
+        "Mandatory",
+        "Optional",
+        "Extracurricular",
+        "Elective"
       ],
       correct: 0
-    },
-    {
-      id: 6,
-      question: "Which sentence has correct subject-verb agreement?",
-      options: [
-        "The team is playing well.",
-        "The team are playing well.",
-        "The team were playing well.",
-        "The team being playing well."
-      ],
-      correct: 0
-    },
-    {
-      id: 7,
-      question: "Which sentence uses the passive voice?",
-      options: [
-        "The student completed the assignment.",
-        "The student is completing the assignment.",
-        "The assignment was completed by the student.",
-        "Complete the assignment, student."
-      ],
-      correct: 2
-    },
-    {
-      id: 8,
-      question: "Which word is the antonym of 'benevolent'?",
-      options: ["malevolent", "cruel", "kind", "selfish"],
-      correct: 0
-    },
-    {
-      id: 9,
-      question: "Which of these words is a gerund?",
-      options: ["run", "runner", "running", "ran"],
-      correct: 2
     }
   ];
 
-  const handleSelect = (optionIdx) => {
-    setAnswers({ ...answers, [currentIdx]: optionIdx });
+  const handleOptionSelect = (qId, optionIdx) => {
+    setAnswers({ ...answers, [qId]: optionIdx });
   };
 
   const handleNext = () => {
-    if (currentIdx < questions.length - 1) {
-      setCurrentIdx(currentIdx + 1);
+    if (currentStep < questions.length - 1) {
+      setCurrentStep(currentStep + 1);
     } else {
-      setSubmitted(true);
+      setIsSubmitted(true);
     }
   };
 
-  const handlePrev = () => {
-    if (currentIdx > 0) {
-      setCurrentIdx(currentIdx - 1);
-    }
+  const handleReset = () => {
+    setAnswers({});
+    setCurrentStep(0);
+    setIsSubmitted(false);
   };
 
-  const getScore = () => {
+  const calculateScore = () => {
     let score = 0;
-    questions.forEach((q, idx) => {
-      if (answers[idx] === q.correct) {
+    questions.forEach(q => {
+      if (answers[q.id] === q.correct) {
         score += 1;
       }
     });
     return score;
   };
 
-  const resetTest = () => {
-    setAnswers({});
-    setCurrentIdx(0);
-    setSubmitted(false);
-    setStarted(false);
-  };
-
-  const score = getScore();
-  const maxScore = questions.length;
-  const percentage = Math.round((score / maxScore) * 100);
-
-  const getResultLevel = () => {
-    if (percentage >= 85) {
-      return {
-        title: "C1 / C2 Advanced English Proficiency",
-        desc: "Exemplary English proficiency suitable for direct entry into top Russell Group universities without pre-sessional English requirements.",
-        steps: [
-          "Eligible for direct postgraduate/undergraduate UK university entry",
-          "Fast-track CAS visa application readiness",
-          "Considered for top competitive academic scholarships"
-        ]
-      };
-    } else if (percentage >= 60) {
-      return {
-        title: "B2 Upper-Intermediate English Proficiency",
-        desc: "Good working competence. Suitable for standard UK university admissions, though a short 4 to 6-week pre-sessional course or UKVI IELTS may be recommended.",
-        steps: [
-          "Qualifies for most UK university undergraduate & postgraduate degree entry",
-          "Minor UKVI IELTS booster recommended to achieve 6.5 minimum score",
-          "Eligible for standard admissions assistance"
-        ]
-      };
-    } else {
-      return {
-        title: "B1 Intermediate English Foundation",
-        desc: "Basic functional English. We recommend enrolling in a UK Foundation Pathway or Pre-sessional English Language course prior to academic study.",
-        steps: [
-          "Recommended 10-12 week UK Pre-sessional English language pathway",
-          "One-on-one English tutoring available through Skyview partners",
-          "Pathway route guaranteeing entry into partner universities upon completion"
-        ]
-      };
-    }
-  };
-
-  const resultLevel = getResultLevel();
+  const score = calculateScore();
+  const percentage = Math.round((score / questions.length) * 100);
 
   return (
-    <section id="english-test" className="test-section section">
+    <section id="english-test" className="section english-section">
       <div className="container">
-        <h2 className="section-title">English Competence Assessment</h2>
+        <h2 className="section-title">English Proficiency Assessment</h2>
         <p className="section-subtitle">
-          Test your English proficiency level with our free 9-question diagnostic tool to determine UK university readiness.
+          Test your UK academic English readiness in 2 minutes. Receive an instant score evaluation for IELTS / SELT waiver eligibility.
         </p>
 
-        <div className="test-card-container">
-          {!started && !submitted && (
-            <div className="glass-card test-intro animate-fade-in">
-              <div className="test-intro-icon">
-                <ClipboardCheck size={32} />
-              </div>
-              <h3>UK University Readiness Test</h3>
-              <p className="test-intro-desc">
-                This diagnostic test evaluates your grammar, vocabulary, and sentence structure against British academic standards. It takes less than 5 minutes.
-              </p>
-              
-              <div className="test-meta-info">
-                <div className="meta-item">
-                  <span className="meta-number">9</span>
-                  <span className="meta-label">Questions</span>
-                </div>
-                <div className="meta-divider"></div>
-                <div className="meta-item">
-                  <span className="meta-number">5 Min</span>
-                  <span className="meta-label">Duration</span>
-                </div>
-                <div className="meta-divider"></div>
-                <div className="meta-item">
-                  <span className="meta-number">Instant</span>
-                  <span className="meta-label">Evaluation</span>
-                </div>
-              </div>
-
-              <button className="btn btn-accent btn-lg" onClick={() => setStarted(true)}>
-                Start English Diagnostic
-                <ArrowRight size={18} />
-              </button>
-            </div>
-          )}
-
-          {started && !submitted && (
-            <div className="glass-card quiz-card animate-fade-in">
+        <div className="quiz-container glass-card">
+          {!isSubmitted ? (
+            <div>
+              {/* Progress Bar */}
               <div className="quiz-progress-wrapper">
-                <div className="quiz-progress-text">
-                  <span>Question {currentIdx + 1} of {questions.length}</span>
-                  <span>{Math.round(((currentIdx + 1) / questions.length) * 100)}% Completed</span>
+                <div className="progress-header">
+                  <span className="step-count">Question {currentStep + 1} of {questions.length}</span>
+                  <span className="step-pct">{Math.round(((currentStep + 1) / questions.length) * 100)}% Complete</span>
                 </div>
                 <div className="progress-track">
-                  <div 
-                    className="progress-bar-fill" 
-                    style={{ width: `${((currentIdx + 1) / questions.length) * 100}%` }}
+                  <div
+                    className="progress-fill"
+                    style={{ width: `${((currentStep + 1) / questions.length) * 100}%` }}
                   ></div>
                 </div>
               </div>
 
-              <div className="quiz-question-box">
-                <h3 className="quiz-question">{questions[currentIdx].question}</h3>
+              {/* Question */}
+              <div className="quiz-body">
+                <h3 className="quiz-question">{questions[currentStep].question}</h3>
+
+                <div className="options-stack">
+                  {questions[currentStep].options.map((opt, idx) => {
+                    const isSelected = answers[questions[currentStep].id] === idx;
+                    return (
+                      <button
+                        key={idx}
+                        className={`option-btn ${isSelected ? 'selected' : ''}`}
+                        onClick={() => handleOptionSelect(questions[currentStep].id, idx)}
+                      >
+                        <span className="option-indicator">{String.fromCharCode(65 + idx)}</span>
+                        <span className="option-text">{opt}</span>
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
 
-              <div className="quiz-options">
-                {questions[currentIdx].options.map((option, optionIdx) => {
-                  const isSelected = answers[currentIdx] === optionIdx;
-                  return (
-                    <button
-                      key={optionIdx}
-                      className={`option-btn ${isSelected ? 'selected' : ''}`}
-                      onClick={() => handleSelect(optionIdx)}
-                    >
-                      <span className="option-letter">{String.fromCharCode(65 + optionIdx)}</span>
-                      <span className="option-text">{option}</span>
-                    </button>
-                  );
-                })}
-              </div>
-
-              <div className="quiz-navigation">
-                <button 
-                  className="btn btn-secondary" 
-                  onClick={handlePrev}
-                  disabled={currentIdx === 0}
-                >
-                  Previous
-                </button>
-                
-                <button 
-                  className="btn btn-primary" 
+              {/* Footer Control */}
+              <div className="quiz-footer">
+                <button
+                  className="btn btn-primary btn-lg quiz-next-btn"
+                  disabled={answers[questions[currentStep].id] === undefined}
                   onClick={handleNext}
-                  disabled={answers[currentIdx] === undefined}
                 >
-                  {currentIdx === questions.length - 1 ? 'Finish & View Score' : 'Next Question'}
+                  {currentStep === questions.length - 1 ? 'Submit & View Score' : 'Next Question'}
+                  <ArrowRight size={18} />
                 </button>
               </div>
             </div>
-          )}
-
-          {submitted && (
-            <div className="glass-card result-card animate-fade-in">
-              <div className="result-header">
-                <div className="result-score-circle">
-                  <span className="result-score-number">{score}</span>
-                  <span className="result-score-max">/ {maxScore}</span>
-                </div>
-                <div className="result-title-box">
-                  <span className="result-subtitle">YOUR TEST RESULTS</span>
-                  <h3 className="result-level-title">{resultLevel.title}</h3>
-                  <span className="result-percentage">{percentage}% Score</span>
-                </div>
+          ) : (
+            /* Score Report */
+            <div className="score-report animate-fade-in">
+              <div className="report-badge">
+                <Award size={48} className="text-gold" />
               </div>
 
-              <p className="result-description">{resultLevel.desc}</p>
-
-              <div className="result-recommendations">
-                <h4>Recommended Next Steps:</h4>
-                <ul className="rec-list">
-                  {resultLevel.steps.map((step, index) => (
-                    <li key={index} className="rec-item">
-                      <CheckCircle2 className="rec-check" size={18} />
-                      <span>{step}</span>
-                    </li>
-                  ))}
-                </ul>
+              <h3 className="report-title">Your English Assessment Result</h3>
+              
+              <div className="score-circle">
+                <span className="score-num">{percentage}%</span>
+                <span className="score-lbl">{score} of {questions.length} Correct</span>
               </div>
 
-              <div className="result-actions">
-                <button className="btn btn-secondary" onClick={resetTest}>
-                  <RotateCcw size={16} />
+              <p className="report-evaluation">
+                {percentage >= 75 ? (
+                  "Congratulations! Your academic English command meets the baseline requirements for direct entry into most UK Masters and Bachelors programs (IELTS 6.5 - 7.0 equivalent)."
+                ) : (
+                  "Good effort! We recommend a brief pre-sessional English module or targeted IELTS prep before applying to competitive UK universities."
+                )}
+              </p>
+
+              <div className="report-actions">
+                <button className="btn btn-secondary btn-lg" onClick={handleReset}>
+                  <RefreshCw size={18} />
                   Retake Test
                 </button>
-                <button 
-                  className="btn btn-accent" 
+                <button
+                  className="btn btn-accent btn-lg"
                   onClick={() => {
                     setCurrentTab('contact');
-                    const el = document.getElementById('contact');
-                    if (el) el.scrollIntoView({ behavior: 'smooth' });
+                    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
                   }}
                 >
-                  Discuss Study Options
-                  <ArrowRight size={16} />
+                  Consult an Advisor
+                  <ArrowRight size={18} />
                 </button>
               </div>
             </div>
@@ -303,285 +186,185 @@ export default function EnglishTest({ setCurrentTab }) {
       </div>
 
       <style>{`
-        .test-section {
-          background-color: var(--bg-surface);
-          border-top: 1px solid var(--border-color);
-          border-bottom: 1px solid var(--border-color);
-        }
-
-        .test-card-container {
-          max-width: 660px;
-          margin: 0 auto;
-        }
-
-        .test-intro {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          text-align: center;
-          gap: 1rem;
-        }
-
-        .test-intro-icon {
-          width: 60px;
-          height: 60px;
-          border-radius: 50%;
-          background: var(--primary-light);
-          color: var(--primary);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-
-        .test-meta-info {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 1.5rem;
-          width: 100%;
+        .english-section {
           background: var(--bg-primary);
-          padding: 0.85rem;
-          border-radius: 12px;
-          border: 1px solid var(--border-color);
-          margin: 0.5rem 0 1rem 0;
         }
 
-        .meta-item {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-        }
-
-        .meta-number {
-          font-family: var(--font-heading);
-          font-size: 1.2rem;
-          font-weight: 800;
-          color: var(--primary);
-        }
-
-        .meta-label {
-          font-size: 0.7rem;
-          color: var(--text-muted);
-          text-transform: uppercase;
-        }
-
-        .meta-divider {
-          width: 1px;
-          height: 24px;
-          background: var(--border-color);
+        .quiz-container {
+          max-width: 780px;
+          margin: 0 auto;
+          padding: 2.25rem !important;
         }
 
         .quiz-progress-wrapper {
-          display: flex;
-          flex-direction: column;
-          gap: 0.4rem;
-          margin-bottom: 1.5rem;
+          margin-bottom: 2rem;
         }
 
-        .quiz-progress-text {
+        .progress-header {
           display: flex;
           justify-content: space-between;
-          font-size: 0.8rem;
-          font-weight: 600;
+          font-size: 0.85rem;
+          font-weight: 700;
           color: var(--text-muted);
+          margin-bottom: 0.5rem;
         }
 
         .progress-track {
-          height: 6px;
+          height: 8px;
           background: var(--bg-subtle);
           border-radius: 99px;
           overflow: hidden;
         }
 
-        .progress-bar-fill {
+        .progress-fill {
           height: 100%;
           background: var(--primary);
           border-radius: 99px;
-          transition: width 0.3s ease;
+          transition: width 0.35s ease;
         }
 
         .quiz-question {
-          font-size: 1.15rem;
-          font-weight: 700;
+          font-size: 1.45rem;
+          font-weight: 800;
           color: var(--text-primary);
-          margin-bottom: 1.5rem;
-          line-height: 1.45;
+          margin-bottom: 1.75rem;
+          line-height: 1.4;
         }
 
-        .quiz-options {
+        .options-stack {
           display: flex;
           flex-direction: column;
-          gap: 0.65rem;
-          margin-bottom: 1.75rem;
+          gap: 0.85rem;
+          margin-bottom: 2rem;
         }
 
         .option-btn {
-          background: var(--bg-primary);
-          border: 1px solid var(--border-color);
-          padding: 0.85rem 1rem;
-          border-radius: 12px;
-          text-align: left;
-          cursor: pointer;
-          font-size: 0.925rem;
-          color: var(--text-primary);
           display: flex;
           align-items: center;
-          gap: 0.75rem;
-          transition: all 0.2s ease;
+          gap: 1rem;
+          padding: 1.1rem 1.25rem;
+          border-radius: 16px;
+          background: var(--bg-primary);
+          border: 1.5px solid var(--border-color);
+          text-align: left;
+          cursor: pointer;
+          min-height: 56px;
+          transition: all 0.25s ease;
         }
 
         .option-btn:hover {
           border-color: var(--primary);
-          background: var(--primary-light);
+          background: #FFFFFF;
         }
 
         .option-btn.selected {
           border-color: var(--primary);
           background: var(--primary-light);
-          font-weight: 600;
         }
 
-        .option-letter {
-          width: 26px;
-          height: 26px;
+        .option-indicator {
+          width: 32px;
+          height: 32px;
           border-radius: 50%;
           background: var(--bg-surface);
-          border: 1px solid var(--border-color);
+          border: 1.5px solid var(--border-color);
+          font-weight: 800;
+          font-size: 0.9rem;
+          color: var(--text-primary);
           display: flex;
           align-items: center;
           justify-content: center;
-          font-weight: 700;
-          font-size: 0.75rem;
-          color: var(--text-primary);
           flex-shrink: 0;
         }
 
-        .option-btn.selected .option-letter {
+        .option-btn.selected .option-indicator {
           background: var(--primary);
           color: #FFFFFF;
           border-color: var(--primary);
         }
 
-        .quiz-navigation {
-          display: flex;
-          justify-content: space-between;
-          gap: 0.75rem;
-          border-top: 1px solid var(--border-color);
-          padding-top: 1.25rem;
+        .option-text {
+          font-size: 1.1rem;
+          font-weight: 600;
+          color: var(--text-primary);
+          line-height: 1.5;
         }
 
-        /* Results */
-        .result-header {
+        .quiz-footer {
           display: flex;
-          align-items: center;
-          gap: 1.25rem;
-          margin-bottom: 1.5rem;
+          justify-content: flex-end;
         }
 
-        @media (max-width: 480px) {
-          .result-header {
-            flex-direction: column;
-            text-align: center;
+        .quiz-next-btn {
+          width: 100%;
+        }
+
+        @media (min-width: 640px) {
+          .quiz-next-btn {
+            width: auto;
           }
         }
 
-        .result-score-circle {
-          width: 80px;
-          height: 80px;
-          border-radius: 50%;
-          display: flex;
+        .score-report {
+          text-align: center;
+          padding: 1rem 0;
+        }
+
+        .report-badge {
+          margin-bottom: 1rem;
+        }
+
+        .report-title {
+          font-size: 1.75rem;
+          font-weight: 900;
+          margin-bottom: 1.5rem;
+        }
+
+        .score-circle {
+          display: inline-flex;
           flex-direction: column;
           align-items: center;
           justify-content: center;
-          flex-shrink: 0;
-          border: 2px solid var(--primary);
+          width: 140px;
+          height: 140px;
+          border-radius: 50%;
           background: var(--primary-light);
-          color: var(--primary);
+          border: 3px solid var(--primary);
+          margin-bottom: 1.75rem;
         }
 
-        .result-score-number {
+        .score-num {
           font-family: var(--font-heading);
-          font-size: 1.75rem;
-          font-weight: 800;
+          font-size: 2.25rem;
+          font-weight: 900;
+          color: var(--primary);
           line-height: 1;
         }
 
-        .result-score-max {
-          font-size: 0.7rem;
-          font-weight: 600;
-          opacity: 0.8;
-        }
-
-        .result-subtitle {
-          font-size: 0.7rem;
+        .score-lbl {
+          font-size: 0.8rem;
           font-weight: 700;
-          letter-spacing: 0.08em;
           color: var(--text-muted);
         }
 
-        .result-level-title {
-          font-size: 1.25rem;
-          font-weight: 700;
-          color: var(--text-primary);
-          margin: 0.2rem 0;
-        }
-
-        .result-description {
-          font-size: 0.925rem;
-          line-height: 1.6;
+        .report-evaluation {
+          font-size: 1.15rem;
+          line-height: 1.7;
           color: var(--text-secondary);
-          margin-bottom: 1.5rem;
+          max-width: 580px;
+          margin: 0 auto 2rem auto;
         }
 
-        .result-recommendations {
-          background: var(--bg-primary);
-          border: 1px solid var(--border-color);
-          padding: 1.25rem;
-          border-radius: 12px;
-          margin-bottom: 1.5rem;
-        }
-
-        .result-recommendations h4 {
-          font-size: 0.85rem;
-          font-weight: 700;
-          margin-bottom: 0.75rem;
-        }
-
-        .rec-list {
-          list-style: none;
+        .report-actions {
           display: flex;
           flex-direction: column;
-          gap: 0.5rem;
+          gap: 1rem;
+          justify-content: center;
         }
 
-        .rec-item {
-          display: flex;
-          align-items: flex-start;
-          gap: 0.5rem;
-          font-size: 0.875rem;
-        }
-
-        .rec-check {
-          color: var(--success);
-          flex-shrink: 0;
-          margin-top: 0.15rem;
-        }
-
-        .result-actions {
-          display: flex;
-          gap: 0.75rem;
-          justify-content: space-between;
-          border-top: 1px solid var(--border-color);
-          padding-top: 1.25rem;
-          flex-wrap: wrap;
-        }
-
-        @media (max-width: 480px) {
-          .result-actions {
-            flex-direction: column;
-          }
-          .result-actions .btn {
-            width: 100%;
+        @media (min-width: 640px) {
+          .report-actions {
+            flex-direction: row;
           }
         }
       `}</style>

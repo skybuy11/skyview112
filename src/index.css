@@ -1,33 +1,36 @@
-/* Ultra-Premium Agency Design System for Skyview Consultants - Cortex Hive Inspired */
+/* Luxury Emerald & Gold Design System for Skyview Consultants */
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap');
 
 :root {
   --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
-  /* Premium Light Agency Palette */
-  --bg-primary: #FAFAFD;
+  /* Luxury Emerald & Warm Gold Palette */
+  --bg-primary: #F8FAF9;
   --bg-surface: #FFFFFF;
-  --bg-subtle: #F1F4F9;
+  --bg-subtle: #F0F4F2;
 
-  --text-primary: #0F172A;       /* Slate Dark Navy */
-  --text-secondary: #475569;     /* Rich body text */
-  --text-muted: #94A3B8;
+  --text-primary: #0F291E;       /* Deep Emerald Navy */
+  --text-secondary: #334155;     /* Slate Body Text */
+  --text-muted: #64748B;
 
-  --primary: #003078;            /* Royal UK Blue */
-  --primary-hover: #001F52;
-  --primary-light: rgba(0, 48, 120, 0.06);
+  --primary: #005C3B;            /* Royal Forest Emerald */
+  --primary-hover: #00442B;
+  --primary-light: rgba(0, 92, 59, 0.08);
 
-  --accent-gold: #B58A3F;
-  --accent-gradient: linear-gradient(135deg, #D4AF37 0%, #B58A3F 100%);
-  --gold-glow: rgba(181, 138, 63, 0.25);
+  --accent-gold: #D4AF37;
+  --accent-gold-dark: #B58A3F;
+  --gold-gradient: linear-gradient(135deg, #D4AF37 0%, #B58A3F 100%);
+  --gold-glow: rgba(212, 175, 55, 0.28);
 
-  --border-color: rgba(15, 23, 42, 0.08);
-  --border-hover: rgba(181, 138, 63, 0.4);
+  --success: #10B981;
 
-  --shadow-sm: 0 2px 6px rgba(15, 23, 42, 0.03);
-  --shadow-md: 0 10px 30px -4px rgba(15, 23, 42, 0.06), 0 4px 12px -2px rgba(15, 23, 42, 0.03);
-  --shadow-lg: 0 24px 48px -8px rgba(15, 23, 42, 0.12), 0 8px 20px -4px rgba(15, 23, 42, 0.05);
+  --border-color: rgba(15, 41, 30, 0.09);
+  --border-hover: rgba(212, 175, 55, 0.4);
+
+  --shadow-sm: 0 2px 6px rgba(15, 41, 30, 0.03);
+  --shadow-md: 0 10px 30px -4px rgba(15, 41, 30, 0.06), 0 4px 12px -2px rgba(15, 41, 30, 0.03);
+  --shadow-lg: 0 24px 48px -8px rgba(15, 41, 30, 0.12), 0 8px 20px -4px rgba(15, 41, 30, 0.05);
 
   --radius-sm: 12px;
   --radius-md: 20px;
@@ -87,14 +90,14 @@ button, input, textarea, select {
   background: var(--bg-primary);
 }
 ::-webkit-scrollbar-thumb {
-  background: #CBD5E1;
+  background: #A3B8B0;
   border-radius: 99px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #94A3B8;
+  background: #005C3B;
 }
 
-/* Container & Sections */
+/* Container & Layout */
 .container {
   width: 100%;
   max-width: 1180px;
@@ -140,7 +143,7 @@ button, input, textarea, select {
   max-width: 680px;
   margin: 0 auto 3rem auto;
   color: var(--text-secondary);
-  font-size: 1.125rem;
+  font-size: 1.15rem; /* 18.5px */
   line-height: 1.7;
 }
 
@@ -154,7 +157,7 @@ button, input, textarea, select {
 /* Surface Cards */
 .glass-card {
   background: var(--bg-surface);
-  border: 1px solid var(--border-color);
+  border: 1.5px solid var(--border-color);
   border-radius: var(--radius-md);
   padding: 1.75rem 1.5rem;
   box-shadow: var(--shadow-md);
@@ -176,7 +179,7 @@ button, input, textarea, select {
   border-color: var(--border-hover);
 }
 
-/* Buttons */
+/* Pill Buttons */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -192,31 +195,29 @@ button, input, textarea, select {
   min-height: 52px;
   -webkit-tap-highlight-color: transparent;
   user-select: none;
-  position: relative;
-  overflow: hidden;
 }
 
 .btn-primary {
   background: var(--primary);
   color: #FFFFFF;
-  box-shadow: 0 4px 16px rgba(0, 48, 120, 0.28);
+  box-shadow: 0 4px 16px rgba(0, 92, 59, 0.28);
 }
 
 .btn-primary:hover {
   background: var(--primary-hover);
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 48, 120, 0.4);
+  box-shadow: 0 8px 24px rgba(0, 92, 59, 0.38);
 }
 
 .btn-accent {
-  background: var(--accent-gradient);
+  background: var(--gold-gradient);
   color: #FFFFFF;
   box-shadow: 0 4px 16px var(--gold-glow);
 }
 
 .btn-accent:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(181, 138, 63, 0.45);
+  box-shadow: 0 8px 24px rgba(212, 175, 55, 0.45);
 }
 
 .btn-secondary {
@@ -228,7 +229,7 @@ button, input, textarea, select {
 
 .btn-secondary:hover {
   background: var(--bg-subtle);
-  border-color: var(--text-primary);
+  border-color: var(--primary);
   transform: translateY(-2px);
 }
 
@@ -273,14 +274,14 @@ button, input, textarea, select {
 .form-group-underline input:focus,
 .form-group-underline textarea:focus,
 .form-group-underline select:focus {
-  border-bottom-color: var(--accent-gold);
+  border-bottom-color: var(--primary);
 }
 
 .form-group-underline:focus-within label {
-  color: var(--accent-gold);
+  color: var(--primary);
 }
 
-/* CSS Keyframe Animations */
+/* Keyframes */
 @keyframes fadeUpScale {
   from {
     opacity: 0;

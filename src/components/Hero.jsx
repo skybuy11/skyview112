@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
-import { Sparkles, ArrowRight, ClipboardCheck, School, Users, Star, FileText, Search, CheckCircle2, ShieldCheck } from 'lucide-react';
+import { Sparkles, ArrowRight, ClipboardCheck, School, Users, Star, FileText, Search, CheckCircle2, ShieldCheck, Filter } from 'lucide-react';
 
 export default function Hero({ setCurrentTab }) {
   const [heroSearch, setHeroSearch] = useState('');
+  const [studyLevel, setStudyLevel] = useState('All Levels');
 
   const handleActionClick = (targetId) => {
     setCurrentTab(targetId);
     const element = document.getElementById(targetId);
     if (element) {
-      const offset = 80;
+      const offset = 85;
       const bodyRect = document.body.getBoundingClientRect().top;
       const elementRect = element.getBoundingClientRect().top;
       const elementPosition = elementRect - bodyRect;
@@ -30,60 +31,82 @@ export default function Hero({ setCurrentTab }) {
   ];
 
   const partnerLogos = [
-    'London School of Economics (LSE)',
-    'University College London (UCL)',
-    'Durham University',
-    'University of Edinburgh',
-    'University of Glasgow',
-    'University of Manchester',
     'University of Greenwich',
-    'Middlesex University',
-    'BPP University'
+    'Middlesex University London',
+    'BPP University',
+    'Coventry University',
+    'University of Sunderland',
+    'De Montfort University',
+    'University of Chester',
+    'University of Hertfordshire',
+    'University of East London',
+    'University of Portsmouth'
   ];
 
   return (
     <section id="home" className="hero-section">
-      {/* Background Decorative Glow */}
       <div className="hero-glow glow-1"></div>
       <div className="hero-glow glow-2"></div>
 
       <div className="container hero-container">
-        {/* Left: Headline & Agency Value Statement */}
+        {/* Left Column: Headline & Fast-Track Finder */}
         <div className="hero-text animate-fade-in animate-delay-1">
           <div className="agency-badge">
             <span className="pulse-dot"></span>
             <Sparkles size={14} className="gold-spark" />
-            <span>British Council Certified • 2026/2027 Admissions Open</span>
+            <span>Official British Council Certified Agent • 2026/27 Intake</span>
           </div>
 
           <h1 className="hero-title">
-            Your Gateway to <br />
-            <span className="gradient-gold">UK Academic Excellence</span>
+            Shape Your Future at <br />
+            <span className="gradient-gold">Top UK Universities</span>
           </h1>
 
           <p className="hero-description">
-            Since 2008, Skyview Consultants has empowered over 15,000+ international students to gain admission into elite British universities. We handle your course matching, university applications, CAS visa compliance, and arrival orientation.
+            Since 2008, Skyview Consultants has empowered international students to study at leading British institutions. We simplify course matchmaking, university applications, CAS visa processing, and arrival housing.
           </p>
 
-          {/* Quick Search Widget */}
-          <form className="hero-search-bar glass-card" onSubmit={handleSearchSubmit}>
-            <Search className="hero-search-icon" size={22} />
-            <input
-              type="text"
-              placeholder="Search UK university, course, or subject..."
-              value={heroSearch}
-              onChange={(e) => setHeroSearch(e.target.value)}
-              className="hero-search-input"
-            />
-            <button type="submit" className="btn btn-primary hero-search-btn">
-              Explore Universities
-            </button>
+          {/* Embedded Fast-Track Search Widget */}
+          <form className="fast-track-widget glass-card" onSubmit={handleSearchSubmit}>
+            <div className="widget-header">
+              <Filter size={18} className="text-primary" />
+              <span>Fast-Track University & Course Finder</span>
+            </div>
+
+            <div className="widget-row">
+              <div className="widget-input-box">
+                <Search size={20} className="input-icon" />
+                <input
+                  type="text"
+                  placeholder="Search subject, course or university..."
+                  value={heroSearch}
+                  onChange={(e) => setHeroSearch(e.target.value)}
+                  className="widget-input"
+                />
+              </div>
+
+              <select
+                value={studyLevel}
+                onChange={(e) => setStudyLevel(e.target.value)}
+                className="widget-select"
+              >
+                <option value="All Levels">All Study Levels</option>
+                <option value="Undergraduate">Undergraduate (BSc/BA)</option>
+                <option value="Postgraduate">Postgraduate (MSc/MA)</option>
+                <option value="Foundation">Foundation / Pathway</option>
+              </select>
+
+              <button type="submit" className="btn btn-primary widget-btn">
+                Search
+                <ArrowRight size={18} />
+              </button>
+            </div>
           </form>
 
-          {/* CTAs */}
+          {/* Action CTAs */}
           <div className="hero-actions">
             <button className="btn btn-accent btn-lg" onClick={() => handleActionClick('contact')}>
-              Start Your Journey
+              Start Free Application
               <ArrowRight size={20} />
             </button>
             <button className="btn btn-secondary btn-lg" onClick={() => handleActionClick('contract')}>
@@ -97,37 +120,37 @@ export default function Hero({ setCurrentTab }) {
           </div>
         </div>
 
-        {/* Right: Agency Showcase Showcase */}
+        {/* Right Column: 3D Showcase Card */}
         <div className="hero-showcase animate-fade-in animate-delay-2">
           <div className="showcase-card glass-card">
             <div className="showcase-header">
               <ShieldCheck className="shield-icon" size={24} />
               <div className="showcase-header-text">
-                <span className="showcase-tag">OFFICIAL REPRESENTATIVE</span>
-                <h4 className="showcase-title">Direct UK University Admissions</h4>
+                <span className="showcase-tag">DIRECT ADMISSIONS PARTNER</span>
+                <h4 className="showcase-title">Official UK University Representation</h4>
               </div>
             </div>
 
             <div className="showcase-image-wrapper">
               <img 
                 src="/library-students.png" 
-                alt="International Students in UK University Library" 
+                alt="International Students studying in UK University Library" 
                 className="showcase-img"
               />
               <div className="floating-badge badge-top-right">
                 <CheckCircle2 size={16} className="text-success" />
-                <span>98% CAS Visa Success</span>
+                <span>98% CAS Visa Rate</span>
               </div>
               <div className="floating-badge badge-bottom-left">
                 <Star size={16} className="text-gold" />
-                <span>100% Admissions Care</span>
+                <span>100% Application Review</span>
               </div>
             </div>
 
             <div className="showcase-footer">
               <div className="footer-stat">
                 <span className="stat-num">15,000+</span>
-                <span className="stat-lbl">Students Placed</span>
+                <span className="stat-lbl">Students Enrolled</span>
               </div>
               <div className="footer-divider"></div>
               <div className="footer-stat">
@@ -139,7 +162,7 @@ export default function Hero({ setCurrentTab }) {
         </div>
       </div>
 
-      {/* Metrics Counter Strip */}
+      {/* Metrics Row */}
       <div className="container hero-metrics animate-fade-in animate-delay-3">
         <div className="metrics-grid glass-card">
           {metrics.map((metric, index) => (
@@ -189,13 +212,13 @@ export default function Hero({ setCurrentTab }) {
           border-radius: 50%;
           filter: blur(90px);
           pointer-events: none;
-          opacity: 0.45;
+          opacity: 0.4;
         }
 
         .glow-1 {
           width: 380px;
           height: 380px;
-          background: rgba(0, 48, 120, 0.08);
+          background: rgba(0, 92, 59, 0.08);
           top: -50px;
           left: -100px;
         }
@@ -203,7 +226,7 @@ export default function Hero({ setCurrentTab }) {
         .glow-2 {
           width: 420px;
           height: 420px;
-          background: rgba(181, 138, 63, 0.12);
+          background: rgba(212, 175, 55, 0.12);
           top: 150px;
           right: -120px;
         }
@@ -229,7 +252,7 @@ export default function Hero({ setCurrentTab }) {
           padding: 0.55rem 1.25rem;
           border-radius: 99px;
           background: var(--primary-light);
-          border: 1.5px solid rgba(0, 48, 120, 0.14);
+          border: 1.5px solid rgba(0, 92, 59, 0.14);
           color: var(--primary);
           font-weight: 700;
           font-size: 0.85rem;
@@ -241,7 +264,7 @@ export default function Hero({ setCurrentTab }) {
           width: 8px;
           height: 8px;
           border-radius: 50%;
-          background: #10B981;
+          background: var(--success);
           box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.25);
         }
 
@@ -250,7 +273,7 @@ export default function Hero({ setCurrentTab }) {
         }
 
         .hero-title {
-          font-size: 2.5rem; /* 40px mobile */
+          font-size: 2.75rem; /* 44px mobile */
           font-weight: 900;
           line-height: 1.18;
           letter-spacing: -0.04em;
@@ -265,7 +288,7 @@ export default function Hero({ setCurrentTab }) {
         }
 
         .gradient-gold {
-          background: var(--accent-gradient);
+          background: var(--gold-gradient);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
         }
@@ -278,41 +301,76 @@ export default function Hero({ setCurrentTab }) {
           max-width: 600px;
         }
 
-        /* Hero Search Widget */
-        .hero-search-bar {
-          display: flex;
-          align-items: center;
-          gap: 0.75rem;
-          padding: 0.5rem 0.5rem 0.5rem 1.25rem !important;
-          border-radius: 99px !important;
+        /* Fast-Track Finder Widget */
+        .fast-track-widget {
+          padding: 1.25rem !important;
           margin-bottom: 2.25rem;
-          box-shadow: var(--shadow-md) !important;
+          display: flex;
+          flex-direction: column;
+          gap: 0.85rem;
+          border-color: rgba(0, 92, 59, 0.18) !important;
         }
 
-        @media (max-width: 640px) {
-          .hero-search-bar {
-            flex-direction: column;
-            border-radius: 20px !important;
-            padding: 1rem !important;
-            align-items: stretch;
+        .widget-header {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          font-size: 0.85rem;
+          font-weight: 800;
+          color: var(--text-primary);
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+        }
+
+        .widget-row {
+          display: flex;
+          flex-direction: column;
+          gap: 0.75rem;
+        }
+
+        @media (min-width: 768px) {
+          .widget-row {
+            flex-direction: row;
+            align-items: center;
           }
         }
 
-        .hero-search-icon {
+        .widget-input-box {
+          display: flex;
+          align-items: center;
+          gap: 0.6rem;
+          background: var(--bg-subtle);
+          padding: 0.75rem 1rem;
+          border-radius: 12px;
+          flex: 1;
+        }
+
+        .input-icon {
           color: var(--text-muted);
           flex-shrink: 0;
         }
 
-        .hero-search-input {
-          flex: 1;
+        .widget-input {
+          width: 100%;
           font-size: 16px;
           color: var(--text-primary);
         }
 
-        .hero-search-btn {
+        .widget-select {
+          background: var(--bg-subtle);
+          padding: 0.75rem 1rem;
+          border-radius: 12px;
+          font-size: 16px;
+          color: var(--text-primary);
+          font-weight: 600;
+          cursor: pointer;
+        }
+
+        .widget-btn {
           min-height: 48px;
-          padding: 0.75rem 1.5rem;
+          padding: 0.75rem 1.35rem;
           font-size: 0.95rem;
+          flex-shrink: 0;
         }
 
         .hero-actions {
@@ -342,7 +400,6 @@ export default function Hero({ setCurrentTab }) {
           }
         }
 
-        /* Showcase Card */
         .hero-showcase {
           display: flex;
           justify-content: center;
@@ -422,6 +479,7 @@ export default function Hero({ setCurrentTab }) {
 
         .text-success { color: var(--success); }
         .text-gold { color: var(--accent-gold); }
+        .text-primary { color: var(--primary); }
 
         .showcase-footer {
           display: flex;
@@ -531,7 +589,7 @@ export default function Hero({ setCurrentTab }) {
           font-size: 0.75rem;
           font-weight: 800;
           letter-spacing: 0.08em;
-          color: var(--accent);
+          color: var(--accent-gold-dark);
           text-transform: uppercase;
         }
 

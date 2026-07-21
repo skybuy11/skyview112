@@ -1,12 +1,12 @@
 import React from 'react';
-import { Mail, Phone, MapPin, Award } from 'lucide-react';
+import { Mail, Phone, MapPin, ShieldCheck, Heart } from 'lucide-react';
 
 export default function Footer({ setCurrentTab }) {
-  const handleNavClick = (id) => {
+  const handleNav = (id) => {
     setCurrentTab(id);
     const element = document.getElementById(id);
     if (element) {
-      const offset = 76;
+      const offset = 85;
       const bodyRect = document.body.getBoundingClientRect().top;
       const elementRect = element.getBoundingClientRect().top;
       const elementPosition = elementRect - bodyRect;
@@ -19,64 +19,56 @@ export default function Footer({ setCurrentTab }) {
     <footer className="footer">
       <div className="container">
         <div className="footer-grid">
-          {/* Brand Info */}
-          <div className="footer-brand">
-            <div className="brand-header" onClick={() => handleNavClick('home')}>
-              <img src="/logo.png" alt="Skyview Consultants Logo" className="footer-logo-img" />
-            </div>
+          {/* Column 1: Brand Info */}
+          <div className="footer-brand-col">
+            <img src="/logo.png" alt="Skyview Logo" className="footer-logo-img" />
             <p className="brand-desc">
-              For over 15 years, Skyview Consultants has been the trusted bridge connecting international students with prestigious British universities.
+              Skyview Consultants UK Ltd is a British Council certified educational advisory helping international students secure admissions and visas for top UK universities since 2008.
             </p>
-            
-            <div className="bc-badge">
-              <Award className="bc-badge-icon" size={22} />
-              <div className="bc-badge-text">
-                <span className="bc-title">British Council Approved</span>
-                <span className="bc-desc">Certified & Verified Agent</span>
-              </div>
+            <div className="verified-seal">
+              <ShieldCheck size={18} className="text-gold" />
+              <span>British Council Certified Agent • Ref: BC-UK-9821</span>
             </div>
           </div>
 
-          {/* Quick Links */}
+          {/* Column 2: Quick Links */}
           <div className="footer-links-col">
-            <h4 className="footer-title">Quick Links</h4>
+            <h4 className="footer-col-title">Navigation</h4>
             <ul className="footer-links">
-              <li><button onClick={() => handleNavClick('home')}>Home</button></li>
-              <li><button onClick={() => handleNavClick('services')}>Services</button></li>
-              <li><button onClick={() => handleNavClick('universities')}>Partner Universities</button></li>
-              <li><button onClick={() => handleNavClick('english-test')}>English Assessment</button></li>
-              <li><button onClick={() => handleNavClick('contract')}>Student Contract</button></li>
-              <li><button onClick={() => handleNavClick('news')}>UK Education News</button></li>
-              <li><button onClick={() => handleNavClick('about')}>About Us</button></li>
+              <li><button onClick={() => handleNav('home')}>Home</button></li>
+              <li><button onClick={() => handleNav('services')}>Services</button></li>
+              <li><button onClick={() => handleNav('universities')}>UK Universities</button></li>
+              <li><button onClick={() => handleNav('english-test')}>English Test</button></li>
+              <li><button onClick={() => handleNav('contract')}>Student Contract</button></li>
             </ul>
           </div>
 
-          {/* Core Services */}
+          {/* Column 3: Services */}
           <div className="footer-links-col">
-            <h4 className="footer-title">Services</h4>
+            <h4 className="footer-col-title">Our Services</h4>
             <ul className="footer-links">
-              <li><button onClick={() => handleNavClick('services')}>Course Advice</button></li>
-              <li><button onClick={() => handleNavClick('services')}>University Admissions</button></li>
-              <li><button onClick={() => handleNavClick('services')}>Visa & Immigration</button></li>
-              <li><button onClick={() => handleNavClick('services')}>Pre-Departure Briefings</button></li>
-              <li><button onClick={() => handleNavClick('services')}>Accommodation Search</button></li>
+              <li><button onClick={() => handleNav('services')}>University Selection</button></li>
+              <li><button onClick={() => handleNav('services')}>SOP & UCAS Lodging</button></li>
+              <li><button onClick={() => handleNav('services')}>UK CAS Visa Clearance</button></li>
+              <li><button onClick={() => handleNav('services')}>Campus Accommodation</button></li>
+              <li><button onClick={() => handleNav('contact')}>Free Counseling</button></li>
             </ul>
           </div>
 
-          {/* Contact Details */}
-          <div className="footer-contact">
-            <h4 className="footer-title">Contact Us</h4>
+          {/* Column 4: Contact */}
+          <div className="footer-contact-col">
+            <h4 className="footer-col-title">London Office</h4>
             <ul className="contact-list">
               <li>
-                <MapPin className="contact-icon" size={16} />
+                <MapPin size={16} className="contact-icon" />
                 <span>71-75 Shelton Street, Covent Garden, London, WC2H 9JQ, UK</span>
               </li>
               <li>
-                <Mail className="contact-icon" size={16} />
+                <Mail size={16} className="contact-icon" />
                 <a href="mailto:sharan@skyview.org.uk">sharan@skyview.org.uk</a>
               </li>
               <li>
-                <Phone className="contact-icon" size={16} />
+                <Phone size={16} className="contact-icon" />
                 <a href="tel:+447725355355">+44 7725 355355</a>
               </li>
             </ul>
@@ -84,33 +76,29 @@ export default function Footer({ setCurrentTab }) {
         </div>
 
         <div className="footer-bottom">
-          <p className="copyright">
-            &copy; {new Date().getFullYear()} Skyview Consultants. All rights reserved. Registered in England & Wales.
-          </p>
-          <div className="footer-legal">
-            <a href="#privacy">Privacy Policy</a>
-            <span className="divider">•</span>
-            <a href="#terms">Terms of Representation</a>
+          <p>© {new Date().getFullYear()} Skyview Consultants UK Ltd. All rights reserved.</p>
+          <div className="legal-links">
+            <span>AQF Compliant</span>
+            <span>•</span>
+            <span>UK GDPR Protection</span>
           </div>
         </div>
       </div>
 
       <style>{`
         .footer {
-          background-color: #FFFFFF;
-          border-top: 1px solid var(--border-color);
-          padding: 4rem 0 2rem 0;
-          color: var(--text-secondary);
+          background: #0F291E;
+          color: #E2E8F0;
+          padding: 5rem 0 2.5rem 0;
+          border-top: 3px solid var(--accent-gold);
         }
 
         .footer-grid {
           display: grid;
           grid-template-columns: 1fr;
-          gap: 2.25rem;
-          margin-bottom: 3rem;
+          gap: 2.5rem;
+          margin-bottom: 3.5rem;
         }
-
-
 
         @media (min-width: 992px) {
           .footer-grid {
@@ -119,128 +107,108 @@ export default function Footer({ setCurrentTab }) {
           }
         }
 
-        .footer-brand {
-          display: flex;
-          flex-direction: column;
-          gap: 1rem;
-        }
-
         .footer-logo-img {
-          height: 48px;
-          width: auto;
-          object-fit: contain;
+          height: 60px;
+          margin-bottom: 1.25rem;
+          background: #FFFFFF;
+          padding: 0.35rem 0.75rem;
+          border-radius: 12px;
         }
 
         .brand-desc {
-          font-size: 0.85rem;
+          font-size: 1.05rem;
           line-height: 1.6;
-          color: var(--text-secondary);
+          color: #94A3B8;
+          margin-bottom: 1.25rem;
         }
 
-        .bc-badge {
-          display: flex;
+        .verified-seal {
+          display: inline-flex;
           align-items: center;
-          gap: 0.75rem;
-          padding: 0.65rem 0.85rem;
-          border-radius: 12px;
-          background: var(--bg-primary);
-          border: 1px solid var(--border-color);
-          max-width: fit-content;
-        }
-
-        .bc-badge-icon {
-          color: var(--accent);
-        }
-
-        .bc-badge-text {
-          display: flex;
-          flex-direction: column;
-        }
-
-        .bc-title {
-          font-size: 0.75rem;
+          gap: 0.5rem;
+          font-size: 0.8rem;
           font-weight: 700;
-          color: var(--text-primary);
+          color: var(--accent-gold);
+          background: rgba(255, 255, 255, 0.06);
+          padding: 0.45rem 0.85rem;
+          border-radius: 99px;
         }
 
-        .bc-desc {
-          font-size: 0.65rem;
-          color: var(--text-muted);
-        }
-
-        .footer-title {
-          font-size: 0.75rem;
-          font-weight: 700;
-          text-transform: uppercase;
-          letter-spacing: 0.08em;
-          color: var(--primary);
-          margin-bottom: 1rem;
+        .footer-col-title {
+          font-size: 1.15rem;
+          font-weight: 800;
+          color: #FFFFFF;
+          margin-bottom: 1.25rem;
         }
 
         .footer-links {
           list-style: none;
           display: flex;
           flex-direction: column;
-          gap: 0.5rem;
+          gap: 0.65rem;
         }
 
         .footer-links button {
-          color: var(--text-secondary);
-          cursor: pointer;
-          font-size: 0.85rem;
+          color: #CBD5E1;
+          font-size: 1.05rem;
           text-align: left;
-          transition: color 0.2s;
+          cursor: pointer;
+          transition: color 0.2s ease;
         }
 
         .footer-links button:hover {
-          color: var(--primary);
+          color: var(--accent-gold);
         }
 
         .contact-list {
           list-style: none;
           display: flex;
           flex-direction: column;
-          gap: 0.75rem;
+          gap: 1rem;
         }
 
         .contact-list li {
           display: flex;
-          gap: 0.65rem;
-          font-size: 0.85rem;
           align-items: flex-start;
-          line-height: 1.45;
+          gap: 0.75rem;
+          font-size: 1.05rem;
+          color: #CBD5E1;
+          line-height: 1.5;
         }
 
         .contact-icon {
-          color: var(--accent);
+          color: var(--accent-gold);
           flex-shrink: 0;
-          margin-top: 0.15rem;
+          margin-top: 0.2rem;
+        }
+
+        .contact-list a {
+          color: #FFFFFF;
         }
 
         .footer-bottom {
-          border-top: 1px solid var(--border-color);
-          padding-top: 1.5rem;
           display: flex;
           flex-direction: column;
-          gap: 0.75rem;
+          gap: 1rem;
           align-items: center;
           justify-content: space-between;
+          padding-top: 2rem;
+          border-top: 1px solid rgba(255, 255, 255, 0.1);
+          font-size: 0.9rem;
+          color: #94A3B8;
         }
 
-        @media (min-width: 768px) {
+        @media (min-width: 640px) {
           .footer-bottom {
             flex-direction: row;
           }
         }
 
-        .copyright, .footer-legal {
-          font-size: 0.75rem;
-          color: var(--text-muted);
-        }
-
-        .footer-legal {
+        .legal-links {
           display: flex;
           gap: 0.5rem;
+          color: var(--accent-gold);
+          font-weight: 700;
         }
       `}</style>
     </footer>
