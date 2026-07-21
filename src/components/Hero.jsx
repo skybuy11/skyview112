@@ -233,9 +233,11 @@ export default function Hero({ setCurrentTab }) {
 
         .hero-container {
           display: grid;
-          grid-template-columns: 1fr;
+          grid-template-columns: minmax(0, 1fr);
           gap: 3.5rem;
           align-items: center;
+          width: 100%;
+          max-width: 100%;
         }
 
         @media (min-width: 992px) {
@@ -243,6 +245,11 @@ export default function Hero({ setCurrentTab }) {
             grid-template-columns: 1.15fr 0.85fr;
             gap: 4rem;
           }
+        }
+
+        .hero-text {
+          min-width: 0;
+          max-width: 100%;
         }
 
         .agency-badge {
@@ -309,6 +316,9 @@ export default function Hero({ setCurrentTab }) {
           flex-direction: column;
           gap: 0.85rem;
           border-color: rgba(0, 92, 59, 0.18) !important;
+          width: 100%;
+          max-width: 100%;
+          min-width: 0;
         }
 
         .widget-header {
@@ -326,6 +336,8 @@ export default function Hero({ setCurrentTab }) {
           display: flex;
           flex-direction: column;
           gap: 0.75rem;
+          min-width: 0;
+          width: 100%;
         }
 
         @media (min-width: 768px) {
@@ -343,6 +355,8 @@ export default function Hero({ setCurrentTab }) {
           padding: 0.75rem 1rem;
           border-radius: 12px;
           flex: 1;
+          min-width: 0;
+          width: 100%;
         }
 
         .input-icon {
@@ -352,6 +366,7 @@ export default function Hero({ setCurrentTab }) {
 
         .widget-input {
           width: 100%;
+          min-width: 0;
           font-size: 16px;
           color: var(--text-primary);
         }
@@ -364,6 +379,16 @@ export default function Hero({ setCurrentTab }) {
           color: var(--text-primary);
           font-weight: 600;
           cursor: pointer;
+          width: 100%;
+          max-width: 100%;
+          min-width: 0;
+        }
+
+        @media (min-width: 768px) {
+          .widget-select {
+            width: auto;
+            flex-shrink: 0;
+          }
         }
 
         .widget-btn {
