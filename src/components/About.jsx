@@ -221,7 +221,7 @@ export default function About() {
           gap: 1.25rem;
         }
 
-        @media (min-width: 768px) {
+        @media (min-width: 992px) {
           .values-grid {
             grid-template-columns: repeat(3, 1fr);
             gap: 1.5rem;

@@ -145,13 +145,7 @@ export default function Hero({ setCurrentTab }) {
           color: var(--text-primary);
         }
 
-        @media (min-width: 640px) {
-          .hero-title {
-            font-size: 2.85rem;
-          }
-        }
-
-        @media (min-width: 1024px) {
+        @media (min-width: 992px) {
           .hero-title {
             font-size: 3.5rem;
           }
@@ -162,27 +156,21 @@ export default function Hero({ setCurrentTab }) {
         }
 
         .hero-description {
-          font-size: 1.05rem; /* 17px on mobile minimum */
+          font-size: 1.15rem;
           line-height: 1.65;
           color: var(--text-secondary);
           margin-bottom: 2.25rem;
           max-width: 560px;
         }
 
-        @media (min-width: 640px) {
-          .hero-description {
-            font-size: 1.1rem;
-          }
-        }
-
         .hero-actions {
           display: flex;
           flex-direction: column;
-          gap: 0.85rem;
+          gap: 1rem;
           width: 100%;
         }
 
-        @media (min-width: 640px) {
+        @media (min-width: 992px) {
           .hero-actions {
             flex-direction: row;
             flex-wrap: wrap;
@@ -191,12 +179,12 @@ export default function Hero({ setCurrentTab }) {
 
         .hero-actions .btn {
           width: 100%;
-          min-height: 52px;
-          font-size: 1.05rem;
-          padding: 0.9rem 1.5rem;
+          min-height: 56px;
+          font-size: 1.1rem;
+          padding: 1rem 1.75rem;
         }
 
-        @media (min-width: 640px) {
+        @media (min-width: 992px) {
           .hero-actions .btn {
             width: auto;
           }

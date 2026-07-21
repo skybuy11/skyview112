@@ -1,251 +1,265 @@
-/* Responsive layout mobile-first legibility adjustments (matching Cortex Hive level prominence) */
+/* Master Mobile-First Legibility Styles matching Cortex Hive level scale */
 
-@media (max-width: 767px) {
-  body {
-    overflow-x: hidden;
-    width: 100%;
+@media (max-width: 991px) {
+  html, body {
+    overflow-x: hidden !important;
+    width: 100% !important;
+    font-size: 16px !important;
   }
 
-  /* Reset grid layouts */
-  .grid-2, .grid-3, .grid-4, .contact-grid, .footer-grid, .unis-grid, .services-grid, .values-grid {
+  /* Force EVERY grid across the site to 1 SINGLE COLUMN on all mobile devices and tablets */
+  .grid-2, .grid-3, .grid-4, 
+  .contact-grid, .footer-grid, 
+  .unis-grid, .services-grid, 
+  .values-grid, .metrics-grid, 
+  .news-grid, .team-grid {
     grid-template-columns: 1fr !important;
-    gap: 1.5rem !important;
+    gap: 1.75rem !important;
+    width: 100% !important;
   }
 
-  /* Section Title and subtitle legibility */
-  .section-title {
-    font-size: 1.85rem !important;
-    padding: 0 0.5rem;
-    line-height: 1.25 !important;
-  }
-
-  .section-subtitle {
-    font-size: 1.05rem !important;
-    line-height: 1.65 !important;
-    padding: 0 0.5rem;
-    margin-bottom: 2.25rem !important;
-  }
-
-  /* Header Logo sizing - enlarged to 58px matching Cortex Hive's prominence */
-  .logo-img {
-    height: 58px !important;
-  }
-
+  /* Header Bar & Logo Adjustments */
   .header {
-    padding: 0.65rem 0 !important;
+    padding: 0.75rem 0 !important;
   }
 
   .header-container {
-    padding: 0 1rem !important;
+    padding: 0 1.25rem !important;
   }
 
-  /* Hero section typography & spacing fixes */
+  /* Large prominent logo on mobile matching Cortex Hive scale */
+  .logo-img {
+    height: 64px !important;
+    max-height: 64px !important;
+    width: auto !important;
+  }
+
+  /* Hide header CTA button on mobile so header bar stays clean and spacious */
+  .header-cta-btn {
+    display: none !important;
+  }
+
+  .mobile-menu-toggle {
+    width: 48px !important;
+    height: 48px !important;
+  }
+
+  /* Section Padding & Headings */
+  .section {
+    padding: 4rem 0 !important;
+  }
+
+  /* Section Titles: Big, Bold, Legible */
+  .section-title {
+    font-size: 2.25rem !important; /* 36px */
+    line-height: 1.2 !important;
+    margin-bottom: 0.75rem !important;
+    text-align: center !important;
+  }
+
+  .section-subtitle {
+    font-size: 1.15rem !important; /* 18.5px */
+    line-height: 1.65 !important;
+    margin-bottom: 2.5rem !important;
+    text-align: center !important;
+    padding: 0 0.5rem !important;
+  }
+
+  /* Hero Section Overhaul */
   .hero-section {
-    padding-top: 115px !important;
-    padding-bottom: 50px !important;
-    text-align: left;
+    padding-top: 120px !important;
+    padding-bottom: 4rem !important;
+    text-align: left !important;
   }
 
   .hero-container {
     display: flex !important;
     flex-direction: column !important;
-    gap: 2rem !important;
+    gap: 2.25rem !important;
   }
 
-  /* H1 Hero Heading: at least 32-36px on mobile */
-  .hero-title {
-    font-size: 2.25rem !important; /* 36px */
-    line-height: 1.25 !important;
+  .trust-badge {
+    padding: 0.45rem 1rem !important;
+    font-size: 0.85rem !important;
     margin-bottom: 1.5rem !important;
   }
 
-  /* Body/paragraph text under hero: 17px minimum with 1.65 line height */
+  /* H1 Hero Title: Massive, crisp & legible (44px) */
+  .hero-title {
+    font-size: 2.65rem !important; /* 42px - 44px */
+    line-height: 1.18 !important;
+    letter-spacing: -0.03em !important;
+    margin-bottom: 1.75rem !important;
+  }
+
+  /* Hero Body Paragraph: 18.5px with 1.65 line-height */
   .hero-description {
-    font-size: 1.05rem !important; /* 17px */
+    font-size: 1.15rem !important; /* 18.5px */
     line-height: 1.65 !important;
-    margin-bottom: 2.25rem !important;
-    padding: 0;
+    margin-bottom: 2.5rem !important;
     max-width: 100% !important;
   }
 
-  /* Hero action buttons: full-width stacked buttons */
+  /* Hero CTAs: 100% full-width stacked buttons */
   .hero-actions {
     display: flex !important;
     flex-direction: column !important;
-    width: 100%;
-    gap: 0.85rem !important;
+    width: 100% !important;
+    gap: 1rem !important;
   }
 
   .hero-actions .btn {
     width: 100% !important;
-    justify-content: center;
-    min-height: 52px !important;
-    font-size: 1.05rem !important; /* 17px */
-    padding: 0.9rem 1.5rem !important;
+    min-height: 56px !important;
+    font-size: 1.1rem !important; /* 18px */
+    padding: 1rem 1.75rem !important;
+    justify-content: center !important;
+    border-radius: 99px !important;
   }
 
-  /* Metrics Grid */
+  /* Stats Cards: 1-Column Full Width */
   .metrics-grid {
-    grid-template-columns: 1fr !important;
-    padding: 1.5rem !important;
-    gap: 1.25rem !important;
+    padding: 1.75rem !important;
+    border-radius: 20px !important;
   }
 
   .metric-card {
-    border-bottom: 1px solid var(--border-color);
-    padding-bottom: 1rem;
-    width: 100%;
-    justify-content: flex-start;
+    border-bottom: 1px solid var(--border-color) !important;
+    padding-bottom: 1.25rem !important;
+    width: 100% !important;
   }
 
   .metric-card:last-child {
-    border-bottom: none;
-    padding-bottom: 0;
+    border-bottom: none !important;
+    padding-bottom: 0 !important;
   }
 
   .metric-value {
-    font-size: 1.4rem !important;
+    font-size: 1.6rem !important;
   }
 
   .metric-label {
-    font-size: 0.875rem !important; /* ~14px */
+    font-size: 0.95rem !important;
   }
 
-  /* Services & University Cards */
-  .services-section {
-    padding: 4rem 0 !important;
+  /* Card Containers (Services, Universities, News, About) */
+  .glass-card {
+    padding: 1.75rem 1.5rem !important;
+    border-radius: 20px !important;
+    width: 100% !important;
   }
 
+  /* Services Component */
   .service-card {
-    padding: 1.5rem !important;
+    width: 100% !important;
   }
 
   .service-title {
-    font-size: 1.25rem !important;
+    font-size: 1.35rem !important;
   }
 
   .service-short-desc, .details-item {
-    font-size: 1rem !important; /* 16px */
-    line-height: 1.6 !important;
+    font-size: 1.05rem !important; /* 17px */
+    line-height: 1.65 !important;
   }
 
-  /* Partner Universities search & cards */
+  /* Universities Component */
+  .uni-card {
+    width: 100% !important;
+  }
+
+  .uni-card-title {
+    font-size: 1.45rem !important;
+  }
+
+  .uni-card-desc {
+    font-size: 1.05rem !important; /* 17px */
+    line-height: 1.65 !important;
+  }
+
+  .uni-card-btn {
+    width: 100% !important;
+    min-height: 50px !important;
+    font-size: 1rem !important;
+  }
+
   .search-filter-box {
-    padding: 1.25rem !important;
-    border-radius: 16px !important;
-    gap: 1rem !important;
+    padding: 1.5rem !important;
+    border-radius: 20px !important;
   }
 
   .search-bar {
     font-size: 16px !important;
+    padding: 0.9rem 1rem 0.9rem 3.25rem !important;
   }
 
   .filter-tags {
     display: flex !important;
     flex-wrap: nowrap !important;
     overflow-x: auto !important;
-    -webkit-overflow-scrolling: touch;
-    gap: 0.5rem !important;
+    -webkit-overflow-scrolling: touch !important;
+    gap: 0.65rem !important;
     padding-bottom: 0.5rem !important;
   }
 
   .filter-btn {
-    flex-shrink: 0;
-    padding: 0.5rem 1rem !important;
-    font-size: 0.875rem !important;
+    padding: 0.65rem 1.25rem !important;
+    font-size: 0.95rem !important;
   }
 
-  .uni-card-title {
+  /* English Test Component */
+  .quiz-question {
     font-size: 1.3rem !important;
+    line-height: 1.5 !important;
   }
 
-  .uni-card-desc {
-    font-size: 1rem !important;
-    line-height: 1.6 !important;
+  .option-btn {
+    padding: 1rem 1.25rem !important;
+    font-size: 1.05rem !important;
+    min-height: 52px !important;
   }
 
-  /* About section values and timeline */
+  /* About Component */
+  .about-title {
+    font-size: 2.1rem !important;
+    line-height: 1.25 !important;
+  }
+
   .about-text-col p {
+    font-size: 1.1rem !important;
+    line-height: 1.65 !important;
+  }
+
+  .team-name {
+    font-size: 1.5rem !important;
+  }
+
+  .team-bio {
     font-size: 1.05rem !important;
     line-height: 1.65 !important;
   }
 
-  .about-img {
-    height: auto !important;
-  }
-
-  .about-image-wrapper {
-    height: 220px !important;
-  }
-
-  .team-grid {
-    grid-template-columns: 1fr !important;
-    text-align: center;
-    gap: 1.5rem !important;
-  }
-
-  .team-bio {
-    font-size: 1rem !important;
-    line-height: 1.65 !important;
-  }
-
-  .team-credentials {
-    justify-content: center !important;
-  }
-
-  /* Contact page layouts */
-  .contact-info-panel {
-    gap: 1.5rem !important;
-  }
-
-  .contact-image-container {
-    display: none !important;
-  }
-
-  .form-row {
-    flex-direction: column !important;
-    gap: 0 !important;
+  /* Contact Component */
+  .panel-title, .form-panel-title {
+    font-size: 1.5rem !important;
   }
 
   .panel-desc, .info-item p {
+    font-size: 1.05rem !important;
+    line-height: 1.65 !important;
+  }
+
+  /* Footer Component */
+  .footer {
+    padding: 3.5rem 0 2rem 0 !important;
+  }
+
+  .footer-logo-img {
+    height: 58px !important;
+  }
+
+  .brand-desc, .footer-links button, .contact-list li {
     font-size: 1rem !important;
     line-height: 1.6 !important;
-  }
-
-  /* Newsletter adjustments */
-  .newsletter-box {
-    padding: 1.5rem !important;
-    border-radius: 16px !important;
-    text-align: center;
-    gap: 1.25rem !important;
-  }
-
-  .newsletter-text p {
-    font-size: 0.95rem !important;
-  }
-
-  .newsletter-form {
-    flex-direction: column !important;
-    align-items: stretch !important;
-    width: 100% !important;
-  }
-
-  .newsletter-input {
-    font-size: 16px !important;
-  }
-
-  /* Modal responsive adjustment */
-  .modal-overlay {
-    padding: 0.5rem !important;
-  }
-
-  .modal-content {
-    padding: 1.5rem !important;
-    max-height: 95vh !important;
-  }
-
-  .modal-desc {
-    font-size: 1rem !important;
-    line-height: 1.65 !important;
   }
 }

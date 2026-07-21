@@ -110,11 +110,7 @@ export default function Footer({ setCurrentTab }) {
           margin-bottom: 3rem;
         }
 
-        @media (min-width: 560px) {
-          .footer-grid {
-            grid-template-columns: repeat(2, 1fr);
-          }
-        }
+
 
         @media (min-width: 992px) {
           .footer-grid {

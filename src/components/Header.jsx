@@ -233,7 +233,7 @@ export default function Header({ currentTab, setCurrentTab }) {
           font-size: 0.875rem;
         }
 
-        @media (min-width: 640px) {
+        @media (min-width: 992px) {
           .header-cta-btn {
             display: inline-flex;
           }

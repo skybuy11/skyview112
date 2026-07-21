@@ -121,7 +121,7 @@ export default function Services() {
           gap: 1.25rem;
         }
 
-        @media (min-width: 768px) {
+        @media (min-width: 992px) {
           .services-grid {
             grid-template-columns: repeat(2, 1fr);
             gap: 1.5rem;
