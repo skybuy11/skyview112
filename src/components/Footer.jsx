@@ -1,12 +1,12 @@
 import React from 'react';
-import { GraduationCap, Mail, Phone, MapPin, Award, CheckCircle } from 'lucide-react';
+import { Mail, Phone, MapPin, Award } from 'lucide-react';
 
 export default function Footer({ setCurrentTab }) {
   const handleNavClick = (id) => {
     setCurrentTab(id);
     const element = document.getElementById(id);
     if (element) {
-      const offset = 80;
+      const offset = 76;
       const bodyRect = document.body.getBoundingClientRect().top;
       const elementRect = element.getBoundingClientRect().top;
       const elementPosition = elementRect - bodyRect;
@@ -22,17 +22,17 @@ export default function Footer({ setCurrentTab }) {
           {/* Brand Info */}
           <div className="footer-brand">
             <div className="brand-header" onClick={() => handleNavClick('home')}>
-              <img src="/logo.png" alt="Skyview Consultants" className="footer-logo-img" />
+              <img src="/logo.png" alt="Skyview Consultants Logo" className="footer-logo-img" />
             </div>
             <p className="brand-desc">
-              For over 15 years, we've been the trusted bridge connecting ambitious international students with prestigious UK universities.
+              For over 15 years, Skyview Consultants has been the trusted bridge connecting international students with prestigious British universities.
             </p>
-            {/* British Council Certified Badge */}
-            <div className="bc-badge glass">
-              <Award className="bc-badge-icon" size={24} />
+            
+            <div className="bc-badge">
+              <Award className="bc-badge-icon" size={22} />
               <div className="bc-badge-text">
                 <span className="bc-title">British Council Approved</span>
-                <span className="bc-desc">Trusted & Certified Agent</span>
+                <span className="bc-desc">Certified & Verified Agent</span>
               </div>
             </div>
           </div>
@@ -42,7 +42,7 @@ export default function Footer({ setCurrentTab }) {
             <h4 className="footer-title">Quick Links</h4>
             <ul className="footer-links">
               <li><button onClick={() => handleNavClick('home')}>Home</button></li>
-              <li><button onClick={() => handleNavClick('services')}>Our Services</button></li>
+              <li><button onClick={() => handleNavClick('services')}>Services</button></li>
               <li><button onClick={() => handleNavClick('universities')}>Partner Universities</button></li>
               <li><button onClick={() => handleNavClick('english-test')}>English Assessment</button></li>
               <li><button onClick={() => handleNavClick('contract')}>Student Contract</button></li>
@@ -51,16 +51,15 @@ export default function Footer({ setCurrentTab }) {
             </ul>
           </div>
 
-          {/* Core Services Links */}
+          {/* Core Services */}
           <div className="footer-links-col">
-            <h4 className="footer-title">Our Services</h4>
+            <h4 className="footer-title">Services</h4>
             <ul className="footer-links">
               <li><button onClick={() => handleNavClick('services')}>Course Advice</button></li>
               <li><button onClick={() => handleNavClick('services')}>University Admissions</button></li>
               <li><button onClick={() => handleNavClick('services')}>Visa & Immigration</button></li>
               <li><button onClick={() => handleNavClick('services')}>Pre-Departure Briefings</button></li>
               <li><button onClick={() => handleNavClick('services')}>Accommodation Search</button></li>
-              <li><button onClick={() => handleNavClick('services')}>Arrival Assistance</button></li>
             </ul>
           </div>
 
@@ -69,22 +68,16 @@ export default function Footer({ setCurrentTab }) {
             <h4 className="footer-title">Contact Us</h4>
             <ul className="contact-list">
               <li>
-                <MapPin className="contact-icon text-accent" size={18} />
-                <span>71-75 Shelton Street, Covent Garden, London, WC2H 9JQ, United Kingdom</span>
+                <MapPin className="contact-icon" size={16} />
+                <span>71-75 Shelton Street, Covent Garden, London, WC2H 9JQ, UK</span>
               </li>
               <li>
-                <Mail className="contact-icon text-accent" size={18} />
+                <Mail className="contact-icon" size={16} />
                 <a href="mailto:sharan@skyview.org.uk">sharan@skyview.org.uk</a>
               </li>
               <li>
-                <Phone className="contact-icon text-accent" size={18} />
+                <Phone className="contact-icon" size={16} />
                 <a href="tel:+447725355355">+44 7725 355355</a>
-              </li>
-              <li>
-                <div className="status-indicator">
-                  <span className="dot pulse"></span>
-                  <span className="status-text">We are open: Mon - Fri (09:00 - 17:00 GMT)</span>
-                </div>
               </li>
             </ul>
           </div>
@@ -92,41 +85,40 @@ export default function Footer({ setCurrentTab }) {
 
         <div className="footer-bottom">
           <p className="copyright">
-            &copy; {new Date().getFullYear()} Skyview Consultants. All rights reserved. 
+            &copy; {new Date().getFullYear()} Skyview Consultants. All rights reserved. Registered in England & Wales.
           </p>
           <div className="footer-legal">
             <a href="#privacy">Privacy Policy</a>
-            <span className="divider">|</span>
-            <a href="#terms">Terms of Service</a>
+            <span className="divider">•</span>
+            <a href="#terms">Terms of Representation</a>
           </div>
         </div>
       </div>
 
       <style>{`
         .footer {
-          background-color: var(--bg-primary);
+          background-color: #FFFFFF;
           border-top: 1px solid var(--border-color);
-          padding: 4.5rem 0 2.5rem 0;
+          padding: 4rem 0 2rem 0;
           color: var(--text-secondary);
-          position: relative;
         }
 
         .footer-grid {
           display: grid;
           grid-template-columns: 1fr;
-          gap: 2rem;
+          gap: 2.25rem;
           margin-bottom: 3rem;
         }
 
         @media (min-width: 560px) {
           .footer-grid {
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(2, 1fr);
           }
         }
 
-        @media (min-width: 900px) {
+        @media (min-width: 992px) {
           .footer-grid {
-            grid-template-columns: 1.8fr 1fr 1fr 1.4fr;
+            grid-template-columns: 1.6fr 1fr 1fr 1.4fr;
             gap: 2.5rem;
           }
         }
@@ -134,30 +126,13 @@ export default function Footer({ setCurrentTab }) {
         .footer-brand {
           display: flex;
           flex-direction: column;
-          gap: 1.25rem;
-        }
-
-        .brand-header {
-          display: flex;
-          align-items: center;
-          cursor: pointer;
+          gap: 1rem;
         }
 
         .footer-logo-img {
-          height: 68px; /* Proportional, visible footer logo */
+          height: 48px;
           width: auto;
           object-fit: contain;
-          transition: transform 0.3s ease;
-        }
-
-        @media (max-width: 767px) {
-          .footer-logo-img {
-            height: 60px;
-          }
-        }
-
-        [data-theme="dark"] .footer-logo-img {
-          filter: brightness(1.35) contrast(1.1); /* Crisper visibility on dark backgrounds */
         }
 
         .brand-desc {
@@ -170,9 +145,9 @@ export default function Footer({ setCurrentTab }) {
           display: flex;
           align-items: center;
           gap: 0.75rem;
-          padding: 0.75rem 1rem;
+          padding: 0.65rem 0.85rem;
           border-radius: 12px;
-          background: var(--bg-secondary);
+          background: var(--bg-primary);
           border: 1px solid var(--border-color);
           max-width: fit-content;
         }
@@ -188,7 +163,7 @@ export default function Footer({ setCurrentTab }) {
 
         .bc-title {
           font-size: 0.75rem;
-          font-weight: 600;
+          font-weight: 700;
           color: var(--text-primary);
         }
 
@@ -197,119 +172,57 @@ export default function Footer({ setCurrentTab }) {
           color: var(--text-muted);
         }
 
-        .footer-links-col {
-          display: flex;
-          flex-direction: column;
-          gap: 1.25rem;
-        }
-
         .footer-title {
           font-size: 0.75rem;
-          font-weight: 600;
+          font-weight: 700;
           text-transform: uppercase;
           letter-spacing: 0.08em;
-          color: var(--text-primary);
+          color: var(--primary);
+          margin-bottom: 1rem;
         }
 
         .footer-links {
           list-style: none;
           display: flex;
           flex-direction: column;
-          gap: 0.65rem;
+          gap: 0.5rem;
         }
 
         .footer-links button {
-          background: none;
-          border: none;
           color: var(--text-secondary);
           cursor: pointer;
-          font-size: 0.8rem;
-          padding: 0;
+          font-size: 0.85rem;
           text-align: left;
-          transition: all 0.2s ease;
+          transition: color 0.2s;
         }
 
         .footer-links button:hover {
-          color: var(--accent);
-        }
-
-        .footer-contact {
-          display: flex;
-          flex-direction: column;
-          gap: 1.25rem;
+          color: var(--primary);
         }
 
         .contact-list {
           list-style: none;
           display: flex;
           flex-direction: column;
-          gap: 0.85rem;
+          gap: 0.75rem;
         }
 
         .contact-list li {
           display: flex;
-          gap: 0.75rem;
-          font-size: 0.8rem;
+          gap: 0.65rem;
+          font-size: 0.85rem;
           align-items: flex-start;
           line-height: 1.45;
         }
 
         .contact-icon {
-          flex-shrink: 0;
-          margin-top: 0.1rem;
-        }
-
-        .contact-list a {
-          transition: color 0.2s;
-        }
-
-        .contact-list a:hover {
           color: var(--accent);
-        }
-
-        .status-indicator {
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-          margin-top: 0.25rem;
-        }
-
-        .dot {
-          width: 6px;
-          height: 6px;
-          background-color: var(--secondary);
-          border-radius: 50%;
-        }
-
-        .dot.pulse {
-          box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
-          animation: pulse 1.8s infinite;
-        }
-
-        @keyframes pulse {
-          0% {
-            transform: scale(0.95);
-            box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
-          }
-          70% {
-            transform: scale(1);
-            box-shadow: 0 0 0 4px rgba(16, 185, 129, 0);
-          }
-          100% {
-            transform: scale(0.95);
-            box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
-          }
-        }
-
-        .status-text {
-          font-size: 0.75rem;
-          font-weight: 400;
-          color: var(--text-muted);
+          flex-shrink: 0;
+          margin-top: 0.15rem;
         }
 
         .footer-bottom {
           border-top: 1px solid var(--border-color);
-          margin-top: 3rem;
           padding-top: 1.5rem;
           display: flex;
           flex-direction: column;
@@ -324,25 +237,14 @@ export default function Footer({ setCurrentTab }) {
           }
         }
 
-        .copyright {
+        .copyright, .footer-legal {
           font-size: 0.75rem;
           color: var(--text-muted);
         }
 
         .footer-legal {
           display: flex;
-          align-items: center;
-          gap: 0.75rem;
-          font-size: 0.75rem;
-          color: var(--text-muted);
-        }
-
-        .footer-legal a:hover {
-          color: var(--accent);
-        }
-
-        .divider {
-          color: var(--border-color);
+          gap: 0.5rem;
         }
       `}</style>
     </footer>

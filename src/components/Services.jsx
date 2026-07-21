@@ -1,70 +1,70 @@
 import React, { useState } from 'react';
-import { BookOpen, FileText, Landmark, Compass, ChevronRight, CheckCircle2 } from 'lucide-react';
+import { BookOpen, GraduationCap, FileCheck, Compass, CheckCircle2, ChevronRight } from 'lucide-react';
 
 export default function Services() {
   const [activeService, setActiveService] = useState(null);
 
   const servicesData = [
     {
-      id: 'course-selection',
-      icon: <BookOpen size={32} />,
+      id: 'selection',
+      icon: <BookOpen size={24} />,
       title: 'University & Course Selection',
-      shortDesc: 'Discover the ideal academic path tailored to your profile, interests, and professional aspirations.',
+      shortDesc: 'Personalized matching based on academic background, budget, and career goals.',
       details: [
-        'Academic profile evaluation and personalized consultancy',
-        'Detailed recommendations on UK universities matching your GPA and goals',
-        'Expert guidance on course curriculum, modules, and employability outlook',
-        'Advising on university tier options (Russell Group, specialist institutions)'
+        'Academic transcript & GPA evaluation',
+        'Course curriculum & career outcome matching',
+        'Scholarship & funding eligibility check',
+        'Location & cost of living advice (London vs regional)'
       ]
     },
     {
-      id: 'application-support',
-      icon: <FileText size={32} />,
-      title: 'Application Preparation & Support',
-      shortDesc: 'Submit compelling, polished applications that stand out to UK admissions officers.',
+      id: 'application',
+      icon: <GraduationCap size={24} />,
+      title: 'Application Preparation',
+      shortDesc: 'End-to-end guidance on personal statements, reference letters, and submission.',
       details: [
-        'Personal statement brainstorming, structuring, and multi-round review',
-        'Guidance on academic and professional reference letters (formatting and requirements)',
-        'Standardized test requirements advice and application portal tracking',
-        'Mock interview sessions for competitive universities requiring admission interviews'
+        'Bespoke Statement of Purpose (SOP) review',
+        'Academic & professional reference guidance',
+        'Portfolio & CV structuring',
+        'Direct application submission & portal tracking'
       ]
     },
     {
-      id: 'visa-support',
-      icon: <Landmark size={32} />,
-      title: 'Visa & Immigration Support',
-      shortDesc: 'Navigate the complex student visa process with complete confidence and guidance.',
+      id: 'visa',
+      icon: <FileCheck size={24} />,
+      title: 'Visa & Immigration Guidance',
+      shortDesc: 'Certified UK Student Visa (CAS) support ensuring full Home Office compliance.',
       details: [
-        'Detailed document checklist tailored to your nationality and visa regulations',
-        'Expert guidance on meeting Home Office financial requirements and funding proof',
-        'CAS (Confirmation of Acceptance for Studies) verification and review',
-        'Step-by-step assistance with online visa forms and booking biometric appointments'
+        'Confirmation of Acceptance for Studies (CAS) review',
+        'Financial evidence & bank statement verification',
+        'UKVI visa application form assistance',
+        'Credibility interview preparation'
       ]
     },
     {
-      id: 'pre-departure',
-      icon: <Compass size={32} />,
-      title: 'Arrival & Pre-Departure Support',
-      shortDesc: 'Prepare for a smooth transition to life and learning in the United Kingdom.',
+      id: 'predeparture',
+      icon: <Compass size={24} />,
+      title: 'Arrival & Pre-Departure Briefing',
+      shortDesc: 'Comprehensive orientation covering UK travel, banking, housing, and life.',
       details: [
-        'Comprehensive pre-departure briefings (packing lists, border control tips)',
-        'Assistance in searching for and securing university or private student accommodation',
-        'Guidance on setting up UK bank accounts, mobile SIMs, and GP health registrations',
-        'Coordination of airport pickup services and campus arrival logistics support'
+        'Pre-departure orientation sessions',
+        'Student accommodation booking support',
+        'UK bank account & NHS registration guidance',
+        'Airport pickup & UK orientation advice'
       ]
     }
   ];
 
   return (
-    <section id="services" className="services-section">
+    <section id="services" className="services-section section">
       <div className="container">
-        <h2 className="section-title">Our Comprehensive Services</h2>
+        <h2 className="section-title">Our Specialist Services</h2>
         <p className="section-subtitle">
-          From your initial inquiry to your first week on campus, our certified team provides full support every step of the way.
+          We provide end-to-end, personalized support at every stage of your journey to studying in the United Kingdom.
         </p>
 
-        <div className="grid-2 services-grid">
-          {servicesData.map((service, index) => {
+        <div className="services-grid">
+          {servicesData.map((service) => {
             const isActive = activeService === service.id;
             return (
               <div 
@@ -110,13 +110,22 @@ export default function Services() {
 
       <style>{`
         .services-section {
-          background-color: var(--bg-secondary);
-          position: relative;
+          background-color: var(--bg-surface);
           border-top: 1px solid var(--border-color);
+          border-bottom: 1px solid var(--border-color);
         }
 
         .services-grid {
-          margin-top: 1.5rem;
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 1.25rem;
+        }
+
+        @media (min-width: 768px) {
+          .services-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+          }
         }
 
         .service-card {
@@ -124,33 +133,6 @@ export default function Services() {
           display: flex;
           flex-direction: column;
           justify-content: space-between;
-          padding: 1.25rem;
-          min-height: unset;
-          background: var(--bg-primary);
-          border: 1px solid var(--border-color);
-          box-shadow: none;
-        }
-
-        @media (min-width: 480px) {
-          .service-card {
-            padding: 1.75rem;
-            min-height: 200px;
-          }
-        }
-
-        @media (min-width: 768px) {
-          .service-card {
-            padding: 2.5rem;
-            min-height: 240px;
-          }
-        }
-
-        @media (max-width: 480px) {
-          /* Force single-column stacking for service cards on small phones */
-          .services-grid {
-            grid-template-columns: 1fr !important;
-            gap: 10px !important;
-          }
         }
 
         .service-card-header {
@@ -160,89 +142,85 @@ export default function Services() {
         }
 
         .service-icon-box {
-          background: var(--bg-secondary);
-          border: 1px solid var(--border-color);
-          color: var(--accent);
-          width: 54px;
-          height: 54px;
-          border-radius: 50%;
+          background: var(--primary-light);
+          color: var(--primary);
+          width: 50px;
+          height: 50px;
+          border-radius: 14px;
           display: flex;
           align-items: center;
           justify-content: center;
           flex-shrink: 0;
-          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+          transition: all 0.25s ease;
         }
 
         .service-card:hover .service-icon-box {
-          background: var(--accent);
-          color: #ffffff;
-          border-color: var(--accent);
+          background: var(--primary);
+          color: #FFFFFF;
         }
 
         .service-header-text {
           display: flex;
           flex-direction: column;
-          gap: 0.35rem;
+          gap: 0.25rem;
         }
 
         .service-title {
-          font-size: 1.25rem;
-          font-weight: 600;
+          font-size: 1.2rem;
+          font-weight: 700;
           color: var(--text-primary);
-          letter-spacing: -0.01em;
         }
 
         .service-short-desc {
-          font-size: 0.95rem;
+          font-size: 0.9rem;
           color: var(--text-secondary);
-          line-height: 1.55;
+          line-height: 1.5;
         }
 
         .service-details-container {
           max-height: 0;
           overflow: hidden;
-          transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+          transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .service-details-container.expanded {
-          max-height: 500px;
+          max-height: 400px;
         }
 
         .service-details-divider {
           height: 1px;
           background: var(--border-color);
-          margin: 1.5rem 0;
+          margin: 1.25rem 0;
         }
 
         .details-heading {
           font-size: 0.75rem;
-          font-weight: 600;
+          font-weight: 700;
           text-transform: uppercase;
-          letter-spacing: 0.08em;
+          letter-spacing: 0.06em;
           color: var(--text-muted);
-          margin-bottom: 0.85rem;
+          margin-bottom: 0.75rem;
         }
 
         .details-list {
           list-style: none;
           display: flex;
           flex-direction: column;
-          gap: 0.65rem;
+          gap: 0.6rem;
         }
 
         .details-item {
           display: flex;
           align-items: flex-start;
-          gap: 0.65rem;
-          font-size: 0.9rem;
+          gap: 0.5rem;
+          font-size: 0.875rem;
           color: var(--text-secondary);
-          line-height: 1.45;
         }
 
         .detail-check {
-          color: var(--accent);
-          margin-top: 0.15rem;
+          color: var(--success);
           flex-shrink: 0;
+          margin-top: 0.15rem;
         }
 
         .service-expand-footer {
@@ -250,38 +228,18 @@ export default function Services() {
           align-items: center;
           justify-content: flex-end;
           gap: 0.25rem;
-          margin-top: 2rem;
-          color: var(--text-primary);
-          opacity: 0.8;
-          font-weight: 500;
+          margin-top: 1.5rem;
+          color: var(--primary);
+          font-weight: 600;
           font-size: 0.85rem;
-          transition: color 0.2s, opacity 0.2s;
-        }
-
-        .service-card:hover .service-expand-footer {
-          color: var(--accent);
-          opacity: 1;
         }
 
         .expand-arrow {
-          transition: transform 0.3s ease;
+          transition: transform 0.25s ease;
         }
 
         .expand-arrow.rotated {
           transform: rotate(90deg);
-        }
-
-        .expand-text {
-          font-family: var(--font-body);
-        }
-
-        @media (max-width: 640px) {
-          .service-card {
-            padding: 1.75rem 1.25rem;
-          }
-          .service-card-header {
-            gap: 1rem;
-          }
         }
       `}</style>
     </section>

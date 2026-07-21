@@ -12,30 +12,13 @@ import Footer from './components/Footer';
 
 export default function App() {
   const [currentTab, setCurrentTab] = useState('home');
-  const [isDarkMode, setIsDarkMode] = useState(() => {
-    // Read from localStorage or fallback to system preference
-    const stored = localStorage.getItem('theme');
-    if (stored) return stored === 'dark';
-    return window.matchMedia('(prefers-color-scheme: dark)').matches;
-  });
-
-  // Apply theme to document element
-  useEffect(() => {
-    if (isDarkMode) {
-      document.documentElement.setAttribute('data-theme', 'dark');
-      localStorage.setItem('theme', 'dark');
-    } else {
-      document.documentElement.setAttribute('data-theme', 'light');
-      localStorage.setItem('theme', 'light');
-    }
-  }, [isDarkMode]);
 
   // Handle active navigation tab highlighting on scroll
   useEffect(() => {
     const sections = ['home', 'services', 'universities', 'english-test', 'contract', 'news', 'about', 'contact'];
     
     const handleScroll = () => {
-      const scrollPosition = window.scrollY + 120; // offset for nav header
+      const scrollPosition = window.scrollY + 100;
 
       for (const section of sections) {
         const el = document.getElementById(section);
@@ -54,45 +37,36 @@ export default function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const toggleTheme = () => {
-    setIsDarkMode((prev) => !prev);
-  };
-
   return (
     <div className="app-shell">
       {/* Navbar Header */}
-      <Header 
-        currentTab={currentTab} 
-        setCurrentTab={setCurrentTab} 
-        isDarkMode={isDarkMode} 
-        toggleTheme={toggleTheme} 
-      />
+      <Header currentTab={currentTab} setCurrentTab={setCurrentTab} />
 
-      {/* Hero Home Banner */}
+      {/* Hero Banner */}
       <Hero setCurrentTab={setCurrentTab} />
 
-      {/* Services Grid Checklists */}
+      {/* Services Grid */}
       <Services />
 
-      {/* University Search and Filter Database */}
+      {/* University Search Database */}
       <Universities />
 
-      {/* Interactive English Competence Test */}
+      {/* English Competence Test */}
       <EnglishTest setCurrentTab={setCurrentTab} />
 
-      {/* Student-Agent Representation Agreement */}
+      {/* Student-Agent Agreement */}
       <StudentContract />
 
       {/* UK Higher Education News */}
       <News />
 
-      {/* About Company Mission and Values Timeline */}
+      {/* About Company */}
       <About />
 
-      {/* Contact Form Details */}
+      {/* Contact Details */}
       <Contact />
 
-      {/* Common Footer */}
+      {/* Footer */}
       <Footer setCurrentTab={setCurrentTab} />
 
       <style>{`

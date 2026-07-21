@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FileText, Printer, Check, Info } from 'lucide-react';
+import { Printer } from 'lucide-react';
 
 export default function StudentContract() {
   const [formData, setFormData] = useState({
@@ -9,7 +9,7 @@ export default function StudentContract() {
     email: '',
     phone: '',
     passportNumber: '',
-    courseLevel: 'postgraduate',
+    courseLevel: 'Postgraduate',
     subjectArea: '',
     preferredUni: '',
     startDate: 'September 2026',
@@ -29,7 +29,6 @@ export default function StudentContract() {
 
   const [contractRef, setContractRef] = useState('');
 
-  // Generate a random stable reference number on load or reset
   useEffect(() => {
     const year = new Date().getFullYear();
     const rand = Math.floor(100000 + Math.random() * 900000);
@@ -64,11 +63,11 @@ export default function StudentContract() {
       <div className="container">
         <h2 className="section-title">Student–Agent Agreement</h2>
         <p className="section-subtitle">
-          Complete the 4-part application form to instantly generate your official representation agreement. You can save or print it as a PDF.
+          Complete the 4-part application form to instantly generate your official UK representation agreement. Print or save as a PDF.
         </p>
 
         <div className="contract-layout-grid">
-          {/* Left panel: Form */}
+          {/* Left Panel: 4-Part Guided Form */}
           <div className="contract-form-panel glass-card">
             <div className="form-steps-container">
               {/* Part 1: Student Details */}
@@ -82,7 +81,7 @@ export default function StudentContract() {
                     name="fullName"
                     value={formData.fullName}
                     onChange={handleInputChange}
-                    placeholder="Enter your full name"
+                    placeholder="Enter your full legal name"
                     required
                   />
                 </div>
@@ -129,7 +128,7 @@ export default function StudentContract() {
                       name="phone"
                       value={formData.phone}
                       onChange={handleInputChange}
-                      placeholder="+249 9..."
+                      placeholder="+44 7..."
                     />
                   </div>
                 </div>
@@ -186,7 +185,7 @@ export default function StudentContract() {
                     name="subjectArea"
                     value={formData.subjectArea}
                     onChange={handleInputChange}
-                    placeholder="e.g. Computer Science, Business Administration"
+                    placeholder="e.g. Computer Science, Law, MBA"
                   />
                 </div>
                 <div className="form-group-underline">
@@ -317,7 +316,7 @@ export default function StudentContract() {
             </div>
           </div>
 
-          {/* Right panel: Live Contract Document */}
+          {/* Right Panel: Live Document Preview */}
           <div className="contract-preview-panel">
             <div className="contract-document-wrapper" id="printable-contract">
               {/* Document Header / Letterhead */}
@@ -344,7 +343,7 @@ export default function StudentContract() {
                 </div>
               </div>
 
-              {/* Title */}
+              {/* Document Title */}
               <h1 className="document-title">STANDARD STUDENT–AGENT REPRESENTATION AGREEMENT</h1>
 
               {/* Preamble */}
@@ -419,7 +418,7 @@ export default function StudentContract() {
                 <div className="clause-item">
                   <h4 className="clause-heading">3. AGENT FEES & PAYMENT TERMS</h4>
                   <div className="clause-body">
-                    The Agent provides counseling and university admission services free of charge to the Student when applying to partnered universities, as the Agent receives representative commissions from participating British universities. If the Student requests specialized applications to non-partnered universities or bespoke visa appeals, the fee structure must be agreed upon in writing separately before services are rendered.
+                    The Agent provides counseling and university admission services free of charge to the Student when applying to partnered universities, as the Agent receives representative commissions from participating British universities.
                   </div>
                 </div>
 
@@ -438,28 +437,28 @@ export default function StudentContract() {
                 <div className="clause-item">
                   <h4 className="clause-heading">5. STUDENT OBLIGATIONS</h4>
                   <div className="clause-body">
-                    The Student agrees to provide fully authentic, accurate, and original documents (transcripts, reference letters, financial bank certificates, and identity cards). Providing fraudulent credentials or omitting critical visa refusal histories voids this agreement immediately. The Student remains solely responsible for paying university application fees, UK immigration health surcharges, and tuition fees.
+                    The Student agrees to provide fully authentic, accurate, and original documents. Providing fraudulent credentials voids this agreement immediately. The Student remains solely responsible for university application fees, UK immigration health surcharges, and tuition fees.
                   </div>
                 </div>
 
                 <div className="clause-item">
                   <h4 className="clause-heading">6. CONFIDENTIALITY & DATA PROTECTION</h4>
                   <div className="clause-body">
-                    All personal data shared will be protected and processed strictly for admissions purposes. Information will only be disclosed to selected universities and UK immigration authorities as required.
+                    All personal data shared will be protected and processed strictly for admissions purposes in compliance with UK GDPR rules.
                   </div>
                 </div>
 
                 <div className="clause-item">
                   <h4 className="clause-heading">7. AGREEMENT TERMINATION</h4>
                   <div className="clause-body">
-                    This Agreement may be terminated by either party upon 14 days' written notice. It is immediately terminated if the Student behaves dishonestly, submits fraudulent documentation, or fails to obtain necessary admissions credentials.
+                    This Agreement may be terminated by either party upon 14 days' written notice.
                   </div>
                 </div>
 
                 <div className="clause-item">
                   <h4 className="clause-heading">8. LIMITATION OF LIABILITY</h4>
                   <div className="clause-body">
-                    While the Agent commits to high professional standards, the final decision on admissions rests solely with the universities, and the decision on student visas rests with UK Visas and Immigration (UKVI). The Agent accepts no liability for visa rejections or university refusal decisions.
+                    While the Agent commits to high professional standards, final admissions decisions rest with universities, and student visa decisions rest with UK Visas and Immigration (UKVI).
                   </div>
                 </div>
               </div>
@@ -484,9 +483,9 @@ export default function StudentContract() {
                 </div>
               </div>
 
-              {/* Disclaimer / Footer */}
+              {/* Footer Notes */}
               <div className="document-footer-notes">
-                This document serves as a digital record of representation under UK law. Skyview Consultants is a registered organization in England.
+                This document serves as an official digital record of representation under UK law. Skyview Consultants is registered in England & Wales.
               </div>
             </div>
           </div>
@@ -496,62 +495,57 @@ export default function StudentContract() {
       <style>{`
         .contract-section {
           background-color: var(--bg-primary);
-          border-top: 1px solid var(--border-color);
         }
 
         .contract-layout-grid {
           display: grid;
           grid-template-columns: 1fr;
           gap: 2rem;
-          margin-top: 1.5rem;
           align-items: start;
         }
 
         @media (min-width: 1024px) {
           .contract-layout-grid {
-            grid-template-columns: 1fr 1.1fr;
+            grid-template-columns: 1fr 1.05fr;
             gap: 2.5rem;
           }
         }
 
         .contract-form-panel {
-          background: var(--bg-secondary);
           display: flex;
           flex-direction: column;
-          gap: 2rem;
+          gap: 1.5rem;
         }
 
         .form-steps-container {
           display: flex;
           flex-direction: column;
-          gap: 2.25rem;
+          gap: 2rem;
         }
 
         .form-step-section {
           display: flex;
           flex-direction: column;
-          gap: 1.25rem;
+          gap: 1rem;
         }
 
         .step-title {
-          font-size: 1.15rem;
-          font-weight: 600;
-          color: var(--accent);
-          border-bottom: 1.5px solid var(--border-color);
-          padding-bottom: 0.5rem;
-          margin-bottom: 0.5rem;
+          font-size: 1.1rem;
+          font-weight: 700;
+          color: var(--primary);
+          border-bottom: 1px solid var(--border-color);
+          padding-bottom: 0.4rem;
         }
 
         .step-subtitle-desc {
           font-size: 0.85rem;
           color: var(--text-secondary);
-          margin-top: -0.5rem;
         }
 
         .form-grid-2 {
           display: grid;
           grid-template-columns: 1fr;
-          gap: 0 1.25rem;
+          gap: 0 1rem;
         }
 
         @media (min-width: 480px) {
@@ -563,24 +557,21 @@ export default function StudentContract() {
         .checkbox-list {
           display: flex;
           flex-direction: column;
-          gap: 0.85rem;
+          gap: 0.75rem;
         }
 
         .checkbox-item {
           display: flex;
           align-items: flex-start;
-          gap: 0.75rem;
+          gap: 0.65rem;
           cursor: pointer;
-          font-size: 0.9rem;
+          font-size: 0.875rem;
           color: var(--text-secondary);
-          user-select: none;
         }
 
         .checkbox-item input[type="checkbox"] {
           width: 18px;
           height: 18px;
-          border-radius: 4px;
-          border: 1px solid var(--border-color);
           accent-color: var(--accent);
           cursor: pointer;
           margin-top: 0.1rem;
@@ -592,65 +583,54 @@ export default function StudentContract() {
           background: var(--bg-primary);
           border-radius: 8px;
           border: 1px solid var(--border-color);
-          margin-top: 0.5rem;
         }
 
         .form-actions-row {
-          margin-top: 1rem;
           border-top: 1px solid var(--border-color);
-          padding-top: 1.5rem;
+          padding-top: 1.25rem;
         }
 
         .print-button {
           width: 100%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 0.5rem;
         }
 
-        /* Live Contract preview styles */
+        /* Live Preview Document */
         .contract-preview-panel {
           position: sticky;
-          top: 100px;
+          top: 90px;
           max-height: 85vh;
           overflow-y: auto;
-          border-radius: 18px;
+          border-radius: 16px;
           border: 1px solid var(--border-color);
-          background: var(--bg-secondary);
-          box-shadow: var(--card-shadow);
+          background: #FFFFFF;
+          box-shadow: var(--shadow-md);
         }
 
         .contract-document-wrapper {
-          padding: 2.5rem;
-          color: #1d1d1f; /* Premium dark ink color */
-          background: #ffffff; /* Page white for realistic agreement feel */
-          font-size: 0.82rem;
+          padding: 2rem;
+          color: #111827;
+          background: #FFFFFF;
+          font-size: 0.8rem;
           line-height: 1.5;
-        }
-
-        [data-theme="dark"] .contract-preview-panel {
-          /* Keep realism in dark mode but with a dark scroll track on container */
-          border-color: #222222;
         }
 
         .contract-letterhead {
           display: flex;
           flex-direction: column;
           gap: 0.75rem;
-          margin-bottom: 1.5rem;
+          margin-bottom: 1.25rem;
         }
 
         .letterhead-top {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          gap: 1.5rem;
+          gap: 1rem;
           flex-wrap: wrap;
         }
 
         .letterhead-logo {
-          height: 54px;
+          height: 48px;
           width: auto;
           object-fit: contain;
         }
@@ -675,32 +655,32 @@ export default function StudentContract() {
 
         .company-name {
           font-family: var(--font-heading);
-          font-weight: 700;
-          font-size: 0.95rem;
+          font-weight: 800;
+          font-size: 0.9rem;
           color: #003078;
         }
 
         .company-address {
-          font-size: 0.7rem;
-          color: #515154;
+          font-size: 0.68rem;
+          color: #4B5563;
         }
 
         .company-email {
-          font-size: 0.7rem;
-          color: var(--accent);
-          font-weight: 500;
+          font-size: 0.68rem;
+          color: #B58A3F;
+          font-weight: 600;
         }
 
         .letterhead-divider {
-          height: 1.5px;
-          background: #b58a3f; /* Gold line separator */
+          height: 2px;
+          background: #B58A3F;
         }
 
         .document-meta-row {
           display: flex;
           justify-content: space-between;
-          font-size: 0.75rem;
-          color: #515154;
+          font-size: 0.72rem;
+          color: #4B5563;
         }
 
         .meta-val.highlight {
@@ -710,30 +690,29 @@ export default function StudentContract() {
 
         .document-title {
           font-family: var(--font-heading);
-          font-size: 1.15rem;
+          font-size: 1.1rem;
           font-weight: 800;
           color: #003078;
           text-align: center;
-          margin: 1.5rem 0 1.25rem 0;
-          letter-spacing: 0.02em;
+          margin: 1.25rem 0;
           line-height: 1.3;
         }
 
         .preamble-text {
           font-style: italic;
-          margin-bottom: 1.25rem;
-          color: #333333;
+          margin-bottom: 1rem;
+          color: #374151;
         }
 
         .document-parties-box {
           display: grid;
           grid-template-columns: 1fr;
-          gap: 1rem;
-          background: #f8f9fa;
-          border: 1px solid #e9ecef;
-          padding: 1rem;
+          gap: 0.75rem;
+          background: #F9FAFB;
+          border: 1px solid #E5E7EB;
+          padding: 0.85rem;
           border-radius: 8px;
-          margin-bottom: 1.5rem;
+          margin-bottom: 1.25rem;
         }
 
         @media (min-width: 640px) {
@@ -742,74 +721,54 @@ export default function StudentContract() {
           }
         }
 
-        .party-details {
-          display: flex;
-          flex-direction: column;
-          gap: 0.5rem;
-        }
-
         .party-details strong {
           color: #003078;
-          font-size: 0.75rem;
-          letter-spacing: 0.05em;
-          border-bottom: 1px solid #e9ecef;
-          padding-bottom: 0.25rem;
+          font-size: 0.72rem;
+          display: block;
+          margin-bottom: 0.25rem;
         }
 
         .party-grid {
           display: grid;
-          grid-template-columns: 80px 1fr;
-          gap: 0.25rem;
-          font-size: 0.72rem;
-          color: #333333;
+          grid-template-columns: 75px 1fr;
+          gap: 0.2rem;
+          font-size: 0.7rem;
         }
 
         .party-grid span:nth-child(odd) {
-          font-weight: 550;
-          color: #6c757d;
+          color: #6B7280;
+          font-weight: 600;
         }
 
         .clauses-container {
           display: flex;
           flex-direction: column;
-          gap: 1.25rem;
-          margin-bottom: 2rem;
-        }
-
-        .clause-item {
-          display: flex;
-          flex-direction: column;
-          gap: 0.4rem;
+          gap: 1rem;
+          margin-bottom: 1.5rem;
         }
 
         .clause-heading {
-          font-family: var(--font-heading);
-          font-size: 0.78rem;
+          font-size: 0.75rem;
           font-weight: 700;
           color: #003078;
-          letter-spacing: 0.02em;
         }
 
         .clause-body {
-          color: #333333;
-          text-align: justify;
+          color: #374151;
         }
 
         .clause-bullet-list, .clause-ordered-sublist {
-          margin-top: 0.4rem;
-          padding-left: 1.25rem;
-          display: flex;
-          flex-direction: column;
-          gap: 0.3rem;
+          padding-left: 1.2rem;
+          margin-top: 0.3rem;
         }
 
         .contract-signature-block {
           display: grid;
           grid-template-columns: 1fr;
-          gap: 1.5rem;
-          margin-top: 2rem;
-          border-top: 1px dashed #ced4da;
-          padding-top: 1.5rem;
+          gap: 1.25rem;
+          margin-top: 1.5rem;
+          border-top: 1px dashed #D1D5DB;
+          padding-top: 1.25rem;
         }
 
         @media (min-width: 540px) {
@@ -818,57 +777,43 @@ export default function StudentContract() {
           }
         }
 
-        .signature-col {
-          display: flex;
-          flex-direction: column;
-          gap: 0.35rem;
-        }
-
-        .sig-title {
-          font-weight: 700;
-          font-size: 0.7rem;
-          color: #6c757d;
-          letter-spacing: 0.05em;
-        }
-
         .signature-line {
-          height: 48px;
-          border-bottom: 1px solid #1d1d1f;
+          height: 42px;
+          border-bottom: 1px solid #111827;
           display: flex;
           align-items: flex-end;
-          padding-bottom: 0.25rem;
-          font-size: 1.4rem;
+          padding-bottom: 0.2rem;
+          font-size: 1.3rem;
           color: #003078;
         }
 
         .signature-font {
-          font-family: 'Outfit', cursive, sans-serif;
           font-style: italic;
         }
 
         .signature-line.agent-sig {
-          color: #b58a3f;
+          color: #B58A3F;
         }
 
         .sig-details {
-          font-size: 0.7rem;
-          color: #6c757d;
+          font-size: 0.68rem;
+          color: #6B7280;
         }
 
         .document-footer-notes {
           text-align: center;
           font-size: 0.65rem;
-          color: #adb5bd;
-          margin-top: 2.5rem;
-          border-top: 1px solid #f1f3f5;
+          color: #9CA3AF;
+          margin-top: 2rem;
+          border-top: 1px solid #F3F4F6;
           padding-top: 0.75rem;
         }
 
-        /* PRINT STYLES - STrips page layouts down to absolute contract paper */
+        /* PRINT STYLES */
         @media print {
           body * {
             visibility: hidden;
-            background: #ffffff !important;
+            background: #FFFFFF !important;
           }
           #contract, #contract *, .contract-document-wrapper, .contract-document-wrapper * {
             visibility: visible;
@@ -880,13 +825,12 @@ export default function StudentContract() {
             width: 100%;
             padding: 0 !important;
             margin: 0 !important;
-            background: #ffffff !important;
           }
           .contract-layout-grid {
             display: block !important;
           }
           .contract-form-panel {
-            display: none !important; /* Hide input fields entirely */
+            display: none !important;
           }
           .contract-preview-panel {
             position: relative !important;
@@ -896,25 +840,10 @@ export default function StudentContract() {
             border: none !important;
             box-shadow: none !important;
             width: 100% !important;
-            margin: 0 !important;
-            padding: 0 !important;
           }
           .contract-document-wrapper {
             padding: 0 !important;
-            margin: 0 !important;
             font-size: 9pt !important;
-            color: #000000 !important;
-            width: 100% !important;
-          }
-          .document-title {
-            font-size: 14pt !important;
-            color: #000000 !important;
-          }
-          .company-name, .clause-heading, .signature-line {
-            color: #000000 !important;
-          }
-          .letterhead-logo {
-            filter: grayscale(1) !important;
           }
         }
       `}</style>

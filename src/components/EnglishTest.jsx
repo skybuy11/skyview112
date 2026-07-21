@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ClipboardCheck, ArrowRight, RotateCcw, Check, X, Award, CheckCircle2 } from 'lucide-react';
+import { ClipboardCheck, ArrowRight, RotateCcw, CheckCircle2 } from 'lucide-react';
 
 export default function EnglishTest({ setCurrentTab }) {
   const [started, setStarted] = useState(false);
@@ -118,87 +118,80 @@ export default function EnglishTest({ setCurrentTab }) {
   const maxScore = questions.length;
   const percentage = Math.round((score / maxScore) * 100);
 
-  // Determine feedback level
-  let resultLevel = {};
-  if (score >= 7) {
-    resultLevel = {
-      title: "Excellent English Proficiency",
-      colorClass: "result-excellent",
-      desc: "Your English proficiency is excellent! You're likely ready for university-level studies in the UK. You might want to consider preparing for official exams like IELTS or TOEFL if required by your chosen institution.",
-      steps: [
-        "Practice academic reading and writing structured papers",
-        "Prepare for formal English language tests (IELTS, TOEFL, PTE)",
-        "Focus on academic writing, referencing, and vocabulary enrichment"
-      ]
-    };
-  } else if (score >= 5) {
-    resultLevel = {
-      title: "Good English Command",
-      colorClass: "result-good",
-      desc: "You have a good command of English, but might benefit from some additional practice to prepare for university studies. Many UK universities will accept this level with conditional offers.",
-      steps: [
-        "Prepare for formal English language tests early",
-        "Practice English daily through academic reading, listening and speaking",
-        "Consider a pre-sessional English course to bridge the gap"
-      ]
-    };
-  } else {
-    resultLevel = {
-      title: "Basic English Skills",
-      colorClass: "result-basic",
-      desc: "You have some knowledge of English, but would benefit from intensive language preparation before university studies. Many UK institutions offer foundation or pathway programs for students at this level.",
-      steps: [
-        "Consider an intensive English language program in your home country or in the UK",
-        "Look into foundation year programs with integrated English modules",
-        "Practice English communication skills daily and read simplified academic journals"
-      ]
-    };
-  }
+  const getResultLevel = () => {
+    if (percentage >= 85) {
+      return {
+        title: "C1 / C2 Advanced English Proficiency",
+        desc: "Exemplary English proficiency suitable for direct entry into top Russell Group universities without pre-sessional English requirements.",
+        steps: [
+          "Eligible for direct postgraduate/undergraduate UK university entry",
+          "Fast-track CAS visa application readiness",
+          "Considered for top competitive academic scholarships"
+        ]
+      };
+    } else if (percentage >= 60) {
+      return {
+        title: "B2 Upper-Intermediate English Proficiency",
+        desc: "Good working competence. Suitable for standard UK university admissions, though a short 4 to 6-week pre-sessional course or UKVI IELTS may be recommended.",
+        steps: [
+          "Qualifies for most UK university undergraduate & postgraduate degree entry",
+          "Minor UKVI IELTS booster recommended to achieve 6.5 minimum score",
+          "Eligible for standard admissions assistance"
+        ]
+      };
+    } else {
+      return {
+        title: "B1 Intermediate English Foundation",
+        desc: "Basic functional English. We recommend enrolling in a UK Foundation Pathway or Pre-sessional English Language course prior to academic study.",
+        steps: [
+          "Recommended 10-12 week UK Pre-sessional English language pathway",
+          "One-on-one English tutoring available through Skyview partners",
+          "Pathway route guaranteeing entry into partner universities upon completion"
+        ]
+      };
+    }
+  };
 
-  const progressPercentage = Math.round(((currentIdx + 1) / questions.length) * 100);
+  const resultLevel = getResultLevel();
 
   return (
-    <section id="english-test" className="test-section">
+    <section id="english-test" className="test-section section">
       <div className="container">
-        <h2 className="section-title">English Knowledge Test</h2>
+        <h2 className="section-title">English Competence Assessment</h2>
         <p className="section-subtitle">
-          Assess your English language skills with our quick test to determine your readiness for UK university studies.
+          Test your English proficiency level with our free 9-question diagnostic tool to determine UK university readiness.
         </p>
 
         <div className="test-card-container">
           {!started && !submitted && (
             <div className="glass-card test-intro animate-fade-in">
               <div className="test-intro-icon">
-                <ClipboardCheck size={48} />
+                <ClipboardCheck size={32} />
               </div>
-              <h3>Test Your Preparedness</h3>
+              <h3>UK University Readiness Test</h3>
               <p className="test-intro-desc">
-                This quick English assessment helps us understand your current language proficiency level. It covers grammar, vocabulary, and comprehension to give us a basic idea of your readiness for academic studies in the UK.
+                This diagnostic test evaluates your grammar, vocabulary, and sentence structure against British academic standards. It takes less than 5 minutes.
               </p>
               
               <div className="test-meta-info">
                 <div className="meta-item">
-                  <span className="meta-number">{questions.length}</span>
+                  <span className="meta-number">9</span>
                   <span className="meta-label">Questions</span>
                 </div>
                 <div className="meta-divider"></div>
                 <div className="meta-item">
-                  <span className="meta-number">~10</span>
-                  <span className="meta-label">Minutes</span>
+                  <span className="meta-number">5 Min</span>
+                  <span className="meta-label">Duration</span>
                 </div>
                 <div className="meta-divider"></div>
                 <div className="meta-item">
                   <span className="meta-number">Instant</span>
-                  <span className="meta-label">Feedback</span>
+                  <span className="meta-label">Evaluation</span>
                 </div>
               </div>
 
-              <div className="test-disclaimer">
-                <strong>Please note:</strong> This is not an official language test and is provided as an indicative guide only. UK universities typically require formal English language qualifications such as IELTS, TOEFL, or PTE Academic.
-              </div>
-
-              <button className="btn btn-primary btn-lg" onClick={() => setStarted(true)}>
-                Start Assessment
+              <button className="btn btn-accent btn-lg" onClick={() => setStarted(true)}>
+                Start English Diagnostic
                 <ArrowRight size={18} />
               </button>
             </div>
@@ -206,43 +199,39 @@ export default function EnglishTest({ setCurrentTab }) {
 
           {started && !submitted && (
             <div className="glass-card quiz-card animate-fade-in">
-              {/* Progress bar */}
               <div className="quiz-progress-wrapper">
                 <div className="quiz-progress-text">
                   <span>Question {currentIdx + 1} of {questions.length}</span>
-                  <span>{progressPercentage}% Completed</span>
+                  <span>{Math.round(((currentIdx + 1) / questions.length) * 100)}% Completed</span>
                 </div>
                 <div className="progress-track">
-                  <div className="progress-bar-fill" style={{ width: `${progressPercentage}%` }}></div>
+                  <div 
+                    className="progress-bar-fill" 
+                    style={{ width: `${((currentIdx + 1) / questions.length) * 100}%` }}
+                  ></div>
                 </div>
               </div>
 
-              {/* Question */}
               <div className="quiz-question-box">
                 <h3 className="quiz-question">{questions[currentIdx].question}</h3>
               </div>
 
-              {/* Options */}
               <div className="quiz-options">
-                {questions[currentIdx].options.map((option, idx) => {
-                  const isSelected = answers[currentIdx] === idx;
+                {questions[currentIdx].options.map((option, optionIdx) => {
+                  const isSelected = answers[currentIdx] === optionIdx;
                   return (
                     <button
-                      key={idx}
+                      key={optionIdx}
                       className={`option-btn ${isSelected ? 'selected' : ''}`}
-                      onClick={() => handleSelect(idx)}
+                      onClick={() => handleSelect(optionIdx)}
                     >
-                      <span className="option-letter">
-                        {String.fromCharCode(65 + idx)}
-                      </span>
+                      <span className="option-letter">{String.fromCharCode(65 + optionIdx)}</span>
                       <span className="option-text">{option}</span>
-                      {isSelected && <div className="selected-check"><Check size={16} /></div>}
                     </button>
                   );
                 })}
               </div>
 
-              {/* Navigation buttons */}
               <div className="quiz-navigation">
                 <button 
                   className="btn btn-secondary" 
@@ -266,7 +255,7 @@ export default function EnglishTest({ setCurrentTab }) {
           {submitted && (
             <div className="glass-card result-card animate-fade-in">
               <div className="result-header">
-                <div className={`result-score-circle ${resultLevel.colorClass}`}>
+                <div className="result-score-circle">
                   <span className="result-score-number">{score}</span>
                   <span className="result-score-max">/ {maxScore}</span>
                 </div>
@@ -299,11 +288,9 @@ export default function EnglishTest({ setCurrentTab }) {
                 <button 
                   className="btn btn-accent" 
                   onClick={() => {
-                    const element = document.getElementById('contact');
-                    if (element) {
-                      setCurrentTab('contact');
-                      window.scrollTo({ top: element.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' });
-                    }
+                    setCurrentTab('contact');
+                    const el = document.getElementById('contact');
+                    if (el) el.scrollIntoView({ behavior: 'smooth' });
                   }}
                 >
                   Discuss Study Options
@@ -317,34 +304,14 @@ export default function EnglishTest({ setCurrentTab }) {
 
       <style>{`
         .test-section {
-          background-color: var(--bg-secondary);
+          background-color: var(--bg-surface);
           border-top: 1px solid var(--border-color);
+          border-bottom: 1px solid var(--border-color);
         }
 
         .test-card-container {
-          max-width: 680px;
+          max-width: 660px;
           margin: 0 auto;
-        }
-
-        .test-intro, .quiz-card, .result-card {
-          padding: 1.25rem 1rem;
-          border-radius: 16px;
-          border: 1px solid var(--border-color);
-          background: var(--bg-primary);
-          box-shadow: none;
-        }
-
-        @media (min-width: 480px) {
-          .test-intro, .quiz-card, .result-card {
-            padding: 2rem 1.5rem;
-            border-radius: 18px;
-          }
-        }
-
-        @media (min-width: 640px) {
-          .test-intro, .quiz-card, .result-card {
-            padding: 3rem;
-          }
         }
 
         .test-intro {
@@ -352,45 +319,31 @@ export default function EnglishTest({ setCurrentTab }) {
           flex-direction: column;
           align-items: center;
           text-align: center;
-          gap: 1.25rem;
+          gap: 1rem;
         }
 
         .test-intro-icon {
-          width: 64px;
-          height: 64px;
+          width: 60px;
+          height: 60px;
           border-radius: 50%;
-          background: var(--bg-secondary);
-          border: 1px solid var(--border-color);
-          color: var(--accent);
+          background: var(--primary-light);
+          color: var(--primary);
           display: flex;
           align-items: center;
           justify-content: center;
-        }
-
-        .test-intro h3 {
-          font-size: 1.5rem;
-          color: var(--text-primary);
-          font-weight: 600;
-          letter-spacing: -0.015em;
-        }
-
-        .test-intro-desc {
-          color: var(--text-secondary);
-          line-height: 1.6;
-          font-size: 0.95rem;
         }
 
         .test-meta-info {
           display: flex;
           align-items: center;
           justify-content: center;
-          gap: 2rem;
+          gap: 1.5rem;
           width: 100%;
-          background: var(--bg-secondary);
-          padding: 1rem;
+          background: var(--bg-primary);
+          padding: 0.85rem;
           border-radius: 12px;
           border: 1px solid var(--border-color);
-          margin: 1rem 0;
+          margin: 0.5rem 0 1rem 0;
         }
 
         .meta-item {
@@ -401,18 +354,15 @@ export default function EnglishTest({ setCurrentTab }) {
 
         .meta-number {
           font-family: var(--font-heading);
-          font-size: 1.35rem;
-          font-weight: 700;
-          color: var(--text-primary);
-          line-height: 1.1;
+          font-size: 1.2rem;
+          font-weight: 800;
+          color: var(--primary);
         }
 
         .meta-label {
           font-size: 0.7rem;
           color: var(--text-muted);
-          font-weight: 500;
           text-transform: uppercase;
-          letter-spacing: 0.04em;
         }
 
         .meta-divider {
@@ -421,313 +371,217 @@ export default function EnglishTest({ setCurrentTab }) {
           background: var(--border-color);
         }
 
-        .test-disclaimer {
-          font-size: 0.8rem;
-          color: var(--text-muted);
-          line-height: 1.5;
-          border-left: 2px solid var(--accent);
-          padding-left: 0.85rem;
-          text-align: left;
-          width: 100%;
-        }
-
-        /* Quiz Card styles */
         .quiz-progress-wrapper {
           display: flex;
           flex-direction: column;
-          gap: 0.5rem;
-          margin-bottom: 2rem;
+          gap: 0.4rem;
+          margin-bottom: 1.5rem;
         }
 
         .quiz-progress-text {
           display: flex;
           justify-content: space-between;
           font-size: 0.8rem;
-          font-weight: 500;
+          font-weight: 600;
           color: var(--text-muted);
         }
 
         .progress-track {
-          height: 4px;
-          background: var(--border-color);
+          height: 6px;
+          background: var(--bg-subtle);
           border-radius: 99px;
           overflow: hidden;
         }
 
         .progress-bar-fill {
           height: 100%;
-          background: var(--accent);
+          background: var(--primary);
           border-radius: 99px;
-          transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .quiz-question-box {
-          margin-bottom: 2rem;
+          transition: width 0.3s ease;
         }
 
         .quiz-question {
-          font-size: 1rem;
-          font-weight: 600;
+          font-size: 1.15rem;
+          font-weight: 700;
           color: var(--text-primary);
+          margin-bottom: 1.5rem;
           line-height: 1.45;
-          letter-spacing: -0.01em;
-        }
-
-        @media (min-width: 480px) {
-          .quiz-question {
-            font-size: 1.15rem;
-          }
-        }
-
-        @media (min-width: 640px) {
-          .quiz-question {
-            font-size: 1.25rem;
-            line-height: 1.4;
-          }
         }
 
         .quiz-options {
           display: flex;
           flex-direction: column;
-          gap: 0.75rem;
-          margin-bottom: 2rem;
+          gap: 0.65rem;
+          margin-bottom: 1.75rem;
         }
 
         .option-btn {
-          background: var(--bg-secondary);
+          background: var(--bg-primary);
           border: 1px solid var(--border-color);
-          padding: 0.85rem 1.25rem;
-          border-radius: 10px;
+          padding: 0.85rem 1rem;
+          border-radius: 12px;
           text-align: left;
           cursor: pointer;
-          font-size: 0.95rem;
-          color: var(--text-secondary);
-          font-weight: 400;
+          font-size: 0.925rem;
+          color: var(--text-primary);
           display: flex;
           align-items: center;
-          gap: 0.85rem;
-          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+          gap: 0.75rem;
+          transition: all 0.2s ease;
         }
 
         .option-btn:hover {
-          border-color: var(--text-primary);
-          background: var(--bg-secondary);
+          border-color: var(--primary);
+          background: var(--primary-light);
         }
 
         .option-btn.selected {
-          border-color: var(--accent);
-          background: var(--bg-secondary);
-          color: var(--text-primary);
-          box-shadow: 0 0 0 1px var(--accent);
+          border-color: var(--primary);
+          background: var(--primary-light);
+          font-weight: 600;
         }
 
         .option-letter {
-          width: 24px;
-          height: 24px;
+          width: 26px;
+          height: 26px;
           border-radius: 50%;
-          background: var(--bg-primary);
+          background: var(--bg-surface);
           border: 1px solid var(--border-color);
           display: flex;
           align-items: center;
           justify-content: center;
-          font-weight: 600;
-          font-size: 0.8rem;
+          font-weight: 700;
+          font-size: 0.75rem;
           color: var(--text-primary);
           flex-shrink: 0;
         }
 
         .option-btn.selected .option-letter {
-          background: var(--accent);
-          border-color: var(--accent);
-          color: white;
-        }
-
-        .option-text {
-          flex-grow: 1;
-        }
-
-        .selected-check {
-          color: var(--accent);
-          display: flex;
-          align-items: center;
-          justify-content: center;
+          background: var(--primary);
+          color: #FFFFFF;
+          border-color: var(--primary);
         }
 
         .quiz-navigation {
           display: flex;
           justify-content: space-between;
+          gap: 0.75rem;
           border-top: 1px solid var(--border-color);
-          padding-top: 1.5rem;
+          padding-top: 1.25rem;
         }
 
-        /* Results Card */
+        /* Results */
         .result-header {
           display: flex;
           align-items: center;
-          gap: 1.5rem;
-          margin-bottom: 2rem;
+          gap: 1.25rem;
+          margin-bottom: 1.5rem;
         }
 
-        @media (max-width: 640px) {
+        @media (max-width: 480px) {
           .result-header {
             flex-direction: column;
             text-align: center;
-            gap: 1.25rem;
           }
         }
 
         .result-score-circle {
-          width: 90px;
-          height: 90px;
+          width: 80px;
+          height: 80px;
           border-radius: 50%;
           display: flex;
           flex-direction: column;
           align-items: center;
           justify-content: center;
           flex-shrink: 0;
-          border: 2px solid var(--border-color);
-          background: var(--bg-secondary);
-        }
-
-        .result-excellent {
-          border-color: var(--secondary);
-          color: var(--secondary);
-        }
-
-        .result-good {
-          border-color: var(--accent);
-          color: var(--accent);
-        }
-
-        .result-basic {
-          border-color: var(--accent);
-          color: var(--accent);
+          border: 2px solid var(--primary);
+          background: var(--primary-light);
+          color: var(--primary);
         }
 
         .result-score-number {
           font-family: var(--font-heading);
-          font-size: 2rem;
-          font-weight: 700;
+          font-size: 1.75rem;
+          font-weight: 800;
           line-height: 1;
         }
 
         .result-score-max {
-          font-size: 0.75rem;
-          font-weight: 500;
-          opacity: 0.7;
-          margin-top: -0.15rem;
-        }
-
-        .result-title-box {
-          display: flex;
-          flex-direction: column;
-          align-items: flex-start;
-        }
-
-        @media (max-width: 640px) {
-          .result-title-box {
-            align-items: center;
-          }
+          font-size: 0.7rem;
+          font-weight: 600;
+          opacity: 0.8;
         }
 
         .result-subtitle {
           font-size: 0.7rem;
-          font-weight: 600;
+          font-weight: 700;
           letter-spacing: 0.08em;
           color: var(--text-muted);
-          text-transform: uppercase;
         }
 
         .result-level-title {
-          font-size: 1.5rem;
-          font-weight: 600;
+          font-size: 1.25rem;
+          font-weight: 700;
           color: var(--text-primary);
-          line-height: 1.2;
           margin: 0.2rem 0;
-          letter-spacing: -0.015em;
-        }
-
-        .result-percentage {
-          font-size: 0.85rem;
-          font-weight: 500;
-          color: var(--text-muted);
         }
 
         .result-description {
-          font-size: 0.95rem;
+          font-size: 0.925rem;
           line-height: 1.6;
           color: var(--text-secondary);
-          margin-bottom: 2rem;
+          margin-bottom: 1.5rem;
         }
 
         .result-recommendations {
-          background: var(--bg-secondary);
+          background: var(--bg-primary);
           border: 1px solid var(--border-color);
-          padding: 1.75rem;
+          padding: 1.25rem;
           border-radius: 12px;
-          margin-bottom: 2rem;
+          margin-bottom: 1.5rem;
         }
 
         .result-recommendations h4 {
-          font-size: 0.95rem;
-          font-weight: 600;
-          color: var(--text-primary);
-          margin-bottom: 1rem;
+          font-size: 0.85rem;
+          font-weight: 700;
+          margin-bottom: 0.75rem;
         }
 
         .rec-list {
           list-style: none;
           display: flex;
           flex-direction: column;
-          gap: 0.75rem;
+          gap: 0.5rem;
         }
 
         .rec-item {
           display: flex;
           align-items: flex-start;
-          gap: 0.65rem;
-          font-size: 0.9rem;
-          color: var(--text-secondary);
-          line-height: 1.45;
+          gap: 0.5rem;
+          font-size: 0.875rem;
         }
 
         .rec-check {
-          color: var(--accent);
-          margin-top: 0.15rem;
+          color: var(--success);
           flex-shrink: 0;
+          margin-top: 0.15rem;
         }
 
         .result-actions {
           display: flex;
+          gap: 0.75rem;
           justify-content: space-between;
-          align-items: center;
-          gap: 1rem;
-          flex-wrap: wrap;
           border-top: 1px solid var(--border-color);
-          padding-top: 1.5rem;
+          padding-top: 1.25rem;
+          flex-wrap: wrap;
         }
 
-        @media (max-width: 640px) {
-          .quiz-navigation {
-            gap: 0.75rem;
-          }
-          .quiz-navigation .btn {
-            flex: 1;
-            padding: 0.65rem 0.5rem;
-            font-size: 0.85rem;
-          }
+        @media (max-width: 480px) {
           .result-actions {
             flex-direction: column;
           }
           .result-actions .btn {
             width: 100%;
-            justify-content: center;
-          }
-          .result-header {
-            gap: 1rem;
-          }
-          .result-recommendations {
-            padding: 1.25rem;
           }
         }
       `}</style>

@@ -1,22 +1,22 @@
 import React from 'react';
-import { Award, Compass, Heart, Users, GraduationCap, CheckCircle } from 'lucide-react';
+import { Award, Compass, Heart, CheckCircle } from 'lucide-react';
 
 export default function About() {
   const values = [
     {
-      icon: <Heart size={24} />,
+      icon: <Heart size={22} />,
       title: 'Student-First Approach',
-      desc: 'We put the needs, dreams, and aspirations of our students at the absolute heart of everything we do, providing honest advice.'
+      desc: 'We put the needs, dreams, and aspirations of our students at the absolute heart of everything we do, providing honest, unbiased advice.'
     },
     {
-      icon: <Award size={24} />,
+      icon: <Award size={22} />,
       title: 'Integrity & Transparency',
       desc: 'We operate with total honesty in all our university applications, visa evaluations, and financial requirements assessments.'
     },
     {
-      icon: <Compass size={24} />,
+      icon: <Compass size={22} />,
       title: 'Continuous Excellence',
-      desc: 'We continuously improve our consulting methods and stay up-to-date with changing UK higher education and visa regulations.'
+      desc: 'We continuously improve our consulting methods and stay up-to-date with changing UK higher education and Home Office visa regulations.'
     }
   ];
 
@@ -24,50 +24,45 @@ export default function About() {
     {
       year: '2008',
       title: 'Founding of Skyview Consultants',
-      desc: 'Established with a mission to bridge the gap between international students and world-class British universities.'
+      desc: 'Established in London with a mission to bridge international students with world-class British universities.'
     },
     {
       year: '2012',
-      title: 'British Council Certification',
-      desc: 'Received official certification as a recognized British Council Agent, guaranteeing compliance with high ethical standards.'
+      title: 'British Council Agent Certification',
+      desc: 'Received official certification as a recognized British Council Agent, guaranteeing compliance with UK ethical standards.'
     },
     {
       year: '2018',
-      title: 'Expansion of University Partners',
-      desc: 'Expanded our official representative agreements to cover leading Russell Group and modern career-focused UK universities.'
-    },
-    {
-      year: '2022',
-      title: 'MENA & Sudan Support Services',
-      desc: 'Successfully established dedicated channels to support admissions and visa applications for students from the Middle East and Sudan.'
+      title: 'Expansion of University Partnerships',
+      desc: 'Expanded representative agreements covering leading Russell Group and modern career-focused UK universities.'
     },
     {
       year: '2026',
-      title: 'Going Digital',
-      desc: 'Over 15,000+ consults completed. Rebuilt our digital platforms to assist students worldwide with advanced evaluation tools.'
+      title: 'Digital Platform Launch',
+      desc: 'Over 15,000+ consults completed. Rebuilt our digital platforms to assist students worldwide with online agreement tools.'
     }
   ];
 
   return (
-    <section id="about" className="about-section">
+    <section id="about" className="about-section section">
       <div className="container">
-        {/* Intro */}
-        <div className="about-intro grid-2">
-          <div className="about-intro-text">
+        {/* Intro Grid */}
+        <div className="about-intro-grid">
+          <div className="about-text-col">
             <span className="accent-label">WHO WE ARE</span>
             <h2 className="about-title">Trusted bridge to UK higher education since 2008</h2>
             <p>
               Skyview Consultants was established in 2008 with a clear mission: to empower ambitious international students by providing expert, tailored guidance throughout their educational journey to the United Kingdom.
             </p>
             <p>
-              Founded by professionals with extensive experience in international student recruitment and university administration, we have grown from a small London office to a trusted advisor helping students from over 30 countries secure entry into prestigious British institutions.
+              Founded by professionals with extensive experience in international student recruitment and university administration, we have grown into a trusted advisor helping students from over 30 countries secure entry into prestigious British institutions.
             </p>
           </div>
 
-          <div className="about-intro-graphic">
-            <div className="about-image-wrapper glass animate-fade-in">
+          <div className="about-graphic-col">
+            <div className="about-img-card glass-card">
               <img src="/graduation-day.png" alt="UK University Graduation Day" className="about-img" />
-              <div className="about-image-badge">
+              <div className="about-badge">
                 <span>EST. 2008</span>
               </div>
             </div>
@@ -77,7 +72,7 @@ export default function About() {
         {/* Values */}
         <div className="about-values">
           <h3 className="sub-section-title">Our Core Values</h3>
-          <div className="grid-3 values-grid">
+          <div className="values-grid">
             {values.map((val, index) => (
               <div key={index} className="glass-card value-card">
                 <div className="value-icon-box">{val.icon}</div>
@@ -88,8 +83,8 @@ export default function About() {
           </div>
         </div>
 
-        {/* Team Leader */}
-        <div className="about-team glass">
+        {/* Leadership Bio */}
+        <div className="about-team glass-card">
           <div className="team-grid">
             <div className="team-avatar-box">
               <div className="avatar-placeholder">
@@ -114,167 +109,137 @@ export default function About() {
         <div className="about-timeline">
           <h3 className="sub-section-title">Our Journey</h3>
           <div className="timeline">
-            {timelineData.map((item, index) => {
-              const isLeft = index % 2 === 0;
-              return (
-                <div 
-                  key={index} 
-                  className={`timeline-item ${isLeft ? 'timeline-left' : 'timeline-right'}`}
-                >
-                  <div className="timeline-content">
-                    <span className="timeline-year">{item.year}</span>
-                    <h4 className="timeline-item-title">{item.title}</h4>
-                    <p className="timeline-item-desc">{item.desc}</p>
-                  </div>
+            {timelineData.map((item, index) => (
+              <div key={index} className="timeline-item">
+                <div className="timeline-content">
+                  <span className="timeline-year">{item.year}</span>
+                  <h4 className="timeline-item-title">{item.title}</h4>
+                  <p className="timeline-item-desc">{item.desc}</p>
                 </div>
-              );
-            })}
+              </div>
+            ))}
           </div>
         </div>
       </div>
 
       <style>{`
         .about-section {
-          background-color: var(--bg-secondary);
+          background-color: var(--bg-surface);
           border-top: 1px solid var(--border-color);
+          border-bottom: 1px solid var(--border-color);
+        }
+
+        .about-intro-grid {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 2rem;
+          align-items: center;
+        }
+
+        @media (min-width: 992px) {
+          .about-intro-grid {
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 3.5rem;
+          }
         }
 
         .accent-label {
           color: var(--accent);
-          font-weight: 600;
+          font-weight: 700;
           font-size: 0.75rem;
           letter-spacing: 0.08em;
-          text-transform: uppercase;
           display: block;
           margin-bottom: 0.5rem;
         }
 
         .about-title {
-          font-size: 2rem;
-          font-weight: 600;
+          font-size: 1.85rem;
+          font-weight: 800;
           color: var(--text-primary);
-          margin-bottom: 1.5rem;
-          line-height: 1.2;
-          letter-spacing: -0.025em;
+          margin-bottom: 1.25rem;
         }
 
-        .about-intro-text {
-          display: flex;
-          flex-direction: column;
-          gap: 1.25rem;
+        @media (min-width: 640px) {
+          .about-title {
+            font-size: 2.25rem;
+          }
         }
 
-        .about-intro-text p {
-          font-size: 1rem;
-          line-height: 1.6;
+        .about-text-col p {
+          font-size: 0.95rem;
+          line-height: 1.65;
           color: var(--text-secondary);
+          margin-bottom: 1rem;
         }
 
-        .about-intro-graphic {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-
-        .about-image-wrapper {
+        .about-img-card {
+          padding: 0.5rem;
           position: relative;
-          border-radius: 16px;
           overflow: hidden;
-          border: 1px solid var(--border-color);
-          box-shadow: none;
-          height: 220px;
-          width: 100%;
-          max-width: 450px;
-        }
-
-        @media (min-width: 480px) {
-          .about-image-wrapper {
-            height: 280px;
-          }
-        }
-
-        @media (min-width: 768px) {
-          .about-image-wrapper {
-            height: 380px;
-            border-radius: 18px;
-          }
         }
 
         .about-img {
           width: 100%;
-          height: 100%;
+          height: 260px;
           object-fit: cover;
-          transition: transform 0.5s ease;
+          border-radius: 14px;
         }
 
-        .about-image-wrapper:hover .about-img {
-          transform: scale(1.02);
+        @media (min-width: 640px) {
+          .about-img {
+            height: 320px;
+          }
         }
 
-        .about-image-badge {
+        .about-badge {
           position: absolute;
           top: 1.25rem;
           right: 1.25rem;
           background: var(--accent);
-          color: #ffffff;
-          font-weight: 600;
+          color: #FFFFFF;
+          font-weight: 700;
           font-size: 0.75rem;
-          padding: 0.4rem 0.95rem;
+          padding: 0.35rem 0.85rem;
           border-radius: 99px;
         }
 
-        /* Values styles */
         .about-values {
-          margin-top: 5rem;
+          margin-top: 4rem;
         }
 
         .sub-section-title {
           text-align: center;
-          font-size: 1.35rem;
-          font-weight: 600;
+          font-size: 1.5rem;
+          font-weight: 700;
           color: var(--text-primary);
-          margin-bottom: 2rem;
-          letter-spacing: -0.02em;
+          margin-bottom: 2.25rem;
         }
 
-        @media (min-width: 480px) {
-          .sub-section-title {
-            font-size: 1.55rem;
-            margin-bottom: 2.5rem;
-          }
+        .values-grid {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 1.25rem;
         }
 
         @media (min-width: 768px) {
-          .sub-section-title {
-            font-size: 1.75rem;
-            margin-bottom: 3.5rem;
+          .values-grid {
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
           }
         }
 
         .value-card {
           display: flex;
           flex-direction: column;
-          gap: 0.85rem;
-          padding: 2.25rem;
-          background: var(--bg-primary);
-          border: 1px solid var(--border-color);
-          box-shadow: none;
-        }
-
-        .value-card:hover {
-          transform: translateY(-2px);
-          border-color: var(--accent);
-          background: var(--bg-secondary);
-          box-shadow: var(--card-shadow-hover);
+          gap: 0.75rem;
         }
 
         .value-icon-box {
           width: 44px;
           height: 44px;
           border-radius: 50%;
-          background: var(--bg-secondary);
-          border: 1px solid var(--border-color);
-          color: var(--accent);
+          background: var(--primary-light);
+          color: var(--primary);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -282,199 +247,132 @@ export default function About() {
 
         .value-card h4 {
           font-size: 1.1rem;
-          color: var(--text-primary);
-          font-weight: 600;
+          font-weight: 700;
         }
 
         .value-card p {
-          font-size: 0.9rem;
-          line-height: 1.55;
+          font-size: 0.875rem;
           color: var(--text-secondary);
+          line-height: 1.55;
         }
 
-        /* Team Leader Card */
         .about-team {
-          margin-top: 5rem;
-          padding: 3rem;
-          border-radius: 18px;
-          border: 1px solid var(--border-color);
-          background: var(--bg-primary);
-        }
-
-        @media (max-width: 767px) {
-          .about-team {
-            padding: 1.5rem;
-            margin-top: 3rem;
-          }
+          margin-top: 4rem;
         }
 
         .team-grid {
           display: grid;
           grid-template-columns: 1fr;
-          gap: 2.5rem;
+          gap: 1.5rem;
           align-items: center;
         }
 
         @media (min-width: 768px) {
           .team-grid {
-            grid-template-columns: 1fr 3fr;
+            grid-template-columns: 100px 1fr;
+            gap: 2rem;
           }
         }
 
-        .team-avatar-box {
-          display: flex;
-          justify-content: center;
-        }
-
         .avatar-placeholder {
-          width: 110px;
-          height: 110px;
+          width: 90px;
+          height: 90px;
           border-radius: 50%;
-          background: var(--bg-secondary);
-          border: 1px solid var(--border-color);
+          background: var(--primary-light);
+          border: 2px solid var(--primary);
+          color: var(--primary);
           display: flex;
           align-items: center;
           justify-content: center;
-          color: var(--text-primary);
-          font-size: 2.25rem;
           font-family: var(--font-heading);
-          font-weight: 600;
-        }
-
-        .team-info-box {
-          display: flex;
-          flex-direction: column;
-          gap: 0.5rem;
+          font-weight: 800;
+          font-size: 1.75rem;
+          margin: 0 auto;
         }
 
         .team-role {
           font-size: 0.75rem;
-          font-weight: 600;
-          text-transform: uppercase;
-          letter-spacing: 0.08em;
+          font-weight: 700;
           color: var(--accent);
+          letter-spacing: 0.06em;
         }
 
         .team-name {
-          font-size: 1.6rem;
-          color: var(--text-primary);
-          font-weight: 600;
-          letter-spacing: -0.02em;
+          font-size: 1.4rem;
+          font-weight: 700;
+          margin: 0.15rem 0 0.5rem 0;
         }
 
         .team-bio {
-          font-size: 0.95rem;
-          line-height: 1.6;
+          font-size: 0.925rem;
           color: var(--text-secondary);
-          margin-bottom: 1.5rem;
+          line-height: 1.6;
+          margin-bottom: 1rem;
         }
 
         .team-credentials {
           list-style: none;
           display: flex;
           flex-wrap: wrap;
-          gap: 1rem 1.5rem;
+          gap: 1rem;
         }
 
         .team-credentials li {
           display: flex;
           align-items: center;
-          gap: 0.5rem;
+          gap: 0.4rem;
           font-size: 0.85rem;
-          font-weight: 550;
-          color: var(--text-secondary);
+          font-weight: 600;
+          color: var(--text-primary);
         }
 
-        /* Timeline styles - Editorial thread */
         .about-timeline {
-          margin-top: 5rem;
+          margin-top: 4rem;
         }
 
         .timeline {
           position: relative;
-          max-width: 680px;
+          max-width: 640px;
           margin: 0 auto;
-        }
-
-        .timeline::after {
-          content: '';
-          position: absolute;
-          width: 1px;
-          background-color: var(--border-color);
-          top: 0.75rem;
-          bottom: 1rem;
-          left: 20px;
-          margin-left: 0;
+          padding-left: 20px;
+          border-left: 2px solid var(--border-color);
         }
 
         .timeline-item {
-          padding: 0 0 2rem 45px !important;
           position: relative;
-          width: 100% !important;
-          left: 0 !important;
+          padding-bottom: 2rem;
+          padding-left: 1.5rem;
         }
 
-        .timeline-item::after {
+        .timeline-item::before {
           content: '';
           position: absolute;
-          width: 10px;
-          height: 10px;
-          left: 15px !important;
-          right: auto !important;
-          background-color: var(--bg-secondary);
-          border: 2px solid var(--accent);
-          top: 0.5rem;
+          left: -27px;
+          top: 4px;
+          width: 12px;
+          height: 12px;
           border-radius: 50%;
-          z-index: 1;
-        }
-
-        .timeline-content {
-          padding: 0;
-          background: transparent;
-          border: none;
-          border-radius: 0;
-          box-shadow: none;
+          background: var(--accent);
+          border: 3px solid var(--bg-surface);
         }
 
         .timeline-year {
           font-family: var(--font-heading);
-          font-weight: 700;
-          font-size: 1.25rem;
+          font-weight: 800;
+          font-size: 1.15rem;
           color: var(--accent);
-          display: block;
-          margin-bottom: 0.25rem;
-          line-height: 1.1;
         }
 
         .timeline-item-title {
           font-size: 1.05rem;
-          font-weight: 600;
+          font-weight: 700;
           color: var(--text-primary);
-          margin-bottom: 0.4rem;
+          margin: 0.2rem 0;
         }
 
         .timeline-item-desc {
-          font-size: 0.9rem;
-          line-height: 1.5;
+          font-size: 0.875rem;
           color: var(--text-secondary);
-        }
-
-        @media (max-width: 640px) {
-          .value-card {
-            padding: 1.25rem 1rem;
-          }
-          .about-intro {
-            gap: 1.25rem;
-          }
-          .about-values {
-            margin-top: 3rem;
-          }
-          .about-timeline {
-            margin-top: 3rem;
-          }
-          .about-team {
-            margin-top: 2rem;
-          }
         }
       `}</style>
     </section>

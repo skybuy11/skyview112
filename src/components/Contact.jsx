@@ -16,22 +16,20 @@ export default function Contact() {
 
   const validate = () => {
     const newErrors = {};
-    if (!formData.name.trim()) newErrors.name = 'Name is required';
+    if (!formData.name.trim()) newErrors.name = 'Full name is required';
     
     if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
+      newErrors.email = 'Email address is required';
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
       newErrors.email = 'Invalid email address';
     }
     
     if (!formData.phone.trim()) {
       newErrors.phone = 'Phone number is required';
-    } else if (!/^\+?[0-9\s-]{8,15}$/.test(formData.phone.trim())) {
-      newErrors.phone = 'Invalid phone number format';
     }
 
     if (!formData.message.trim()) {
-      newErrors.message = 'Message details are required';
+      newErrors.message = 'Please enter your message details';
     }
 
     setErrors(newErrors);
@@ -41,7 +39,6 @@ export default function Contact() {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-    // clear error for this field
     if (errors[name]) {
       setErrors({ ...errors, [name]: '' });
     }
@@ -52,8 +49,6 @@ export default function Contact() {
     if (!validate()) return;
 
     setIsSubmitting(true);
-
-    // Simulate API request
     setTimeout(() => {
       setIsSubmitting(false);
       setIsSubmitted(true);
@@ -64,29 +59,29 @@ export default function Contact() {
         inquiryType: 'admissions',
         message: ''
       });
-    }, 1500);
+    }, 1200);
   };
 
   return (
-    <section id="contact" className="contact-section">
+    <section id="contact" className="contact-section section">
       <div className="container">
         <h2 className="section-title">Get in Touch</h2>
         <p className="section-subtitle">
-          Have questions about studying in the UK? Fill out the form below, and one of our certified advisors will contact you.
+          Have questions about studying in the UK? Send us a message and a certified advisor will get in touch with you.
         </p>
 
         <div className="contact-grid">
-          {/* Left: Contact Info & Map */}
-          <div className="contact-info-panel animate-fade-in animate-delay-1">
+          {/* Left Panel: Contact Info */}
+          <div className="contact-info-panel">
             <div className="contact-details-box">
               <h3 className="panel-title">Contact Information</h3>
               <p className="panel-desc">
-                Feel free to visit our central London office or reach out to us through our direct contact numbers.
+                Feel free to visit our central London office or contact us directly via email or phone.
               </p>
 
               <ul className="info-list">
                 <li className="info-item">
-                  <MapPin className="info-icon text-accent" size={24} />
+                  <div className="info-icon"><MapPin size={22} /></div>
                   <div>
                     <h4>Registered Office</h4>
                     <p>71-75 Shelton Street, Covent Garden, London, WC2H 9JQ, United Kingdom</p>
@@ -94,7 +89,7 @@ export default function Contact() {
                 </li>
 
                 <li className="info-item">
-                  <Mail className="info-icon text-accent" size={24} />
+                  <div className="info-icon"><Mail size={22} /></div>
                   <div>
                     <h4>Email Address</h4>
                     <p><a href="mailto:sharan@skyview.org.uk">sharan@skyview.org.uk</a></p>
@@ -102,7 +97,7 @@ export default function Contact() {
                 </li>
 
                 <li className="info-item">
-                  <Phone className="info-icon text-accent" size={24} />
+                  <div className="info-icon"><Phone size={22} /></div>
                   <div>
                     <h4>Phone Number</h4>
                     <p><a href="tel:+447725355355">+44 7725 355355</a></p>
@@ -111,23 +106,17 @@ export default function Contact() {
               </ul>
             </div>
 
-            {/* Elegant Image Container */}
-            <div className="contact-image-container glass animate-fade-in">
+            <div className="contact-img-box glass-card">
               <img src="/library-students.png" alt="Students studying in the UK" className="contact-img" />
-              <div className="contact-image-overlay">
-                <span className="contact-image-tag">Study in the UK</span>
-                <p className="contact-image-quote">"Your potential is endless. Go find your future."</p>
-              </div>
             </div>
           </div>
 
-          {/* Right: Contact Form */}
-          <div className="contact-form-panel glass animate-fade-in animate-delay-2">
+          {/* Right Panel: Form */}
+          <div className="contact-form-panel glass-card">
             {!isSubmitted ? (
               <form onSubmit={handleSubmit} noValidate className="contact-form">
                 <h3 className="form-panel-title">Send Us a Message</h3>
 
-                {/* Name */}
                 <div className={`form-group-underline ${errors.name ? 'has-error' : ''}`}>
                   <label htmlFor="name">Full Name</label>
                   <input
@@ -139,7 +128,7 @@ export default function Contact() {
                     placeholder="Enter your name"
                   />
                   {errors.name && (
-                    <div className="error-message-underline">
+                    <div className="error-message">
                       <AlertCircle size={14} />
                       <span>{errors.name}</span>
                     </div>
@@ -147,7 +136,6 @@ export default function Contact() {
                 </div>
 
                 <div className="form-row">
-                  {/* Email */}
                   <div className={`form-group-underline flex-1 ${errors.email ? 'has-error' : ''}`}>
                     <label htmlFor="email">Email Address</label>
                     <input
@@ -159,14 +147,13 @@ export default function Contact() {
                       placeholder="name@example.com"
                     />
                     {errors.email && (
-                      <div className="error-message-underline">
+                      <div className="error-message">
                         <AlertCircle size={14} />
                         <span>{errors.email}</span>
                       </div>
                     )}
                   </div>
 
-                  {/* Phone */}
                   <div className={`form-group-underline flex-1 ${errors.phone ? 'has-error' : ''}`}>
                     <label htmlFor="phone">Phone Number</label>
                     <input
@@ -175,10 +162,10 @@ export default function Contact() {
                       name="phone"
                       value={formData.phone}
                       onChange={handleChange}
-                      placeholder="+44 7123 456789"
+                      placeholder="+44 7..."
                     />
                     {errors.phone && (
-                      <div className="error-message-underline">
+                      <div className="error-message">
                         <AlertCircle size={14} />
                         <span>{errors.phone}</span>
                       </div>
@@ -186,9 +173,8 @@ export default function Contact() {
                   </div>
                 </div>
 
-                {/* Subject / Inquiry Type */}
                 <div className="form-group-underline">
-                  <label htmlFor="inquiryType">What is this regarding?</label>
+                  <label htmlFor="inquiryType">Subject / Inquiry Type</label>
                   <select
                     id="inquiryType"
                     name="inquiryType"
@@ -196,26 +182,25 @@ export default function Contact() {
                     onChange={handleChange}
                   >
                     <option value="admissions">University & Course Admissions</option>
-                    <option value="visas">Student Visa Application</option>
-                    <option value="englishTest">English Knowledge Test Inquiry</option>
-                    <option value="partnerships">University Partnerships</option>
+                    <option value="visas">Student Visa (CAS) Guidance</option>
+                    <option value="contract">Representation Agreement Inquiry</option>
+                    <option value="englishTest">English Diagnostic Test Query</option>
                     <option value="general">General Inquiry</option>
                   </select>
                 </div>
 
-                {/* Message Details */}
                 <div className={`form-group-underline ${errors.message ? 'has-error' : ''}`}>
-                  <label htmlFor="message">Please provide details about your inquiry</label>
+                  <label htmlFor="message">Message Details</label>
                   <textarea
                     id="message"
                     name="message"
                     rows="4"
                     value={formData.message}
                     onChange={handleChange}
-                    placeholder="Describe your qualifications, desired course, and any questions..."
+                    placeholder="Describe your qualifications, intended course, and questions..."
                   ></textarea>
                   {errors.message && (
-                    <div className="error-message-underline">
+                    <div className="error-message">
                       <AlertCircle size={14} />
                       <span>{errors.message}</span>
                     </div>
@@ -234,9 +219,9 @@ export default function Contact() {
             ) : (
               <div className="success-panel animate-fade-in">
                 <CheckCircle className="success-icon" size={54} />
-                <h3>Message Sent</h3>
+                <h3>Message Sent Successfully</h3>
                 <p className="success-message-text">
-                  Thank you for contacting Skyview Consultants. One of our specialist advisors will review your inquiry and get back to you shortly at the email address provided.
+                  Thank you for contacting Skyview Consultants. A specialist advisor will review your message and reply to your email shortly.
                 </p>
                 <button 
                   className="btn btn-secondary" 
@@ -253,70 +238,58 @@ export default function Contact() {
       <style>{`
         .contact-section {
           background-color: var(--bg-primary);
-          border-top: 1px solid var(--border-color);
         }
 
         .contact-grid {
           display: grid;
           grid-template-columns: 1fr;
-          align-items: stretch;
-          margin-top: 1.5rem;
           gap: 2rem;
         }
 
-        @media (min-width: 768px) {
+        @media (min-width: 992px) {
           .contact-grid {
-            grid-template-columns: 1fr 1fr;
-            gap: 2.5rem;
+            grid-template-columns: 1fr 1.1fr;
+            gap: 3rem;
           }
         }
 
         .contact-info-panel {
           display: flex;
           flex-direction: column;
-          gap: 2rem;
-        }
-
-        .contact-details-box {
-          display: flex;
-          flex-direction: column;
-          gap: 1rem;
+          gap: 1.5rem;
         }
 
         .panel-title {
-          font-size: 1.5rem;
-          font-weight: 600;
-          color: var(--text-primary);
-          letter-spacing: -0.015em;
+          font-size: 1.35rem;
+          font-weight: 700;
+          margin-bottom: 0.5rem;
         }
 
         .panel-desc {
-          font-size: 0.95rem;
+          font-size: 0.9rem;
           color: var(--text-secondary);
-          line-height: 1.55;
+          margin-bottom: 1.25rem;
         }
 
         .info-list {
           list-style: none;
           display: flex;
           flex-direction: column;
-          gap: 1.5rem;
-          margin-top: 1rem;
+          gap: 1.25rem;
         }
 
         .info-item {
           display: flex;
-          gap: 1.25rem;
+          gap: 1rem;
           align-items: flex-start;
         }
 
         .info-icon {
-          background: var(--bg-secondary);
-          border: 1px solid var(--border-color);
-          color: var(--accent);
-          width: 42px;
-          height: 42px;
+          width: 44px;
+          height: 44px;
           border-radius: 50%;
+          background: var(--primary-light);
+          color: var(--primary);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -325,109 +298,41 @@ export default function Contact() {
 
         .info-item h4 {
           font-size: 0.95rem;
-          color: var(--text-primary);
-          font-weight: 600;
-          margin-bottom: 0.25rem;
+          font-weight: 700;
         }
 
         .info-item p {
-          font-size: 0.9rem;
+          font-size: 0.875rem;
           color: var(--text-secondary);
-          line-height: 1.45;
         }
 
-        .info-item a {
-          transition: color 0.2s;
-        }
-
-        .info-item a:hover {
-          color: var(--accent);
-        }
-
-        .contact-image-container {
-          height: 280px;
-          border-radius: 18px;
-          overflow: hidden;
-          border: 1px solid var(--border-color);
-          position: relative;
+        .contact-img-box {
+          padding: 0.5rem;
         }
 
         .contact-img {
           width: 100%;
-          height: 100%;
+          height: 180px;
           object-fit: cover;
-          transition: transform 0.5s ease;
-        }
-
-        .contact-image-container:hover .contact-img {
-          transform: scale(1.02);
-        }
-
-        .contact-image-overlay {
-          position: absolute;
-          inset: 0;
-          background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, transparent 60%);
-          display: flex;
-          flex-direction: column;
-          justify-content: flex-end;
-          padding: 1.5rem;
-          color: #ffffff;
-        }
-
-        .contact-image-tag {
-          font-size: 0.7rem;
-          font-weight: 600;
-          text-transform: uppercase;
-          letter-spacing: 0.05em;
-          color: var(--accent);
-          margin-bottom: 0.25rem;
-        }
-
-        .contact-image-quote {
-          font-size: 0.9rem;
-          font-weight: 500;
-          font-style: italic;
-          opacity: 0.9;
-        }
-
-        .contact-form-panel {
-          padding: 1.5rem 1.25rem;
-          border-radius: 16px;
-          background: var(--bg-secondary);
-          border: 1px solid var(--border-color);
-          box-shadow: none;
-        }
-
-        @media (min-width: 480px) {
-          .contact-form-panel {
-            padding: 2rem 1.75rem;
-            border-radius: 18px;
-          }
-        }
-
-        @media (min-width: 768px) {
-          .contact-form-panel {
-            padding: 3rem;
-          }
+          border-radius: 12px;
         }
 
         .form-panel-title {
-          font-size: 1.5rem;
-          font-weight: 600;
-          color: var(--text-primary);
-          margin-bottom: 2rem;
-          letter-spacing: -0.015em;
+          font-size: 1.35rem;
+          font-weight: 700;
+          margin-bottom: 1.5rem;
         }
 
         .form-row {
           display: flex;
-          gap: 1.5rem;
           flex-direction: column;
+          gap: 0;
         }
 
         @media (min-width: 640px) {
           .form-row {
             flex-direction: row;
+            gap: 1.25rem;
           }
         }
 
@@ -435,51 +340,31 @@ export default function Contact() {
           flex: 1;
         }
 
-        .form-submit-btn {
-          width: 100%;
-          margin-top: 1.5rem;
-          padding: 0.85rem;
+        .error-message {
+          font-size: 0.75rem;
+          color: #EF4444;
+          display: flex;
+          align-items: center;
+          gap: 0.25rem;
+          margin-top: 0.25rem;
         }
 
-        /* Success Panel */
+        .form-submit-btn {
+          width: 100%;
+          margin-top: 1rem;
+        }
+
         .success-panel {
           display: flex;
           flex-direction: column;
           align-items: center;
           text-align: center;
           padding: 2rem 0;
-          gap: 1.25rem;
+          gap: 1rem;
         }
 
         .success-icon {
-          color: var(--secondary);
-        }
-
-        .success-panel h3 {
-          font-size: 1.5rem;
-          color: var(--text-primary);
-          font-weight: 600;
-        }
-
-        .success-message-text {
-          font-family: var(--font-body);
-          font-size: 0.95rem;
-          line-height: 1.6;
-          color: var(--text-secondary);
-          max-width: 480px;
-          margin-bottom: 1rem;
-        }
-
-        @media (max-width: 640px) {
-          .contact-image-container {
-            height: 180px;
-          }
-          .panel-title, .form-panel-title {
-            font-size: 1.25rem;
-          }
-          .contact-info-panel {
-            gap: 1.25rem;
-          }
+          color: var(--success);
         }
       `}</style>
     </section>
