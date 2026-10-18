@@ -222,9 +222,11 @@ export default function Hero({ setCurrentTab }) {
 
         .hero-container {
           display: grid;
-          grid-template-columns: 1fr;
+          grid-template-columns: minmax(0, 1fr);
           gap: 3rem;
           align-items: center;
+          width: 100%;
+          max-width: 100%;
         }
 
         @media (min-width: 992px) {
@@ -232,6 +234,11 @@ export default function Hero({ setCurrentTab }) {
             grid-template-columns: 1.15fr 0.85fr;
             gap: 4rem;
           }
+        }
+
+        .hero-text {
+          min-width: 0;
+          max-width: 100%;
         }
 
         .agency-badge {
