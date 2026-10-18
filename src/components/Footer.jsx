@@ -71,7 +71,10 @@ export default function Footer({ setCurrentTab }) {
               </li>
               <li>
                 <Phone size={16} className="contact-icon" />
-                <a href="tel:+447725355355">+44 7725 355355</a>
+                <div>
+                  <div>UK Office: <a href="tel:02071124806">020 7112 4806</a></div>
+                  <div>Mobile / WhatsApp: <a href="tel:+447725355355">+44 7725 355355</a></div>
+                </div>
               </li>
             </ul>
           </div>

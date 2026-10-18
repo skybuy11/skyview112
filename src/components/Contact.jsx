@@ -64,7 +64,17 @@ export default function Contact() {
                   <Phone size={22} />
                 </div>
                 <div>
-                  <span className="info-label">Phone & WhatsApp</span>
+                  <span className="info-label">UK Office Landline</span>
+                  <p><a href="tel:02071124806">020 7112 4806</a> / <a href="tel:+442071124806">+44 20 7112 4806</a></p>
+                </div>
+              </div>
+
+              <div className="info-item">
+                <div className="info-icon">
+                  <Phone size={22} />
+                </div>
+                <div>
+                  <span className="info-label">Mobile & WhatsApp</span>
                   <p><a href="tel:+447725355355">+44 7725 355355</a></p>
                 </div>
               </div>

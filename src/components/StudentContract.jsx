@@ -154,6 +154,7 @@ export default function StudentContract() {
                   <span>Skyview Consultants UK Ltd</span>
                   <span>71-75 Shelton Street, Covent Garden</span>
                   <span>London WC2H 9JQ, United Kingdom</span>
+                  <span>Tel: 020 7112 4806 | +44 7725 355355</span>
                 </div>
               </div>
               <div className="letterhead-ref">
