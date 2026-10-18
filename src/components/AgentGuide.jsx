@@ -115,6 +115,11 @@ export default function AgentGuide({ isStandalonePage = false, onOpenStandalone,
       org: 'UK Agent Quality Framework (AQF)',
       desc: 'The UK’s official set of tools and standards for ethical practice in international student recruitment.',
       url: 'https://www.britishcouncil.org/education/agents-counsellors/uk-quality-agent-framework'
+    },
+    {
+      org: 'UK Home Office (GOV.UK): Student Visa Money',
+      desc: 'Official UKVI living cost requirements: £1,529/month in London (£13,761 for 9 months) and £1,171/month outside London (£10,539 for 9 months).',
+      url: 'https://www.gov.uk/student-visa/money'
     }
   ];
 

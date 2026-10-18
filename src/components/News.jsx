@@ -24,8 +24,8 @@ export default function News() {
       id: 3,
       tag: 'CAS COMPLIANCE',
       date: '02 July 2026',
-      title: 'UKVI Updated Financial Maintenance Thresholds for London vs Regional Campuses',
-      snippet: 'Essential guidance on calculating required bank balance statements prior to lodging student visa applications for the Autumn intake.'
+      title: 'UKVI Financial Maintenance Thresholds: £1,529/mo (London) & £1,171/mo (Outside London)',
+      snippet: 'Per UK Visas and Immigration (UKVI), students studying in London require £1,529/month (up to 9 months = £13,761), and students outside London require £1,171/month (up to 9 months = £10,539) held for 28 consecutive days.'
     }
   ];
 

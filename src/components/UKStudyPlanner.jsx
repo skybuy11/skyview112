@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
-import { Calculator, Calendar, PoundSterling, Award, Clock, CheckCircle2, ArrowRight } from 'lucide-react';
+import { Calculator, Calendar, CheckCircle2, ArrowRight, ExternalLink, ShieldCheck } from 'lucide-react';
 
 export default function UKStudyPlanner({ setCurrentTab }) {
   const [region, setRegion] = useState('london');
   const [level, setLevel] = useState('postgrad');
 
-  const ukviMonthly = region === 'london' ? 1334 : 1023;
+  // Official UK Home Office / UKVI Student Visa Financial Requirement
+  // London (City of London & 32 London boroughs): £1,529/month (up to 9 months = £13,761)
+  // Outside London: £1,171/month (up to 9 months = £10,539)
+  const ukviMonthly = region === 'london' ? 1529 : 1171;
   const ukviNineMonths = ukviMonthly * 9;
 
   const tuitionRanges = {
@@ -53,7 +56,7 @@ export default function UKStudyPlanner({ setCurrentTab }) {
       <div className="container">
         <h2 className="section-title">UK Study Cost & Intake Planner</h2>
         <p className="section-subtitle">
-          Calculate your official UKVI financial maintenance requirements, tuition estimates, scholarships, and upcoming university intake deadlines.
+          Calculate your official UK Home Office (UKVI) financial maintenance requirements, tuition estimates, scholarships, and upcoming university intake deadlines.
         </p>
 
         <div className="planner-grid">
@@ -61,25 +64,25 @@ export default function UKStudyPlanner({ setCurrentTab }) {
           <div className="calculator-card glass-card">
             <div className="calc-header">
               <Calculator size={24} className="text-primary" />
-              <h3>Interactive UK Cost & UKVI Financial Estimator</h3>
+              <h3>Official UKVI Financial & Tuition Estimator</h3>
             </div>
 
             <div className="calc-control-group">
-              <label>1. Select Study Region (UKVI Living Cost Rule)</label>
+              <label>1. Select Study Region (Latest UKVI Living Cost Rule)</label>
               <div className="toggle-pill-row">
                 <button
                   type="button"
                   className={`toggle-pill ${region === 'london' ? 'active' : ''}`}
                   onClick={() => setRegion('london')}
                 >
-                  London (£1,334 / month)
+                  London (£1,529 / month)
                 </button>
                 <button
                   type="button"
                   className={`toggle-pill ${region === 'outside' ? 'active' : ''}`}
                   onClick={() => setRegion('outside')}
                 >
-                  Outside London (£1,023 / month)
+                  Outside London (£1,171 / month)
                 </button>
               </div>
             </div>
@@ -114,8 +117,20 @@ export default function UKStudyPlanner({ setCurrentTab }) {
             <div className="calc-results-box">
               <div className="result-row">
                 <div>
-                  <span className="res-label">UKVI 9-Month Living Cost Proof</span>
-                  <span className="res-note">Required on bank statement for Student Visa</span>
+                  <span className="res-label">UKVI Monthly Living Requirement</span>
+                  <span className="res-note">
+                    {region === 'london'
+                      ? 'City of London & 32 London Boroughs'
+                      : 'All UK Universities Outside London'}
+                  </span>
+                </div>
+                <span className="res-amount">£{ukviMonthly.toLocaleString()} / mo</span>
+              </div>
+
+              <div className="result-row">
+                <div>
+                  <span className="res-label">Total 9-Month UKVI Maintenance Proof</span>
+                  <span className="res-note">Must be held for 28 consecutive days before visa application</span>
                 </div>
                 <span className="res-amount">£{ukviNineMonths.toLocaleString()}</span>
               </div>
@@ -136,6 +151,32 @@ export default function UKStudyPlanner({ setCurrentTab }) {
                   <span className="res-note">Automatic & bursary fee waivers via Skyview</span>
                 </div>
                 <span className="res-discount">Up to £5,000 Off</span>
+              </div>
+            </div>
+
+            {/* Official Home Office GOV.UK Verification Links */}
+            <div className="govuk-links-box">
+              <div className="govuk-title">
+                <ShieldCheck size={16} className="text-primary" />
+                <span>Official UK Home Office (GOV.UK) Financial Guidance:</span>
+              </div>
+              <div className="govuk-link-row">
+                <a
+                  href="https://www.gov.uk/student-visa/money"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="govuk-link"
+                >
+                  GOV.UK: Student Visa Money You Need <ExternalLink size={13} />
+                </a>
+                <a
+                  href="https://www.gov.uk/guidance/financial-evidence-for-student-and-child-student-route-applicants"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="govuk-link"
+                >
+                  GOV.UK: Financial Evidence Guidance <ExternalLink size={13} />
+                </a>
               </div>
             </div>
 
@@ -218,7 +259,7 @@ export default function UKStudyPlanner({ setCurrentTab }) {
         }
 
         .calc-control-group {
-          margin-bottom: 1.5rem;
+          margin-bottom: 1.35rem;
         }
 
         .calc-control-group label {
@@ -264,8 +305,8 @@ export default function UKStudyPlanner({ setCurrentTab }) {
           border: 1px solid var(--border-color);
           display: flex;
           flex-direction: column;
-          gap: 1rem;
-          margin-bottom: 1.25rem;
+          gap: 0.9rem;
+          margin-bottom: 1.15rem;
         }
 
         .result-row {
@@ -273,7 +314,7 @@ export default function UKStudyPlanner({ setCurrentTab }) {
           justify-content: space-between;
           align-items: center;
           gap: 1rem;
-          padding-bottom: 0.85rem;
+          padding-bottom: 0.8rem;
           border-bottom: 1px dashed var(--border-color);
         }
 
@@ -312,6 +353,40 @@ export default function UKStudyPlanner({ setCurrentTab }) {
           padding: 0.3rem 0.75rem;
           border-radius: 99px;
           white-space: nowrap;
+        }
+
+        .govuk-links-box {
+          background: rgba(0, 92, 59, 0.04);
+          border: 1px solid rgba(0, 92, 59, 0.16);
+          border-radius: 12px;
+          padding: 0.9rem 1rem;
+          margin-bottom: 1.15rem;
+        }
+
+        .govuk-title {
+          display: flex;
+          align-items: center;
+          gap: 0.45rem;
+          font-size: 0.82rem;
+          font-weight: 700;
+          color: var(--text-primary);
+          margin-bottom: 0.5rem;
+        }
+
+        .govuk-link-row {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.85rem;
+        }
+
+        .govuk-link {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.3rem;
+          font-size: 0.82rem;
+          font-weight: 700;
+          color: var(--primary);
+          text-decoration: underline;
         }
 
         .calc-perks {
