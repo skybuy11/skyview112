@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Send, CheckCircle, Clock, Globe } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, CheckCircle, Clock, MessageCircle } from 'lucide-react';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -9,11 +9,53 @@ export default function Contact() {
     studyLevel: 'Postgraduate',
     message: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e) => {
+  const encodeForm = (data) =>
+    Object.keys(data)
+      .map((key) => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
+      .join('&');
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (formData.name && formData.email) {
+    if (!formData.name || !formData.email) return;
+
+    setIsSubmitting(true);
+
+    try {
+      // 1. Direct Email Delivery to sharan@skyview.org.uk via FormSubmit AJAX API
+      const emailPromise = fetch('https://formsubmit.co/ajax/sharan@skyview.org.uk', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json'
+        },
+        body: JSON.stringify({
+          _subject: `New UK Study Inquiry from ${formData.name} (${formData.studyLevel})`,
+          _replyto: formData.email,
+          _template: 'table',
+          Full_Name: formData.name,
+          Email_Address: formData.email,
+          Phone_WhatsApp: formData.phone || 'Not provided',
+          Study_Level: formData.studyLevel,
+          Inquiry_Message: formData.message || 'General consultation request'
+        })
+      }).catch(() => null);
+
+      // 2. Parallel Backup Storage in Netlify Forms Dashboard
+      const netlifyPromise = fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: encodeForm({
+          'form-name': 'student-application',
+          ...formData
+        })
+      }).catch(() => null);
+
+      await Promise.all([emailPromise, netlifyPromise]);
+    } finally {
+      setIsSubmitting(false);
       setSubmitted(true);
     }
   };
@@ -21,6 +63,16 @@ export default function Contact() {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+
+  const whatsappFollowupUrl = `https://wa.me/447725355355?text=${encodeURIComponent(
+    `Hello Skyview Consultants,\n\nI just submitted an inquiry on skyview.org.uk:\n• Name: ${formData.name}\n• Email: ${formData.email}\n• Phone: ${formData.phone || 'N/A'}\n• Study Level: ${formData.studyLevel}\n• Course/Inquiry: ${formData.message || 'UK University Admission'}`
+  )}`;
+
+  const mailtoFollowupUrl = `mailto:sharan@skyview.org.uk?subject=${encodeURIComponent(
+    `UK Study Application Inquiry - ${formData.name}`
+  )}&body=${encodeURIComponent(
+    `Hello Mr. Sharan Ahamed,\n\nFull Name: ${formData.name}\nEmail: ${formData.email}\nPhone/WhatsApp: ${formData.phone || 'N/A'}\nIntended Study Level: ${formData.studyLevel}\n\nInquiry:\n${formData.message || 'I would like guidance on applying to a UK university.'}`
+  )}`;
 
   return (
     <section id="contact" className="section contact-section">
@@ -94,7 +146,13 @@ export default function Contact() {
           {/* Right Column: Interactive Consultation Form */}
           <div className="form-panel glass-card">
             {!submitted ? (
-              <form onSubmit={handleSubmit}>
+              <form
+                name="student-application"
+                method="POST"
+                data-netlify="true"
+                onSubmit={handleSubmit}
+              >
+                <input type="hidden" name="form-name" value="student-application" />
                 <h3 className="form-panel-title">Start Free Application Guidance</h3>
 
                 <div className="form-group-underline">
@@ -153,16 +211,42 @@ export default function Contact() {
                   ></textarea>
                 </div>
 
-                <button type="submit" className="btn btn-primary btn-lg submit-btn">
-                  Submit Consultation Request
+                <button
+                  type="submit"
+                  className="btn btn-primary btn-lg submit-btn"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? 'Sending Application Request...' : 'Submit Consultation Request'}
                   <Send size={18} />
                 </button>
               </form>
             ) : (
               <div className="submitted-box animate-fade-in">
                 <CheckCircle size={56} className="text-success" />
-                <h3>Application Request Received!</h3>
-                <p>Thank you, <strong>{formData.name}</strong>. A British Council certified Skyview advisor will contact you within 24 business hours at <strong>{formData.email}</strong>.</p>
+                <h3>Application Request Sent!</h3>
+                <p>
+                  Thank you, <strong>{formData.name}</strong>. Your inquiry has been forwarded to <strong>sharan@skyview.org.uk</strong>, and a British Council certified Skyview advisor will contact you within 24 business hours at <strong>{formData.email}</strong>.
+                </p>
+
+                <div className="submitted-actions">
+                  <a
+                    href={whatsappFollowupUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-accent"
+                  >
+                    <MessageCircle size={18} />
+                    Instant Reply on WhatsApp
+                  </a>
+                  <a
+                    href={mailtoFollowupUrl}
+                    className="btn btn-primary"
+                  >
+                    <Mail size={18} />
+                    Open in Email App
+                  </a>
+                </div>
+
                 <button
                   className="btn btn-secondary"
                   onClick={() => setSubmitted(false)}
@@ -195,7 +279,7 @@ export default function Contact() {
 
         .panel-title {
           font-size: 1.6rem;
-          font-weight: 900;
+          font-weight: 800;
           margin-bottom: 0.5rem;
         }
 
@@ -253,7 +337,7 @@ export default function Contact() {
 
         .form-panel-title {
           font-size: 1.5rem;
-          font-weight: 900;
+          font-weight: 800;
           margin-bottom: 2rem;
         }
 
@@ -261,25 +345,38 @@ export default function Contact() {
           width: 100%;
         }
 
+        .submit-btn:disabled {
+          opacity: 0.7;
+          cursor: wait;
+        }
+
         .submitted-box {
           text-align: center;
-          padding: 3rem 1rem;
+          padding: 2.5rem 1rem;
           display: flex;
           flex-direction: column;
           align-items: center;
-          gap: 1rem;
+          gap: 1.15rem;
         }
 
         .submitted-box h3 {
           font-size: 1.6rem;
-          font-weight: 900;
+          font-weight: 800;
         }
 
         .submitted-box p {
-          font-size: 1.1rem;
-          line-height: 1.6;
+          font-size: 1.05rem;
+          line-height: 1.65;
           color: var(--text-secondary);
-          max-width: 440px;
+          max-width: 480px;
+        }
+
+        .submitted-actions {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 0.75rem;
+          margin: 0.5rem 0;
         }
       `}</style>
     </section>
