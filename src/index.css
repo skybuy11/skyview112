@@ -65,8 +65,8 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
   color: var(--text-primary);
   font-weight: 800;
-  line-height: 1.18;
-  letter-spacing: -0.035em;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
 }
 
 a {
@@ -100,7 +100,7 @@ button, input, textarea, select {
 /* Container & Layout */
 .container {
   width: 100%;
-  max-width: 1180px;
+  max-width: 1260px;
   margin: 0 auto;
   padding: 0 1.25rem;
 }
@@ -126,10 +126,10 @@ button, input, textarea, select {
 .section-title {
   text-align: center;
   font-size: 2.25rem;
-  font-weight: 900;
+  font-weight: 800;
   color: var(--text-primary);
   margin-bottom: 0.75rem;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.015em;
 }
 
 @media (min-width: 992px) {

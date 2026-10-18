@@ -7,7 +7,7 @@ export default function Header({ currentTab, setCurrentTab }) {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 25);
+      setScrolled(window.scrollY > 20);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -35,9 +35,10 @@ export default function Header({ currentTab, setCurrentTab }) {
     { id: 'home', label: 'Home' },
     { id: 'services', label: 'Services' },
     { id: 'universities', label: 'Universities' },
+    { id: 'study-planner', label: 'Cost & Intakes' },
+    { id: 'agent-guide', label: 'Student Guide' },
     { id: 'english-test', label: 'English Test' },
     { id: 'contract', label: 'Contract' },
-    { id: 'news', label: 'News' },
     { id: 'about', label: 'About Us' },
     { id: 'contact', label: 'Contact' },
   ];
@@ -45,59 +46,59 @@ export default function Header({ currentTab, setCurrentTab }) {
   const handleNavClick = (id) => {
     setCurrentTab(id);
     setIsOpen(false);
-    
-    const element = document.getElementById(id);
-    if (element) {
-      const offset = 85;
-      const bodyRect = document.body.getBoundingClientRect().top;
-      const elementRect = element.getBoundingClientRect().top;
-      const elementPosition = elementRect - bodyRect;
-      const offsetPosition = elementPosition - offset;
 
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
-    }
+    setTimeout(() => {
+      const element = document.getElementById(id);
+      if (element) {
+        const offset = 84;
+        const bodyRect = document.body.getBoundingClientRect().top;
+        const elementRect = element.getBoundingClientRect().top;
+        const elementPosition = elementRect - bodyRect;
+        const offsetPosition = elementPosition - offset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }
+    }, 50);
   };
 
   return (
     <header className={`header ${scrolled ? 'scrolled' : ''} ${isOpen ? 'menu-open' : ''}`}>
       <div className="container header-container">
-        <div className="floating-navbar-shell glass-card">
-          <div className="logo-container" onClick={() => handleNavClick('home')}>
-            <img src="/logo.png" alt="Skyview Consultants Logo" className="logo-img" />
-          </div>
+        <div className="logo-container" onClick={() => handleNavClick('home')}>
+          <img src="/logo.png" alt="Skyview Consultants Logo" className="logo-img" />
+        </div>
 
-          <nav className="desktop-nav">
-            {navItems.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => handleNavClick(item.id)}
-                className={`nav-link ${currentTab === item.id ? 'active' : ''}`}
-              >
-                {item.label}
-              </button>
-            ))}
-          </nav>
-
-          <div className="controls-container">
-            <button 
-              className="btn btn-accent header-cta-btn"
-              onClick={() => handleNavClick('contact')}
-            >
-              Apply Now
-              <ArrowRight size={16} />
-            </button>
-
+        <nav className="desktop-nav">
+          {navItems.map((item) => (
             <button
-              className="mobile-menu-toggle"
-              onClick={() => setIsOpen(!isOpen)}
-              aria-label="Toggle navigation menu"
+              key={item.id}
+              onClick={() => handleNavClick(item.id)}
+              className={`nav-link ${currentTab === item.id ? 'active' : ''}`}
             >
-              {isOpen ? <X size={26} /> : <Menu size={26} />}
+              {item.label}
             </button>
-          </div>
+          ))}
+        </nav>
+
+        <div className="controls-container">
+          <button
+            className="btn btn-accent header-cta-btn"
+            onClick={() => handleNavClick('contact')}
+          >
+            <span>Apply Now</span>
+            <ArrowRight size={16} />
+          </button>
+
+          <button
+            className="mobile-menu-toggle"
+            onClick={() => setIsOpen(!isOpen)}
+            aria-label="Toggle navigation menu"
+          >
+            {isOpen ? <X size={26} /> : <Menu size={26} />}
+          </button>
         </div>
       </div>
 
@@ -113,7 +114,7 @@ export default function Header({ currentTab, setCurrentTab }) {
                 {item.label}
               </button>
             ))}
-            <button 
+            <button
               className="btn btn-accent mobile-drawer-cta"
               onClick={() => handleNavClick('contact')}
             >
@@ -126,62 +127,77 @@ export default function Header({ currentTab, setCurrentTab }) {
       <style>{`
         .header {
           position: fixed;
-          top: 1rem;
+          top: 0;
           left: 0;
           right: 0;
           z-index: 1000;
-          transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+          background: rgba(255, 255, 255, 0.96);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          border-bottom: 1px solid rgba(15, 41, 30, 0.08);
+          transition: all 0.25s ease;
+          padding: 0.75rem 0;
         }
 
         .header.scrolled {
-          top: 0.5rem;
+          padding: 0.55rem 0;
+          box-shadow: 0 6px 24px rgba(15, 41, 30, 0.06);
         }
 
-        .floating-navbar-shell {
+        .header-container {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          padding: 0.6rem 1.25rem !important;
-          border-radius: 99px !important;
-          background: rgba(255, 255, 255, 0.95) !important;
-          backdrop-filter: blur(16px);
-          -webkit-backdrop-filter: blur(16px);
-          border: 1.5px solid rgba(0, 92, 59, 0.12) !important;
-          box-shadow: 0 10px 30px rgba(15, 41, 30, 0.08) !important;
+          gap: 1.5rem;
         }
 
         .logo-container {
           display: flex;
           align-items: center;
           cursor: pointer;
+          flex-shrink: 0;
+          margin-right: 0.5rem;
         }
 
         .logo-img {
-          height: 64px;
+          height: 46px;
           width: auto;
           object-fit: contain;
-          transition: transform 0.25s ease;
+          transition: transform 0.2s ease;
+        }
+
+        .logo-container:hover .logo-img {
+          transform: scale(1.02);
         }
 
         .desktop-nav {
           display: none;
-          gap: 1.75rem;
+          gap: 1.15rem;
           align-items: center;
+          justify-content: center;
+          flex: 1;
         }
 
-        @media (min-width: 992px) {
+        @media (min-width: 1120px) {
           .desktop-nav {
             display: flex;
+          }
+        }
+
+        @media (min-width: 1240px) {
+          .desktop-nav {
+            gap: 1.5rem;
           }
         }
 
         .nav-link {
           color: var(--text-secondary);
           font-weight: 600;
-          font-size: 0.95rem;
-          padding: 0.4rem 0.25rem;
+          font-size: 0.92rem;
+          padding: 0.45rem 0.2rem;
           cursor: pointer;
           position: relative;
+          white-space: nowrap;
           transition: color 0.2s ease;
         }
 
@@ -191,16 +207,16 @@ export default function Header({ currentTab, setCurrentTab }) {
 
         .nav-link.active {
           color: var(--primary);
-          font-weight: 800;
+          font-weight: 700;
         }
 
         .nav-link.active::after {
           content: '';
           position: absolute;
-          bottom: -3px;
+          bottom: -2px;
           left: 0;
           right: 0;
-          height: 3px;
+          height: 2.5px;
           background: var(--accent-gold);
           border-radius: 99px;
         }
@@ -208,17 +224,19 @@ export default function Header({ currentTab, setCurrentTab }) {
         .controls-container {
           display: flex;
           align-items: center;
-          gap: 0.85rem;
+          gap: 0.75rem;
+          flex-shrink: 0;
         }
 
         .header-cta-btn {
           display: none;
-          padding: 0.6rem 1.5rem;
-          min-height: 44px;
-          font-size: 0.925rem;
+          padding: 0.6rem 1.35rem;
+          min-height: 42px;
+          font-size: 0.9rem;
+          white-space: nowrap;
         }
 
-        @media (min-width: 992px) {
+        @media (min-width: 1120px) {
           .header-cta-btn {
             display: inline-flex;
           }
@@ -228,8 +246,8 @@ export default function Header({ currentTab, setCurrentTab }) {
           display: flex;
           align-items: center;
           justify-content: center;
-          width: 48px;
-          height: 48px;
+          width: 46px;
+          height: 46px;
           border-radius: 50%;
           color: var(--text-primary);
           background: var(--bg-subtle);
@@ -237,7 +255,7 @@ export default function Header({ currentTab, setCurrentTab }) {
           transition: background 0.2s;
         }
 
-        @media (min-width: 992px) {
+        @media (min-width: 1120px) {
           .mobile-menu-toggle {
             display: none;
           }
@@ -245,32 +263,30 @@ export default function Header({ currentTab, setCurrentTab }) {
 
         .mobile-nav-drawer {
           position: absolute;
-          top: calc(100% + 0.5rem);
-          left: 1.25rem;
-          right: 1.25rem;
+          top: 100%;
+          left: 0;
+          right: 0;
           background: #FFFFFF;
-          border: 1.5px solid var(--border-color);
-          border-radius: 24px;
-          box-shadow: 0 24px 48px rgba(0, 0, 0, 0.12);
-          padding: 1.25rem;
+          border-bottom: 1.5px solid var(--border-color);
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+          padding: 1.25rem 0 1.75rem 0;
         }
 
         .mobile-nav-container {
           display: flex;
           flex-direction: column;
           gap: 0.35rem;
-          padding: 0;
         }
 
         .mobile-nav-link {
           display: block;
           width: 100%;
           text-align: left;
-          padding: 0.95rem 1.25rem;
-          font-size: 1.1rem;
+          padding: 0.9rem 1.25rem;
+          font-size: 1.08rem;
           font-weight: 700;
           color: var(--text-primary);
-          border-radius: 14px;
+          border-radius: 12px;
           transition: all 0.2s;
         }
 
@@ -281,7 +297,7 @@ export default function Header({ currentTab, setCurrentTab }) {
         }
 
         .mobile-drawer-cta {
-          margin-top: 1.25rem;
+          margin-top: 1rem;
           width: 100%;
         }
       `}</style>

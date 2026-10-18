@@ -1,26 +1,29 @@
-import React, { useState } from 'react';
-import { Sparkles, ArrowRight, ClipboardCheck, School, Users, Star, FileText, Search, CheckCircle2, ShieldCheck, Filter } from 'lucide-react';
+import React from 'react';
+import {
+  Sparkles,
+  ArrowRight,
+  ClipboardCheck,
+  School,
+  Users,
+  Star,
+  FileText,
+  CheckCircle2,
+  ShieldCheck,
+  BookOpen
+} from 'lucide-react';
 
 export default function Hero({ setCurrentTab }) {
-  const [heroSearch, setHeroSearch] = useState('');
-  const [studyLevel, setStudyLevel] = useState('All Levels');
-
   const handleActionClick = (targetId) => {
     setCurrentTab(targetId);
     const element = document.getElementById(targetId);
     if (element) {
-      const offset = 85;
+      const offset = 84;
       const bodyRect = document.body.getBoundingClientRect().top;
       const elementRect = element.getBoundingClientRect().top;
       const elementPosition = elementRect - bodyRect;
       const offsetPosition = elementPosition - offset;
       window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
     }
-  };
-
-  const handleSearchSubmit = (e) => {
-    e.preventDefault();
-    handleActionClick('universities');
   };
 
   const metrics = [
@@ -49,7 +52,7 @@ export default function Hero({ setCurrentTab }) {
       <div className="hero-glow glow-2"></div>
 
       <div className="container hero-container">
-        {/* Left Column: Headline & Fast-Track Finder */}
+        {/* Left Column: Clean Executive Headline, Value Proposition & CTAs */}
         <div className="hero-text animate-fade-in animate-delay-1">
           <div className="agency-badge">
             <span className="pulse-dot"></span>
@@ -63,68 +66,49 @@ export default function Hero({ setCurrentTab }) {
           </h1>
 
           <p className="hero-description">
-            Since 2008, Skyview Consultants has empowered international students to study at leading British institutions. We simplify course matchmaking, university applications, CAS visa processing, and arrival housing.
+            Since 2008, Skyview Consultants has guided over 15,000 international students into leading British universities. We provide transparent, ethical support across course selection, UCAS applications, CAS visa compliance, and UK student housing.
           </p>
 
-          {/* Embedded Fast-Track Search Widget */}
-          <form className="fast-track-widget glass-card" onSubmit={handleSearchSubmit}>
-            <div className="widget-header">
-              <Filter size={18} className="text-primary" />
-              <span>Fast-Track University & Course Finder</span>
-            </div>
-
-            <div className="widget-row">
-              <div className="widget-input-box">
-                <Search size={20} className="input-icon" />
-                <input
-                  type="text"
-                  placeholder="Search subject, course or university..."
-                  value={heroSearch}
-                  onChange={(e) => setHeroSearch(e.target.value)}
-                  className="widget-input"
-                />
-              </div>
-
-              <select
-                value={studyLevel}
-                onChange={(e) => setStudyLevel(e.target.value)}
-                className="widget-select"
-              >
-                <option value="All Levels">All Study Levels</option>
-                <option value="Undergraduate">Undergraduate (BSc/BA)</option>
-                <option value="Postgraduate">Postgraduate (MSc/MA)</option>
-                <option value="Foundation">Foundation / Pathway</option>
-              </select>
-
-              <button type="submit" className="btn btn-primary widget-btn">
-                Search
-                <ArrowRight size={18} />
-              </button>
-            </div>
-          </form>
-
-          {/* Action CTAs */}
+          {/* Clean Action CTAs */}
           <div className="hero-actions">
             <button className="btn btn-accent btn-lg" onClick={() => handleActionClick('contact')}>
-              Start Free Application
-              <ArrowRight size={20} />
+              <span>Start Free Application</span>
+              <ArrowRight size={19} />
+            </button>
+            <button className="btn btn-primary btn-lg" onClick={() => handleActionClick('agent-guide')}>
+              <BookOpen size={19} />
+              <span>Student & Parent Guide</span>
             </button>
             <button className="btn btn-secondary btn-lg" onClick={() => handleActionClick('contract')}>
-              Student Agreement
-              <FileText size={20} />
+              <FileText size={19} />
+              <span>Student Agreement</span>
             </button>
-            <button className="btn btn-secondary btn-lg" onClick={() => handleActionClick('english-test')}>
-              Test Your English
-              <ClipboardCheck size={20} />
-            </button>
+          </div>
+
+          {/* Official Accreditation & Compliance Strip */}
+          <div className="accreditation-strip">
+            <div className="accred-item">
+              <CheckCircle2 size={16} className="text-success" />
+              <span>UK Agent Quality Framework (AQF)</span>
+            </div>
+            <div className="accred-item">
+              <CheckCircle2 size={16} className="text-success" />
+              <span>British Council Certified Counsellor</span>
+            </div>
+            <div className="accred-item">
+              <CheckCircle2 size={16} className="text-success" />
+              <span>Zero Hidden Fees Pledge</span>
+            </div>
           </div>
         </div>
 
-        {/* Right Column: 3D Showcase Card */}
+        {/* Right Column: Executive Showcase Card */}
         <div className="hero-showcase animate-fade-in animate-delay-2">
           <div className="showcase-card glass-card">
             <div className="showcase-header">
-              <ShieldCheck className="shield-icon" size={24} />
+              <div className="shield-badge-box">
+                <ShieldCheck className="shield-icon" size={24} />
+              </div>
               <div className="showcase-header-text">
                 <span className="showcase-tag">DIRECT ADMISSIONS PARTNER</span>
                 <h4 className="showcase-title">Official UK University Representation</h4>
@@ -132,9 +116,9 @@ export default function Hero({ setCurrentTab }) {
             </div>
 
             <div className="showcase-image-wrapper">
-              <img 
-                src="/library-students.png" 
-                alt="International Students studying in UK University Library" 
+              <img
+                src="/library-students.png"
+                alt="International Students studying in UK University Library"
                 className="showcase-img"
               />
               <div className="floating-badge badge-top-right">
@@ -156,6 +140,11 @@ export default function Hero({ setCurrentTab }) {
               <div className="footer-stat">
                 <span className="stat-num">100+</span>
                 <span className="stat-lbl">UK Institutions</span>
+              </div>
+              <div className="footer-divider"></div>
+              <div className="footer-stat">
+                <span className="stat-num">Free</span>
+                <span className="stat-lbl">Admissions Advisory</span>
               </div>
             </div>
           </div>
@@ -193,7 +182,7 @@ export default function Hero({ setCurrentTab }) {
 
       <style>{`
         .hero-section {
-          padding-top: 130px;
+          padding-top: 115px;
           padding-bottom: 4rem;
           background: linear-gradient(180deg, #FFFFFF 0%, var(--bg-primary) 100%);
           position: relative;
@@ -202,7 +191,7 @@ export default function Hero({ setCurrentTab }) {
 
         @media (min-width: 992px) {
           .hero-section {
-            padding-top: 165px;
+            padding-top: 145px;
             padding-bottom: 6rem;
           }
         }
@@ -234,7 +223,7 @@ export default function Hero({ setCurrentTab }) {
         .hero-container {
           display: grid;
           grid-template-columns: 1fr;
-          gap: 3.5rem;
+          gap: 3rem;
           align-items: center;
         }
 
@@ -249,15 +238,15 @@ export default function Hero({ setCurrentTab }) {
           display: inline-flex;
           align-items: center;
           gap: 0.6rem;
-          padding: 0.55rem 1.25rem;
+          padding: 0.5rem 1.15rem;
           border-radius: 99px;
           background: var(--primary-light);
           border: 1.5px solid rgba(0, 92, 59, 0.14);
           color: var(--primary);
           font-weight: 700;
           font-size: 0.85rem;
-          letter-spacing: 0.02em;
-          margin-bottom: 1.75rem;
+          letter-spacing: 0.01em;
+          margin-bottom: 1.5rem;
         }
 
         .pulse-dot {
@@ -273,17 +262,17 @@ export default function Hero({ setCurrentTab }) {
         }
 
         .hero-title {
-          font-size: 2.75rem; /* 44px mobile */
-          font-weight: 900;
-          line-height: 1.18;
-          letter-spacing: -0.04em;
-          margin-bottom: 1.75rem;
+          font-size: 2.75rem;
+          font-weight: 800;
+          line-height: 1.16;
+          letter-spacing: -0.018em;
+          margin-bottom: 1.35rem;
           color: var(--text-primary);
         }
 
         @media (min-width: 992px) {
           .hero-title {
-            font-size: 3.85rem; /* 62px desktop */
+            font-size: 3.75rem;
           }
         }
 
@@ -294,90 +283,19 @@ export default function Hero({ setCurrentTab }) {
         }
 
         .hero-description {
-          font-size: 1.15rem; /* 18.5px mobile */
+          font-size: 1.15rem;
           line-height: 1.7;
           color: var(--text-secondary);
           margin-bottom: 2.25rem;
-          max-width: 600px;
-        }
-
-        /* Fast-Track Finder Widget */
-        .fast-track-widget {
-          padding: 1.25rem !important;
-          margin-bottom: 2.25rem;
-          display: flex;
-          flex-direction: column;
-          gap: 0.85rem;
-          border-color: rgba(0, 92, 59, 0.18) !important;
-        }
-
-        .widget-header {
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-          font-size: 0.85rem;
-          font-weight: 800;
-          color: var(--text-primary);
-          text-transform: uppercase;
-          letter-spacing: 0.05em;
-        }
-
-        .widget-row {
-          display: flex;
-          flex-direction: column;
-          gap: 0.75rem;
-        }
-
-        @media (min-width: 768px) {
-          .widget-row {
-            flex-direction: row;
-            align-items: center;
-          }
-        }
-
-        .widget-input-box {
-          display: flex;
-          align-items: center;
-          gap: 0.6rem;
-          background: var(--bg-subtle);
-          padding: 0.75rem 1rem;
-          border-radius: 12px;
-          flex: 1;
-        }
-
-        .input-icon {
-          color: var(--text-muted);
-          flex-shrink: 0;
-        }
-
-        .widget-input {
-          width: 100%;
-          font-size: 16px;
-          color: var(--text-primary);
-        }
-
-        .widget-select {
-          background: var(--bg-subtle);
-          padding: 0.75rem 1rem;
-          border-radius: 12px;
-          font-size: 16px;
-          color: var(--text-primary);
-          font-weight: 600;
-          cursor: pointer;
-        }
-
-        .widget-btn {
-          min-height: 48px;
-          padding: 0.75rem 1.35rem;
-          font-size: 0.95rem;
-          flex-shrink: 0;
+          max-width: 610px;
         }
 
         .hero-actions {
           display: flex;
           flex-direction: column;
-          gap: 1rem;
+          gap: 0.85rem;
           width: 100%;
+          margin-bottom: 2rem;
         }
 
         @media (min-width: 992px) {
@@ -389,15 +307,33 @@ export default function Hero({ setCurrentTab }) {
 
         .hero-actions .btn {
           width: 100%;
-          min-height: 56px;
-          font-size: 1.1rem;
-          padding: 1rem 1.75rem;
+          min-height: 52px;
+          font-size: 1rem;
+          padding: 0.85rem 1.5rem;
+          white-space: nowrap;
         }
 
         @media (min-width: 992px) {
           .hero-actions .btn {
             width: auto;
           }
+        }
+
+        .accreditation-strip {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 1.25rem;
+          padding-top: 1.35rem;
+          border-top: 1px solid var(--border-color);
+        }
+
+        .accred-item {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.45rem;
+          font-size: 0.88rem;
+          font-weight: 600;
+          color: var(--text-secondary);
         }
 
         .hero-showcase {
@@ -407,7 +343,7 @@ export default function Hero({ setCurrentTab }) {
 
         .showcase-card {
           width: 100%;
-          max-width: 480px;
+          max-width: 500px;
           padding: 1.5rem !important;
           display: flex;
           flex-direction: column;
@@ -420,21 +356,34 @@ export default function Hero({ setCurrentTab }) {
           gap: 0.85rem;
         }
 
-        .shield-icon {
-          color: var(--accent-gold);
+        .shield-badge-box {
+          width: 44px;
+          height: 44px;
+          border-radius: 12px;
+          background: rgba(212, 175, 55, 0.14);
+          display: flex;
+          align-items: center;
+          justify-content: center;
           flex-shrink: 0;
         }
 
+        .shield-icon {
+          color: var(--accent-gold-dark);
+        }
+
         .showcase-tag {
-          font-size: 0.7rem;
+          font-size: 0.72rem;
           font-weight: 800;
-          color: var(--accent-gold);
-          letter-spacing: 0.08em;
+          color: var(--accent-gold-dark);
+          letter-spacing: 0.06em;
+          display: block;
+          margin-bottom: 0.15rem;
         }
 
         .showcase-title {
-          font-size: 1.05rem;
-          font-weight: 800;
+          font-size: 1.08rem;
+          font-weight: 700;
+          letter-spacing: -0.01em;
           color: var(--text-primary);
         }
 
@@ -453,9 +402,9 @@ export default function Hero({ setCurrentTab }) {
 
         .floating-badge {
           position: absolute;
-          background: rgba(255, 255, 255, 0.94);
+          background: rgba(255, 255, 255, 0.95);
           backdrop-filter: blur(12px);
-          padding: 0.5rem 0.95rem;
+          padding: 0.45rem 0.95rem;
           border-radius: 99px;
           border: 1px solid var(--border-color);
           display: flex;
@@ -486,7 +435,7 @@ export default function Hero({ setCurrentTab }) {
           align-items: center;
           justify-content: space-around;
           background: var(--bg-primary);
-          padding: 0.85rem;
+          padding: 0.9rem;
           border-radius: 14px;
           border: 1px solid var(--border-color);
         }
@@ -499,14 +448,15 @@ export default function Hero({ setCurrentTab }) {
 
         .stat-num {
           font-family: var(--font-heading);
-          font-weight: 900;
-          font-size: 1.25rem;
+          font-weight: 800;
+          font-size: 1.2rem;
           color: var(--primary);
         }
 
         .stat-lbl {
-          font-size: 0.72rem;
+          font-size: 0.74rem;
           color: var(--text-muted);
+          font-weight: 600;
         }
 
         .footer-divider {
@@ -516,7 +466,7 @@ export default function Hero({ setCurrentTab }) {
         }
 
         .hero-metrics {
-          margin-top: 4rem;
+          margin-top: 3.5rem;
         }
 
         .metrics-grid {
@@ -529,7 +479,7 @@ export default function Hero({ setCurrentTab }) {
         @media (min-width: 992px) {
           .metrics-grid {
             grid-template-columns: repeat(4, 1fr);
-            padding: 2.5rem 3rem;
+            padding: 2.25rem 2.75rem;
           }
         }
 
@@ -558,10 +508,10 @@ export default function Hero({ setCurrentTab }) {
 
         .metric-value {
           font-family: var(--font-heading);
-          font-size: 1.7rem;
-          font-weight: 900;
+          font-size: 1.65rem;
+          font-weight: 800;
           color: var(--text-primary);
-          line-height: 1.1;
+          line-height: 1.15;
         }
 
         .metric-label {

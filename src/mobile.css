@@ -14,9 +14,13 @@ html, body {
   box-sizing: border-box !important;
 }
 
-img, svg, video, canvas, iframe {
+img, svg, video, canvas {
   max-width: 100% !important;
   height: auto;
+}
+
+iframe {
+  max-width: 100% !important;
 }
 
 @media (max-width: 991px) {
@@ -29,7 +33,10 @@ img, svg, video, canvas, iframe {
   .contact-grid, .footer-grid, 
   .unis-grid, .services-grid, 
   .values-grid, .metrics-grid, 
-  .news-grid, .team-grid {
+  .news-grid, .team-grid,
+  .steps-grid-6, .expectations-grid,
+  .resources-grid, .contract-grid, .about-grid,
+  .planner-grid, .testimonials-grid, .intakes-grid {
     grid-template-columns: 1fr !important;
     gap: 1.75rem !important;
     width: 100% !important;
@@ -37,17 +44,17 @@ img, svg, video, canvas, iframe {
 
   /* Header Bar & Logo Adjustments */
   .header {
-    padding: 0.75rem 0 !important;
+    padding: 0.7rem 0 !important;
   }
 
   .header-container {
     padding: 0 1.25rem !important;
   }
 
-  /* Prominent 64px logo on mobile matching scale requirements */
+  /* Prominent cropped logo on mobile */
   .logo-img {
-    height: 64px !important;
-    max-height: 64px !important;
+    height: 46px !important;
+    max-height: 46px !important;
     width: auto !important;
   }
 

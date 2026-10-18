@@ -21,7 +21,7 @@ export default function Footer({ setCurrentTab }) {
         <div className="footer-grid">
           {/* Column 1: Brand Info */}
           <div className="footer-brand-col">
-            <img src="/logo.png" alt="Skyview Logo" className="footer-logo-img" />
+            <img src="/logo-light.png" alt="Skyview Logo" className="footer-logo-img" />
             <p className="brand-desc">
               Skyview Consultants UK Ltd is a British Council certified educational advisory helping international students secure admissions and visas for top UK universities since 2008.
             </p>
@@ -38,6 +38,8 @@ export default function Footer({ setCurrentTab }) {
               <li><button onClick={() => handleNav('home')}>Home</button></li>
               <li><button onClick={() => handleNav('services')}>Services</button></li>
               <li><button onClick={() => handleNav('universities')}>UK Universities</button></li>
+              <li><button onClick={() => handleNav('study-planner')}>Cost & Intake Planner</button></li>
+              <li><button onClick={() => handleNav('agent-guide')}>Student & Parent Guide (PDF)</button></li>
               <li><button onClick={() => handleNav('english-test')}>English Test</button></li>
               <li><button onClick={() => handleNav('contract')}>Student Contract</button></li>
             </ul>
@@ -108,11 +110,10 @@ export default function Footer({ setCurrentTab }) {
         }
 
         .footer-logo-img {
-          height: 60px;
+          height: 52px;
+          width: auto;
+          object-fit: contain;
           margin-bottom: 1.25rem;
-          background: #FFFFFF;
-          padding: 0.35rem 0.75rem;
-          border-radius: 12px;
         }
 
         .brand-desc {
